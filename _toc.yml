@@ -32,3 +32,4 @@ parts:
     - file: 14-MPI/MPI-Intro.ipynb
     - file: 15-Intro-Cuda/cuda.ipynb
     - file: 15-Intro-Slurm/Slurm.ipynb
+    - file: 16-Extra/ExtraToolsForDevelopment.ipynb
