@@ -29,7 +29,7 @@ parts:
     - file: 11-matrix-performance/11-matrix-performance.ipynb
     - file: 12-IntroHPC/ParallelProgramming-Intro.ipynb
     - file: 13-OpenMP/OpenMP-Intro.ipynb
+    - file: 15-Intro-Slurm/Slurm.ipynb
     - file: 14-MPI/MPI-Intro.ipynb
     - file: 15-Intro-Cuda/cuda.ipynb
-    - file: 15-Intro-Slurm/Slurm.ipynb
     - file: 16-Extra/ExtraToolsForDevelopment.ipynb
