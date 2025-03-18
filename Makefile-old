@@ -1,0 +1,21 @@
+# the all target will call update and copy
+
+all: copy generate_assignment
+
+# the copy will run the copy_files.sh script
+copy:
+	./copy_extra_to_release.sh
+
+# generates assingment if some ipynb changed target is in ../release/folder and local is in folder/
+../release/**/*.ipynb: **/*.ipynb
+	@echo Compiling $@ from $<
+
+# the generate_assignment target will run the nbgrader generate_assignment command
+generate_assignment:
+	@cd .. && nbgrader generate_assignment --assignment="??-*" --force
+
+# the clean target will remove all the generated html files
+clean_book:
+	rm -f _build
+
+.PHONY: copy clean_book generate_assignment
