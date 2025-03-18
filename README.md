@@ -2,7 +2,9 @@
 
 These lecture notes are a complement to the class and hopefully a good resource for the students.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-2024-1s/HEAD)
+[Lecture Notes](https://iluvatar1.github.io/IntroSciCompHPC-Lectures/README.html)
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-Lectures/HEAD)
 
 [Google Collab](https://colab.research.google.com/)
 
