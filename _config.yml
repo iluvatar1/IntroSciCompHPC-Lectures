@@ -8,7 +8,7 @@
 title                       : Introduction to Scientific and High Performance Computing  # The title of the book. Will be placed in the left navbar.
 author                      : William Oquendo  # The author of the book
 email                       : wfoquendop@unal.edu.co  # An email address to contact the author
-copyright                   : "2024"  # Copyright year to be placed in the footer
+copyright                   : "2025"  # Copyright year to be placed in the footer
 logo                        : https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg  # A path to the book logo
 # Patterns to skip when building the book. Can be glob-style (e.g. "*skip.ipynb")
 exclude_patterns            : [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints", "VisualizationGL"]

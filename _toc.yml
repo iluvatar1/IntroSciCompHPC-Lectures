@@ -12,6 +12,8 @@ parts:
     chapters:
     - file: 01-Introduction/01-Introduction.ipynb
       title: Introduction
+    - file: 01-Introduction/CPPReview.ipynb
+      title: Very short review for c++ programming
     - file: 02-errorsfpnumbers/ErrorsFPNumbers.ipynb
       title: Errors in Floating Point Numbers
     - file: 04-Makefiles/04-Makefiles.ipynb
