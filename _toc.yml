@@ -35,3 +35,7 @@ parts:
     - file: 14-MPI/MPI-Intro.ipynb
     - file: 15-Intro-Cuda/cuda.ipynb
     - file: 16-Extra/ExtraToolsForDevelopment.ipynb
+  - caption: "Appendix"
+    numbered: true
+    chapters:
+    - file: A-01-Git/VersionControlGit.ipynb
