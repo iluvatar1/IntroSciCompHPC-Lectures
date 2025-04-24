@@ -565,7 +565,7 @@ graph TD
 <p>And the following happens if there are or not a change in a given file</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">mermaid_magic</span> -h 250
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">mermaid_magic</span> -h 200
 flowchart TB
     subgraph &quot;Changes Ripple Through Dependencies&quot;
         direction LR
@@ -622,7 +622,7 @@ flowchart TB
  
     &lt;/body&gt;
 &lt;/html&gt;
-" width="100%" height="250"style="border:none !important;" "allowfullscreen" "webkitallowfullscreen" "mozallowfullscreen"></iframe></div></div>
+" width="100%" height="200"style="border:none !important;" "allowfullscreen" "webkitallowfullscreen" "mozallowfullscreen"></iframe></div></div>
 </div>
 <p>There are some ‘modern’ tools/alternatives, with differnt scope, that you can check:</p>
 <ul class="simple">
@@ -750,20 +750,20 @@ program.</p>
 <h2><span class="section-number">4.3. </span>Adding some internal <code class="docutils literal notranslate"><span class="pre">make</span></code> vars<a class="headerlink" href="#adding-some-internal-make-vars" title="Link to this heading">#</a></h2>
 <p>Actually, the makefile can be simplified and generalized using variables</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fig.pdf:<span class="w"> </span>script.gp<span class="w"> </span>data.txt
-<span class="w">    </span>gnuplot<span class="w"> </span>$^
+<span class="w">    </span>gnuplot<span class="w"> </span>$&lt;
 
 data.txt:<span class="w"> </span>sumupdown.x
-<span class="w">    </span>./$^<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$@</span>
+<span class="w">    </span>./$&lt;<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$@</span>
 
 <span class="c1"># Generic rule to compile any cpp into its corresponding .x </span>
 %.x:<span class="w"> </span>%.cpp
-<span class="w">    </span>g++<span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+<span class="w">    </span>g++<span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
 </pre></div>
 </div>
 <p>Explanation:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">$^</span></code> : This is the first dependency</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">$&lt;</span></code> : All dependencies</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$&lt;</span></code> : This is the first dependency</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$^</span></code> : All dependencies</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">$&#64;</span></code> : This is the rule target</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">%.x:</span> <span class="pre">%.cpp</span></code>: For every <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file, check the corresponding <code class="docutils literal notranslate"><span class="pre">.x</span></code> file</p></li>
 </ul>

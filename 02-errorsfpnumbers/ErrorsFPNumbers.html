@@ -628,8 +628,8 @@ begin<span class="w"> </span><span class="k">do</span><span class="w"> </span>N<
 <section id="practical-example-series-expansion-of-e-x">
 <h2><span class="section-number">3.4. </span>Practical example: Series expansion of <span class="math notranslate nohighlight">\(e^{-x}\)</span><a class="headerlink" href="#practical-example-series-expansion-of-e-x" title="Link to this heading">#</a></h2>
 <p>The function <span class="math notranslate nohighlight">\(e^{-x}\)</span> can be expanded as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-84ef2497-4bd2-4f11-b820-237a4a329556">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-84ef2497-4bd2-4f11-b820-237a4a329556" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ae4204cc-0200-4727-b961-f441361f6048">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-ae4204cc-0200-4727-b961-f441361f6048" title="Permalink to this equation">#</a></span>\[\begin{equation}
 e^{-x} = \sum_{i=0}^{\infty} (-1)^i \frac{x^i}{i!} = 1 -  x + \frac{x^2}{2} - \frac{x^3}{6} + \ldots \ (|x| &lt; \infty)
 \end{equation}\]</div>
 <p>This is a great expansion, valid for all finite values of <span class="math notranslate nohighlight">\(x\)</span>. But, <strong>what numerical problems do you see?</strong></p>
@@ -683,8 +683,8 @@ e^{-x} = \sum_{i=0}^{\infty} (-1)^i \frac{x^i}{i!} = 1 -  x + \frac{x^2}{2} - \f
 <section id="exercise-sum-ups-and-down">
 <h3><span class="section-number">3.4.2. </span>Exercise: Sum ups and down<a class="headerlink" href="#exercise-sum-ups-and-down" title="Link to this heading">#</a></h3>
 <p>Is there any computation difference between the following sums?</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4847c82c-cb36-4f5c-bd70-c80a7188d624">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-4847c82c-cb36-4f5c-bd70-c80a7188d624" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-79b10743-c01a-4bbc-91e6-1cdd1a6ede29">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-79b10743-c01a-4bbc-91e6-1cdd1a6ede29" title="Permalink to this equation">#</a></span>\[\begin{align}
 S_{up}(N) &amp;= \sum_{n=1}^{N} \frac{1}{n},\\
 S_{down}(N) &amp;= \sum_{n=N}^{1} \frac{1}{n}.
 \end{align}\]</div>
@@ -736,8 +736,8 @@ S_{down}(N) &amp;= \sum_{n=N}^{1} \frac{1}{n}.
 <section id="roundoff-truncation-example">
 <h3><span class="section-number">3.5.2. </span>Roundoff/truncation example<a class="headerlink" href="#roundoff-truncation-example" title="Link to this heading">#</a></h3>
 <p>Let’s compute the following sum as a function of <span class="math notranslate nohighlight">\(k\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-50415f2c-437f-433c-ad2d-8ceb72956843">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-50415f2c-437f-433c-ad2d-8ceb72956843" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-97886401-d913-4e22-8e62-4d41710610bf">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-97886401-d913-4e22-8e62-4d41710610bf" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(k) = \left|\frac{k}{10} - \sum_{i=1}^k 0.1\right|
 \end{equation}\]</div>
 <p>Mathematically, this function should give 0 always. Is that true?</p>
@@ -745,29 +745,32 @@ f(k) = \left|\frac{k}{10} - \sum_{i=1}^k 0.1\right|
 <section id="substractive-cancellation">
 <h3><span class="section-number">3.5.3. </span>Substractive cancellation<a class="headerlink" href="#substractive-cancellation" title="Link to this heading">#</a></h3>
 <p>Given <span class="math notranslate nohighlight">\(a = b-c\)</span>, then <span class="math notranslate nohighlight">\(a_c = b_c-c_c\)</span>, therefore</p>
-<div class="amsmath math notranslate nohighlight" id="equation-337f25f5-9cab-4432-b6fe-9455f7f4f2a7">
-<span class="eqno">(3.4)<a class="headerlink" href="#equation-337f25f5-9cab-4432-b6fe-9455f7f4f2a7" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c37c7913-f93e-4aee-a8ab-d0faf27d893e">
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-c37c7913-f93e-4aee-a8ab-d0faf27d893e" title="Permalink to this equation">#</a></span>\[\begin{align}
 a_c &amp;= a(1+\epsilon_a ) = b_c - c_c = b(1+\epsilon_b ) - c(1+\epsilon_c )\\
 \frac{a_c}{a} &amp;= 1 + \epsilon_b \frac{b}{a} - \frac{c}{a}\epsilon_c  
 \end{align}\]</div>
-<p>so the error in <span class="math notranslate nohighlight">\(a\)</span> is about
-$<span class="math notranslate nohighlight">\(\epsilon_a = \frac{b}{a}(\epsilon_b - \epsilon_c), \)</span><span class="math notranslate nohighlight">\( 
-which is much larger, when \)</span>b<span class="math notranslate nohighlight">\( and \)</span>c<span class="math notranslate nohighlight">\( are close (so \)</span>a$ is small).</p>
+<p>so the error in <span class="math notranslate nohighlight">\(a\)</span> is about</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2f77b0e9-aaba-4297-8ce8-579c2aec9cd3">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-2f77b0e9-aaba-4297-8ce8-579c2aec9cd3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\epsilon_a = \frac{b}{a}(\epsilon_b - \epsilon_c), 
+\end{equation}\]</div>
+<p>which is much larger, when <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(c\)</span> are close (so <span class="math notranslate nohighlight">\(a\)</span> is small).</p>
 <section id="example-of-substrative-cancellation">
 <h4><span class="section-number">3.5.3.1. </span>Example of substrative cancellation<a class="headerlink" href="#example-of-substrative-cancellation" title="Link to this heading">#</a></h4>
 <p>The following series,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d834930c-8bc8-4b7c-841a-ee52dc952ef0">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-d834930c-8bc8-4b7c-841a-ee52dc952ef0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a1162e30-6e3b-4b80-bfe5-dfec5cba3ead">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-a1162e30-6e3b-4b80-bfe5-dfec5cba3ead" title="Permalink to this equation">#</a></span>\[\begin{equation}
 S_N^{(1)} = \sum_{n=1}^{2N} (-1)^n \frac{n}{n+1},
 \end{equation}\]</div>
 <p>can be written in two mathematically equivalent ways:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b298f484-0c9b-45b2-a105-f819cba4bab2">
-<span class="eqno">(3.6)<a class="headerlink" href="#equation-b298f484-0c9b-45b2-a105-f819cba4bab2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c6073467-a3cf-46f5-a204-bf959d6aa521">
+<span class="eqno">(3.7)<a class="headerlink" href="#equation-c6073467-a3cf-46f5-a204-bf959d6aa521" title="Permalink to this equation">#</a></span>\[\begin{equation}
 S_N^{(2)} = -\sum_{n=1}^{N} \frac{2n-1}{2n} + \sum_{n=1}^{N} \frac{2n}{2n+1},
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fa8a8ca1-96c2-4a7b-90fd-29c99706b110">
-<span class="eqno">(3.7)<a class="headerlink" href="#equation-fa8a8ca1-96c2-4a7b-90fd-29c99706b110" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2dbd2e4b-315e-4a49-b592-cf5329adb6d5">
+<span class="eqno">(3.8)<a class="headerlink" href="#equation-2dbd2e4b-315e-4a49-b592-cf5329adb6d5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 S_N^{(3)} = \sum_{n=1}^{N} \frac{1}{2n(2n+1)}.
 \end{equation}\]</div>
 <p><strong>Could there be any computational difference? why?</strong></p>
@@ -778,8 +781,8 @@ S_N^{(3)} = \sum_{n=1}^{N} \frac{1}{2n(2n+1)}.
 <section id="total-errors-in-algorithms-and-their-computational-implementation">
 <h2><span class="section-number">3.6. </span>Total errors in algorithms and their computational implementation<a class="headerlink" href="#total-errors-in-algorithms-and-their-computational-implementation" title="Link to this heading">#</a></h2>
 <p>As you can see, there are several source for errors in computation. Some come from the mathematical approximation, , called <span class="math notranslate nohighlight">\(\epsilon_a\)</span>, and some others are intrinsic from the numerical representation, and we can call them <span class="math notranslate nohighlight">\(\epsilon_r\)</span>. Sometimes, the rounding/truncation error are modeled as a random walk, <span class="math notranslate nohighlight">\(\epsilon_r \simeq \sqrt{N} \epsilon_m\)</span>, where <span class="math notranslate nohighlight">\(\epsilon_m\)</span> is the machine precision, and <span class="math notranslate nohighlight">\(N\)</span> is the representative number of “steps”.  From here, the total error can be estimated as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d24108c7-b5df-4cbe-80eb-b2ea9dfb3a09">
-<span class="eqno">(3.8)<a class="headerlink" href="#equation-d24108c7-b5df-4cbe-80eb-b2ea9dfb3a09" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5d1bbe8d-ee0c-4647-9c3f-9ee2b65dd344">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-5d1bbe8d-ee0c-4647-9c3f-9ee2b65dd344" title="Permalink to this equation">#</a></span>\[\begin{align}
 \epsilon_{\rm tot} &amp;= \epsilon_a + \epsilon_r \\
 &amp;= \frac{\alpha}{N^\beta} + \sqrt{N} \epsilon_m.
 \end{align}\]</div>

@@ -58,6 +58,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '06-stdlib-randomnumbers/06-stdlib-randomnumbers';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -452,30 +454,43 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">5.1. Containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squence-containers">5.1.1. Squence containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vector">5.1.1.1. Vector</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#associative-containers">5.1.2. Associative containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#map">5.1.2.1. Map</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">5.1. Random numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution-with-random-seed">5.1.1. Uniform distribution with random seed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution-controlled-seed-from-command-line">5.1.2. Uniform distribution controlled seed from command line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distribution-controlled-seed">5.1.3. Normal distribution controlled seed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge">5.1.4. Challenge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">5.1.5. Homework</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms">5.2. Algorithms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-functions">5.3. Special functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-function">5.3.1. Gamma function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-function">5.3.2. Beta function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">5.3. Containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-containers">5.3.1. Sequence containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vector">5.3.1.1. Vector</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">5.4. Random numbers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution-with-random-seed">5.4.1. Uniform distribution with random seed</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution-controlled-seed">5.4.2. Uniform distribution controlled seed</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distribution-controlled-seed">5.4.3. Normal distribution controlled seed</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">5.4.4. Homework</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#associative-containers">5.3.2. Associative containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#map">5.3.2.1. Map</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5.3.3. Challenge</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-functions-in-c-cmath-c-17">5.4. 🔬 Special functions in C++ (<code class="docutils literal notranslate"><span class="pre">&lt;cmath&gt;</span></code>, C++17+)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-function-std-tgamma">5.4.1. Gamma Function (<code class="docutils literal notranslate"><span class="pre">std::tgamma</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-gamma-std-lgamma">5.4.2. Log Gamma (<code class="docutils literal notranslate"><span class="pre">std::lgamma</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-function-std-erf-std-erfc">5.4.3. Error Function (<code class="docutils literal notranslate"><span class="pre">std::erf</span></code>, <code class="docutils literal notranslate"><span class="pre">std::erfc</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bessel-functions-via-boost">5.4.4. Bessel Functions (via Boost)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-polynomial">5.4.5. Legendre Polynomial</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#riemann-zeta">5.4.6. Riemann Zeta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-small-x-functions">5.4.7. High-Precision Small-x Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#std-expm1-x-computes-exp-x-1-accurately-for-small-x">5.4.7.1. <code class="docutils literal notranslate"><span class="pre">std::expm1(x)</span></code> — Computes <code class="docutils literal notranslate"><span class="pre">exp(x)</span> <span class="pre">-</span> <span class="pre">1</span></code> accurately for small <code class="docutils literal notranslate"><span class="pre">x</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#std-log1p-x-computes-log-1-x-accurately-for-small-x">5.4.7.2. <code class="docutils literal notranslate"><span class="pre">std::log1p(x)</span></code> — Computes <code class="docutils literal notranslate"><span class="pre">log(1</span> <span class="pre">+</span> <span class="pre">x)</span></code> accurately for small <code class="docutils literal notranslate"><span class="pre">x</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table-c-standard">5.5. Summary Table (C++ Standard)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-special-functions-via-external-libraries">5.6. Advanced Special Functions (via external libraries)</a></li>
 </ul>
             </nav>
         </div>
@@ -489,156 +504,69 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="standard-library-of-functions-math-functions-containers-and-random-numbers">
 <h1><span class="section-number">5. </span>Standard library of functions: math functions, containers and random numbers<a class="headerlink" href="#standard-library-of-functions-math-functions-containers-and-random-numbers" title="Link to this heading">#</a></h1>
-<section id="containers">
-<h2><span class="section-number">5.1. </span>Containers<a class="headerlink" href="#containers" title="Link to this heading">#</a></h2>
-<p>https://hackingcpp.com/cpp/std/containers.html</p>
-<section id="squence-containers">
-<h3><span class="section-number">5.1.1. </span>Squence containers<a class="headerlink" href="#squence-containers" title="Link to this heading">#</a></h3>
-<div style="text-align: center;">
-    <img src="https://hackingcpp.com/cpp/std/sequence_containers.png" alt="Image Description" width="600">
-    <figcaption>From: "https://hackingcpp.com/cpp/std/sequence_containers.png"</figcaption>
-</div>
-<section id="vector">
-<h4><span class="section-number">5.1.1.1. </span>Vector<a class="headerlink" href="#vector" title="Link to this heading">#</a></h4>
-<div style="text-align: center;">
-    <img src="https://hackingcpp.com/cpp/std/vector.png" alt="Image Description" width="600">
-    <figcaption>From: "https://hackingcpp.com/cpp/std/vector.png"</figcaption>
-</div>
-</section>
-</section>
-<section id="associative-containers">
-<h3><span class="section-number">5.1.2. </span>Associative containers<a class="headerlink" href="#associative-containers" title="Link to this heading">#</a></h3>
-<div style="text-align: center;">
-    <img src="https://hackingcpp.com/cpp/std/associative_containers.png" alt="Image Description" width="600">
-    <figcaption>From: "https://hackingcpp.com/cpp/std/associative_containers.png"</figcaption>
-</div>
-<section id="map">
-<h4><span class="section-number">5.1.2.1. </span>Map<a class="headerlink" href="#map" title="Link to this heading">#</a></h4>
-<div style="text-align: center;">
-    <img src="https://hackingcpp.com/cpp/std/map.png" alt="Image Description" width="600">
-    <figcaption>From: "https://hackingcpp.com/cpp/std/map.png"</figcaption>
-</div>
-</section>
-</section>
-</section>
-<section id="algorithms">
-<h2><span class="section-number">5.2. </span>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">#</a></h2>
-<div style="text-align: center;">
-    <img src="https://hackingcpp.com/cpp/std/algorithms.png" alt="Image Description" width="600">
-    <figcaption>From: "https://hackingcpp.com/cpp/std/algorithms.png"</figcaption>
-</div>
-</section>
-<section id="special-functions">
-<h2><span class="section-number">5.3. </span>Special functions<a class="headerlink" href="#special-functions" title="Link to this heading">#</a></h2>
-<p>https://en.cppreference.com/w/cpp/numeric/special_functions</p>
-<section id="gamma-function">
-<h3><span class="section-number">5.3.1. </span>Gamma function<a class="headerlink" href="#gamma-function" title="Link to this heading">#</a></h3>
-<p>See <a class="reference external" href="http://en.cppreference.com/w/cpp/numeric/math/tgamma">http://en.cppreference.com/w/cpp/numeric/math/tgamma</a></p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">XMIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">XMAX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">11.0</span><span class="p">;</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">DX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="p">;</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">NSTEPS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">((</span><span class="n">XMAX</span><span class="o">-</span><span class="n">XMIN</span><span class="p">)</span><span class="o">/</span><span class="n">DX</span><span class="p">);</span>
-
-<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSTEPS</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XMIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ii</span><span class="o">*</span><span class="n">DX</span><span class="p">;</span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%25.16e%25.16e</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tgamma</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="beta-function">
-<h3><span class="section-number">5.3.2. </span>Beta function<a class="headerlink" href="#beta-function" title="Link to this heading">#</a></h3>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// requires c++17</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">XMIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-3.0</span><span class="p">;</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">XMAX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">YMIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-3.0</span><span class="p">;</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">YMAX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">DELTA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01</span><span class="p">;</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">NSTEPS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">((</span><span class="n">XMAX</span><span class="o">-</span><span class="n">XMIN</span><span class="p">)</span><span class="o">/</span><span class="n">DELTA</span><span class="p">);</span>
-
-<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSTEPS</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XMIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ii</span><span class="o">*</span><span class="n">DELTA</span><span class="p">;</span>
-<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSTEPS</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">jj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">YMIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">jj</span><span class="o">*</span><span class="n">DELTA</span><span class="p">;</span>
-<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%25.16e%25.16e%25.16e</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">beta</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">));</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-</section>
+<p>The C++ Standard Template Library (STL) is a powerful collection of template classes and functions that provide general-purpose data structures and algorithms. Core components include containers (such as vectors, lists, maps, and sets), iterators for traversing these containers, algorithms for searching and sorting, function objects, and adaptors. The STL emphasizes generic programming through templates, allowing operations to work with different data types while maintaining type safety and performance. Its design principles of abstraction, efficiency, and reusability have made it an essential part of modern C++ programming, enabling developers to write cleaner, more maintainable code with less effort.</p>
+<p>Check: <a class="reference external" href="https://en.cppreference.com/w/">https://en.cppreference.com/w/</a></p>
 <section id="random-numbers">
-<h2><span class="section-number">5.4. </span>Random numbers<a class="headerlink" href="#random-numbers" title="Link to this heading">#</a></h2>
-<p>https://en.cppreference.com/w/cpp/numeric/random</p>
+<h2><span class="section-number">5.1. </span>Random numbers<a class="headerlink" href="#random-numbers" title="Link to this heading">#</a></h2>
+<p>https://en.cppreference.com/w/cpp/numeric/random
+We need:</p>
+<ul class="simple">
+<li><p>A random bit generator (mersenne-twsiter and so on)</p></li>
+<li><p>A random distribution</p></li>
+</ul>
 <div style="text-align: center;">
     <img src="https://hackingcpp.com/cpp/std/random_distributions.png" alt="Image Description" width="600">
     <figcaption>From: "https://hackingcpp.com/cpp/std/random_distributions.png"</figcaption>
 </div>
 <section id="uniform-distribution-with-random-seed">
-<h3><span class="section-number">5.4.1. </span>Uniform distribution with random seed<a class="headerlink" href="#uniform-distribution-with-random-seed" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.1.1. </span>Uniform distribution with random seed<a class="headerlink" href="#uniform-distribution-with-random-seed" title="Link to this heading">#</a></h3>
 <div style="text-align: center;">
     <img src="https://hackingcpp.com/cpp/std/random/uniform_real_distribution_plot.svg" alt="Image Description" width="600">
     <figcaption>From: "https://hackingcpp.com/cpp/std/random/uniform_real_distribution_plot.svg"</figcaption>
-</div>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+</div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="c1">//std::random_device rd; // inicializacion con semilla aleatoria</span>
 <span class="w">  </span><span class="c1">//std::mt19937 gen(rd()); // genera bits aleatorios</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="w"> </span><span class="n">gen</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="w"> </span><span class="n">gen</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// fixed seed = 10</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">dis</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// distribucion</span>
-<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dis</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
-<section id="uniform-distribution-controlled-seed">
-<h3><span class="section-number">5.4.2. </span>Uniform distribution controlled seed<a class="headerlink" href="#uniform-distribution-controlled-seed" title="Link to this heading">#</a></h3>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<section id="uniform-distribution-controlled-seed-from-command-line">
+<h3><span class="section-number">5.1.2. </span>Uniform distribution controlled seed from command line<a class="headerlink" href="#uniform-distribution-controlled-seed-from-command-line" title="Link to this heading">#</a></h3>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nsamples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="w"> </span><span class="n">gen</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dis</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100000</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nsamples</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dis</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>Plot it.</p>
 </section>
 <section id="normal-distribution-controlled-seed">
-<h3><span class="section-number">5.4.3. </span>Normal distribution controlled seed<a class="headerlink" href="#normal-distribution-controlled-seed" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.1.3. </span>Normal distribution controlled seed<a class="headerlink" href="#normal-distribution-controlled-seed" title="Link to this heading">#</a></h3>
 <div style="text-align: center;">
     <img src="https://hackingcpp.com/cpp/std/random/normal_distribution_plot.svg" alt="Image Description" width="600">
     <figcaption>From: "https://hackingcpp.com/cpp/std/random/normal_distribution_plot.svg"</figcaption>
 </div>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
@@ -653,11 +581,320 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section id="homework">
-<h3><span class="section-number">5.4.4. </span>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h3>
-<p>Create an histogram to compute the pdf and use it to test the random
-numbers produced by several distributions.</p>
+<section id="challenge">
+<h3><span class="section-number">5.1.4. </span>Challenge<a class="headerlink" href="#challenge" title="Link to this heading">#</a></h3>
+<p>Compute <span class="math notranslate nohighlight">\(\pi\)</span>. How? Throw random numbers uniformly distributed in the unit square (randomly generate both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates). Count how many fall inside the unit circle (<span class="math notranslate nohighlight">\(N_c\)</span>). The ratio of the later to the total random numbers <span class="math notranslate nohighlight">\(N\)</span> is a good approximation for the ratio of the circle area  <span class="math notranslate nohighlight">\(A_c = \pi/4\)</span> over the total square area <span class="math notranslate nohighlight">\(1\)</span>. In other words:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7c80321e-ea87-48a7-b7f6-5dcc2825995b">
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-7c80321e-ea87-48a7-b7f6-5dcc2825995b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\dfrac{N_c}{N} \simeq \dfrac{A_c}{A_s} = \frac{\pi}{4},
+\end{equation}\]</div>
+<p>therefore</p>
+<div class="amsmath math notranslate nohighlight" id="equation-af8091cf-bba7-434d-ab2e-17068180a2a4">
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-af8091cf-bba7-434d-ab2e-17068180a2a4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\pi \simeq 4\dfrac{N_c}{N}.
+\end{equation}\]</div>
+<p>how much number do you need to get 2 decimals correctly? and for 6 decimals? compare with your peers to check who gets the most decimals correctly. How to make this faster?</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">compute_pi</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">seed</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nsamples</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SEED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">NSAMPLES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atol</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">.</span><span class="n">precision</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">.</span><span class="n">setf</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">scientific</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">mypi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">compute_pi</span><span class="p">(</span><span class="n">SEED</span><span class="p">,</span><span class="w"> </span><span class="n">NSAMPLES</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mypi</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">compute_pi</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">seed</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nsamples</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// todo</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
+<section id="homework">
+<h3><span class="section-number">5.1.5. </span>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h3>
+<p>Create a histogram to compute the pdf and use it to test the random numbers produced by several distributions. Compute the pdf</p>
+</section>
+</section>
+<section id="algorithms">
+<h2><span class="section-number">5.2. </span>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">#</a></h2>
+<div style="text-align: center;">
+    <img src="https://hackingcpp.com/cpp/std/algorithms.png" alt="Image Description" width="600">
+    <figcaption>From: "https://hackingcpp.com/cpp/std/algorithms.png"</figcaption>
+</div></section>
+<section id="containers">
+<h2><span class="section-number">5.3. </span>Containers<a class="headerlink" href="#containers" title="Link to this heading">#</a></h2>
+<p>https://hackingcpp.com/cpp/std/containers.html</p>
+<section id="sequence-containers">
+<h3><span class="section-number">5.3.1. </span>Sequence containers<a class="headerlink" href="#sequence-containers" title="Link to this heading">#</a></h3>
+<div style="text-align: center;">
+    <img src="https://hackingcpp.com/cpp/std/sequence_containers.png" alt="Image Description" width="600">
+    <figcaption>From: "https://hackingcpp.com/cpp/std/sequence_containers.png"</figcaption>
+</div><section id="vector">
+<h4><span class="section-number">5.3.1.1. </span>Vector<a class="headerlink" href="#vector" title="Link to this heading">#</a></h4>
+<div style="text-align: center;">
+    <img src="https://hackingcpp.com/cpp/std/vector.png" alt="Image Description" width="600">
+    <figcaption>From: "https://hackingcpp.com/cpp/std/vector.png"</figcaption>
+</div></section>
+</section>
+<section id="associative-containers">
+<h3><span class="section-number">5.3.2. </span>Associative containers<a class="headerlink" href="#associative-containers" title="Link to this heading">#</a></h3>
+<div style="text-align: center;">
+    <img src="https://hackingcpp.com/cpp/std/associative_containers.png" alt="Image Description" width="600">
+    <figcaption>From: "https://hackingcpp.com/cpp/std/associative_containers.png"</figcaption>
+</div><section id="map">
+<h4><span class="section-number">5.3.2.1. </span>Map<a class="headerlink" href="#map" title="Link to this heading">#</a></h4>
+<div style="text-align: center;">
+    <img src="https://hackingcpp.com/cpp/std/map.png" alt="Image Description" width="600">
+    <figcaption>From: "https://hackingcpp.com/cpp/std/map.png"</figcaption>
+</div>
+</section>
+</section>
+<section id="id1">
+<h3><span class="section-number">5.3.3. </span>Challenge<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Here we are going to analyze texts from different authors to find a possible “signature”. We will compute the 20 most used words for a given book fr each author, and then plot it.
+To do so, let’s do the following:</p>
+<ol class="arabic simple">
+<li><p>Go to project <a class="reference external" href="https://www.gutenberg.org/">Project Gutenberg</a>. Search for: Jane Austen (e.g., Pride and Prejudice); Mark Twain (e.g., Huckleberry Finn). Download in plain text and strip headers/footers.</p></li>
+<li><p>write a c++ program that reads the text name from the command line and, for each word in the given text:</p>
+<ul class="simple">
+<li><p>Convert it to lowercase (<code class="docutils literal notranslate"><span class="pre">std::tolower</span></code>).</p></li>
+<li><p>Remove basic punctuation (e.g., <code class="docutils literal notranslate"><span class="pre">,</span></code>, <code class="docutils literal notranslate"><span class="pre">.</span></code>, <code class="docutils literal notranslate"><span class="pre">;</span></code>, <code class="docutils literal notranslate"><span class="pre">!</span></code>, <code class="docutils literal notranslate"><span class="pre">?</span></code>) from the end of words. (A simple check ispunct() on the last character can work for basics).
+Use the cleaned word as a key in a <code class="docutils literal notranslate"><span class="pre">std::map&lt;std::string,</span> <span class="pre">int&gt;</span></code>. Increment the corresponding integer value (<code class="docutils literal notranslate"><span class="pre">histogram[word]++;</span></code>).</p></li>
+</ul>
+</li>
+<li><p>The program should print to stdout the 20 most frequent words.</p></li>
+<li><p>Plot the 20 most frequent words per author. Is there any difference? should some words be excluded?</p></li>
+<li><p>What other measures do you think can be used to detect an authors “signature”?</p></li>
+<li><p>Is it possible to infer the text genre?</p></li>
+</ol>
+<p>Extra: Look at your friends histograms. Can you guess which book is?</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;map&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;numeric&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;set&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">analyze_document</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">fname</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">FNAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+<span class="w">    </span><span class="n">analyze_document</span><span class="p">(</span><span class="n">FNAME</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">analyze_document</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">fname</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">ifstream</span><span class="w"> </span><span class="n">file</span><span class="p">(</span><span class="n">fname</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">file</span><span class="p">.</span><span class="n">is_open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Error opening file: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fname</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">word_count</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">word</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">word</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// todo</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="special-functions-in-c-cmath-c-17">
+<h2><span class="section-number">5.4. </span>🔬 Special functions in C++ (<code class="docutils literal notranslate"><span class="pre">&lt;cmath&gt;</span></code>, C++17+)<a class="headerlink" href="#special-functions-in-c-cmath-c-17" title="Link to this heading">#</a></h2>
+<p>Check <a class="reference external" href="https://en.cppreference.com/w/cpp/numeric/special_functions">https://en.cppreference.com/w/cpp/numeric/special_functions</a></p>
+<p>This guide shows examples of <strong>interesting and useful special functions</strong> available in <strong>standard C++</strong> using <code class="docutils literal notranslate"><span class="pre">&lt;cmath&gt;</span></code>. While the standard doesn’t cover all functions (like Bessel or Legendre), it includes many core tools needed for scientific computing and physics.</p>
+<hr class="docutils" />
+<section id="gamma-function-std-tgamma">
+<h3><span class="section-number">5.4.1. </span>Gamma Function (<code class="docutils literal notranslate"><span class="pre">std::tgamma</span></code>)<a class="headerlink" href="#gamma-function-std-tgamma" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Purpose</strong>: Generalizes the factorial function<br />
+<span class="math notranslate nohighlight">\(\Gamma(n) = (n-1)!\)</span></p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span><span class="c1"> // for std::tgamma</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Gamma(&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;) = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tgamma</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// 24.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Use case</strong>: Probability distributions, statistical physics, combinatorics</p>
+</section>
+<hr class="docutils" />
+<section id="log-gamma-std-lgamma">
+<h3><span class="section-number">5.4.2. </span>Log Gamma (<code class="docutils literal notranslate"><span class="pre">std::lgamma</span></code>)<a class="headerlink" href="#log-gamma-std-lgamma" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Purpose</strong>: Computes <code class="docutils literal notranslate"><span class="pre">log(Gamma(x))</span></code> — numerically stable for large values</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Log Gamma(&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;) = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">lgamma</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// ~3.178</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="error-function-std-erf-std-erfc">
+<h3><span class="section-number">5.4.3. </span>Error Function (<code class="docutils literal notranslate"><span class="pre">std::erf</span></code>, <code class="docutils literal notranslate"><span class="pre">std::erfc</span></code>)<a class="headerlink" href="#error-function-std-erf-std-erfc" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Purpose</strong>: Integral of the Gaussian function</p></li>
+<li><p><strong>Application</strong>: Diffusion, quantum mechanics, normal distribution CDF</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;erf(&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;) = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">erf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;erfc(&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;) = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">erfc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Error_function">Wikipedia: Error function</a></p>
+</section>
+<hr class="docutils" />
+<section id="bessel-functions-via-boost">
+<h3><span class="section-number">5.4.4. </span>Bessel Functions (via Boost)<a class="headerlink" href="#bessel-functions-via-boost" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Note</strong>: Also in Use <a class="reference external" href="https://www.boost.org/doc/libs/release/libs/math/doc/html/index.html">Boost.Math</a></p>
+</div></blockquote>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;J0(&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;) = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cyl_bessel_j</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;boost/math/special_functions/bessel.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;J0(&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;) = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">boost</span><span class="o">::</span><span class="n">math</span><span class="o">::</span><span class="n">cyl_bessel_j</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Use case</strong>: Wave equations, cylindrical geometries, optics</p>
+</section>
+<hr class="docutils" />
+<section id="legendre-polynomial">
+<h3><span class="section-number">5.4.5. </span>Legendre Polynomial<a class="headerlink" href="#legendre-polynomial" title="Link to this heading">#</a></h3>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;P3(&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;) = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">legendre</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="riemann-zeta">
+<h3><span class="section-number">5.4.6. </span>Riemann Zeta<a class="headerlink" href="#riemann-zeta" title="Link to this heading">#</a></h3>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Zeta(2) = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">riemann_zeta</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Should be π²/6</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="high-precision-small-x-functions">
+<h3><span class="section-number">5.4.7. </span>High-Precision Small-x Functions<a class="headerlink" href="#high-precision-small-x-functions" title="Link to this heading">#</a></h3>
+<section id="std-expm1-x-computes-exp-x-1-accurately-for-small-x">
+<h4><span class="section-number">5.4.7.1. </span><code class="docutils literal notranslate"><span class="pre">std::expm1(x)</span></code> — Computes <code class="docutils literal notranslate"><span class="pre">exp(x)</span> <span class="pre">-</span> <span class="pre">1</span></code> accurately for small <code class="docutils literal notranslate"><span class="pre">x</span></code><a class="headerlink" href="#std-expm1-x-computes-exp-x-1-accurately-for-small-x" title="Link to this heading">#</a></h4>
+</section>
+<section id="std-log1p-x-computes-log-1-x-accurately-for-small-x">
+<h4><span class="section-number">5.4.7.2. </span><code class="docutils literal notranslate"><span class="pre">std::log1p(x)</span></code> — Computes <code class="docutils literal notranslate"><span class="pre">log(1</span> <span class="pre">+</span> <span class="pre">x)</span></code> accurately for small <code class="docutils literal notranslate"><span class="pre">x</span></code><a class="headerlink" href="#std-log1p-x-computes-log-1-x-accurately-for-small-x" title="Link to this heading">#</a></h4>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;exp(x) - 1 = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">expm1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;log(1 + x) = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">log1p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary-table-c-standard">
+<h2><span class="section-number">5.5. </span>Summary Table (C++ Standard)<a class="headerlink" href="#summary-table-c-standard" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>C++ Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Gamma</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::tgamma</span></code></p></td>
+<td><p>( \Gamma(x) )</p></td>
+</tr>
+<tr class="row-odd"><td><p>Log-Gamma</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::lgamma</span></code></p></td>
+<td><p>( \log(\Gamma(x)) )</p></td>
+</tr>
+<tr class="row-even"><td><p>Error Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::erf</span></code></p></td>
+<td><p>Gaussian CDF integral</p></td>
+</tr>
+<tr class="row-odd"><td><p>Complementary erf</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::erfc</span></code></p></td>
+<td><p>( 1 - \text{erf}(x) )</p></td>
+</tr>
+<tr class="row-even"><td><p>exp(x)-1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::expm1</span></code></p></td>
+<td><p>More accurate near 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>log(1+x)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::log1p</span></code></p></td>
+<td><p>More accurate near 0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="advanced-special-functions-via-external-libraries">
+<h2><span class="section-number">5.6. </span>Advanced Special Functions (via external libraries)<a class="headerlink" href="#advanced-special-functions-via-external-libraries" title="Link to this heading">#</a></h2>
+<p>For advanced tools like:</p>
+<ul class="simple">
+<li><p><strong>Hermite</strong></p></li>
+<li><p><strong>Zeta</strong></p></li>
+<li><p><strong>Elliptic integrals</strong></p></li>
+</ul>
+<p>Use:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.boost.org/doc/libs/release/libs/math/doc/html/index.html">Boost.Math</a></p></li>
+<li><p><a class="reference external" href="https://www.gnu.org/software/gsl/doc/html/specfunc.html">GNU GSL</a></p></li>
+</ul>
+<hr class="docutils" />
 </section>
 </section>
 
@@ -725,30 +962,43 @@ numbers produced by several distributions.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">5.1. Containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squence-containers">5.1.1. Squence containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vector">5.1.1.1. Vector</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#associative-containers">5.1.2. Associative containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#map">5.1.2.1. Map</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">5.1. Random numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution-with-random-seed">5.1.1. Uniform distribution with random seed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution-controlled-seed-from-command-line">5.1.2. Uniform distribution controlled seed from command line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distribution-controlled-seed">5.1.3. Normal distribution controlled seed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenge">5.1.4. Challenge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">5.1.5. Homework</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms">5.2. Algorithms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-functions">5.3. Special functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-function">5.3.1. Gamma function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-function">5.3.2. Beta function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">5.3. Containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-containers">5.3.1. Sequence containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vector">5.3.1.1. Vector</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers">5.4. Random numbers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution-with-random-seed">5.4.1. Uniform distribution with random seed</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution-controlled-seed">5.4.2. Uniform distribution controlled seed</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distribution-controlled-seed">5.4.3. Normal distribution controlled seed</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">5.4.4. Homework</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#associative-containers">5.3.2. Associative containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#map">5.3.2.1. Map</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5.3.3. Challenge</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-functions-in-c-cmath-c-17">5.4. 🔬 Special functions in C++ (<code class="docutils literal notranslate"><span class="pre">&lt;cmath&gt;</span></code>, C++17+)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-function-std-tgamma">5.4.1. Gamma Function (<code class="docutils literal notranslate"><span class="pre">std::tgamma</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-gamma-std-lgamma">5.4.2. Log Gamma (<code class="docutils literal notranslate"><span class="pre">std::lgamma</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-function-std-erf-std-erfc">5.4.3. Error Function (<code class="docutils literal notranslate"><span class="pre">std::erf</span></code>, <code class="docutils literal notranslate"><span class="pre">std::erfc</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bessel-functions-via-boost">5.4.4. Bessel Functions (via Boost)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-polynomial">5.4.5. Legendre Polynomial</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#riemann-zeta">5.4.6. Riemann Zeta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-precision-small-x-functions">5.4.7. High-Precision Small-x Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#std-expm1-x-computes-exp-x-1-accurately-for-small-x">5.4.7.1. <code class="docutils literal notranslate"><span class="pre">std::expm1(x)</span></code> — Computes <code class="docutils literal notranslate"><span class="pre">exp(x)</span> <span class="pre">-</span> <span class="pre">1</span></code> accurately for small <code class="docutils literal notranslate"><span class="pre">x</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#std-log1p-x-computes-log-1-x-accurately-for-small-x">5.4.7.2. <code class="docutils literal notranslate"><span class="pre">std::log1p(x)</span></code> — Computes <code class="docutils literal notranslate"><span class="pre">log(1</span> <span class="pre">+</span> <span class="pre">x)</span></code> accurately for small <code class="docutils literal notranslate"><span class="pre">x</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table-c-standard">5.5. Summary Table (C++ Standard)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-special-functions-via-external-libraries">5.6. Advanced Special Functions (via external libraries)</a></li>
 </ul>
   </nav></div>
 
