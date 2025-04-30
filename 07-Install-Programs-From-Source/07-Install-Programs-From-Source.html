@@ -454,24 +454,57 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spack-automatic-load-for-programs-and-containers">6.1. Spack: automatic load for programs and containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">6.1.1. Installation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-some-tools-with-spack">6.1.2. Installing some tools with spack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-env-vars-introduction">6.1. Shell env vars introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-environment-variables">6.1.1. Key Environment Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#path">6.1.1.1. PATH</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ld-library-path">6.1.1.2. LD_LIBRARY_PATH</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-important-environment-variables">6.1.1.3. Other Important Environment Variables</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-programs-from-source">6.2. How to install programs from source</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-concepts">6.2.1. Preliminary concepts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-version-for-already-installed-programs">6.2.2. Checking the version for already installed programs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-local-places-to-install-the-utilities">6.2.3. Preparing the local places to install the utilities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-installation-algorithm">6.2.4. Typical installation algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop">6.2.5. Workshop</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-programs">6.2.6. Test Programs</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fftw">6.2.6.1. fftw</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c">6.2.6.2. Eigen C++</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-and-using-environment-variables">6.1.2. Setting and Using Environment Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#temporary-setting-current-session-only">6.1.2.1. Temporary Setting (Current Session Only)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#permanent-setting">6.1.2.2. Permanent Setting</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-variables-in-scripts">6.1.2.3. Using Variables in Scripts</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voro">6.2.7. Voro++</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-9-2">6.2.8. g++ 9.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications">6.1.3. Practical Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-programs">6.1.3.1. Compiling Programs</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-programs-with-custom-libraries">6.1.3.2. Running Programs with Custom Libraries</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-environment-issues">6.1.3.3. Debugging Environment Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spack-automatic-load-for-programs-and-containers">6.2. Spack: automatic load for programs and containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">6.2.1. Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#not-needed-troubleshooting-the-openssl-lib">6.2.1.1. NOT NEEDED Troubleshooting the openssl lib</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-some-tools-with-spack">6.3. Installing some tools with spack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activating-modules">6.4. Activating modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-module-spack-package">6.5. Using a module/spack package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-global-spack-installation">6.6. Using the global spack installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-programs-from-source">6.7. How to install programs from source</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-concepts">6.7.1. Preliminary concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-version-for-already-installed-programs">6.7.2. Checking the version for already installed programs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-local-places-to-install-the-utilities">6.7.3. Preparing the local places to install the utilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-installation-algorithm">6.7.4. Typical installation algorithm</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges">6.8. Challenges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#source-code-install-challenges">6.8.1. Source Code Install Challenges</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop">6.9. Workshop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-programs">6.9.1. Test Programs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fftw">6.9.1.1. fftw</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c">6.9.1.2. Eigen C++</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voro">6.9.2. Voro++</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-9-2">6.9.3. g++ 9.2</a></li>
 </ul>
 </li>
 </ul>
@@ -487,29 +520,191 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="using-software-in-a-hpc-environment">
 <h1><span class="section-number">6. </span>Using software in a hpc environment<a class="headerlink" href="#using-software-in-a-hpc-environment" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="http://hpctoolkit.org/software-instructions.html">http://hpctoolkit.org/software-instructions.html</a>
-<a class="reference external" href="https://apptainer.org/docs/user/main/index.html">https://apptainer.org/docs/user/main/index.html</a></p>
+<p>TOCHECK:</p>
 <ul class="simple">
+<li><p><a class="reference external" href="http://hpctoolkit.org/software-instructions.html">http://hpctoolkit.org/software-instructions.html</a></p></li>
+<li><p><a class="reference external" href="https://apptainer.org/docs/user/main/index.html">https://apptainer.org/docs/user/main/index.html</a></p></li>
 <li><p><a class="reference external" href="https://ashki23.github.io/spack.html">https://ashki23.github.io/spack.html</a></p></li>
 <li><p><a class="reference external" href="https://developer.amd.com/spack/build-customization/">https://developer.amd.com/spack/build-customization/</a></p></li>
-<li></li>
 </ul>
+<p>In real HPC environments, software is often not available, outdated, or needs specific compiler optimizations for your project. Mastering the installation of software from source is not only about ‘getting it to work’ — it’s about taking control of your computational environment, maximizing performance, and enabling reproducible science. Software installation is an essential survival skill in HPC. And using the right environment and tools is critical to not reinvent the wheel and use the resources more efficiently. Real life examples are:</p>
+<ul class="simple">
+<li><p>A production cluster that has GCC 8 but you need C++20 features (GCC 11+).</p></li>
+<li><p>Building MPI or HDF5 with specific flags for performance (or GPUs).</p></li>
+<li><p>Needing newer Python packages, but the cluster limits pip install.</p></li>
+<li><p>The Reproducibility Crisis &amp; Your Research: “Imagine publishing a groundbreaking result, but nobody, not even your future self, can replicate it because the exact software environment is lost. Manually installing and managing software correctly is the first step towards reproducible computational science.”</p></li>
+<li><p>Bleeding Edge vs. Stability: Your research often demands the latest features or bug fixes in a scientific library (e.g., a new algorithm in TensorFlow, a fix in GROMACS). System administrators, prioritizing stability, might offer older versions. Learning to install software yourself gives you access to the cutting edge.</p></li>
+<li><p>Performance is Key: HPC is about speed! Generic software provided by admins might not be compiled with optimizations for the specific processor architecture (like AVX-512) or linked against high-performance libraries (like MKL) available on your cluster. Compiling from source allows you to tailor the build for maximum performance.</p></li>
+<li><p>The “It Doesn’t Exist” Problem: Sometimes, the specialized tool you need simply isn’t available at all via system package managers or modules. Your only option is to build it from source.</p></li>
+<li><p>Dependency Hell: Software rarely lives in isolation. Program A needs Library B version 1.2, but Program C needs Library B version 2.0. How do you manage this without conflicts, especially without root access? This is a core challenge we’ll address. (This sets the stage nicely for Spack).</p></li>
+</ul>
+<p>Typically, software is available through <code class="docutils literal notranslate"><span class="pre">modules</span></code>, and it can be “loaded” into the current shell environment by using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>SOFTWARE/VERSION
+</pre></div>
+</div>
+<p>You can use several versions of the same software, something that you cannot do using <code class="docutils literal notranslate"><span class="pre">apt</span></code> or similar. In the following we will see a specific tool called <code class="docutils literal notranslate"><span class="pre">spack</span></code> that allows to install software in a hpc environment, and use it, and is compatible with the module tools (see <a class="reference external" href="https://docs.gwdg.de/doku.php?id=en:services:application_services:high_performance_computing:spack_and_modulefiles">https://docs.gwdg.de/doku.php?id=en:services:application_services:high_performance_computing:spack_and_modulefiles</a>. It is typical to loose a day or a week installing and configuring software, so is better to use the right tools.</p>
+<p><strong>NOTE regarding python</strong>: My current suggestion is to use <a class="reference external" href="https://docs.astral.sh/uv/">uv</a>.</p>
+<p>Using tools like spack helps to solve many problems, like</p>
+<ul class="simple">
+<li><p>✅ Dependency Management — source installs often require satisfying many dependencies manually (painful) while Spack automates this.</p></li>
+<li><p>✅ Conflicts and Errors (e.g., missing a dependency or wrong compiler).</p></li>
+<li><p>✅ Uninstalling — (e.g., make uninstall if available, or just delete directories).</p></li>
+<li><p>✅ Environment Issues — binaries installed outside of default paths won’t be found unless PATH or LD_LIBRARY_PATH is modified.</p></li>
+<li><p>✅ Parallel Builds — make -j$(nproc) — very practical in HPC!</p></li>
+<li><p>✅ Simple performance aspect  (e.g., using -O3 flags).</p></li>
+</ul>
+<p>Other tools to install/manage packages:</p>
+<ul class="simple">
+<li><p>Environment Modules (Lmod/Tcl): Managing environment variables (PATH, LD_LIBRARY_PATH, etc.) without conflicts. Basic commands: module avail, module list, module load <pkg>, module unload <pkg>, module purge, module spider <pkg> (or module keyword <pkg>). Notice that spack can generate module files (spack module tcl refresh -y <pkg>), bridging the gap between installing with Spack and using the software easily. Even manually installed software should ideally have a module file created for it.</p></li>
+<li><p>Conda: Pros: Easy to use, large package ecosystem (especially Python/R). Cons: Can sometimes have performance issues (binaries not always optimized for HPC hardware/interconnects), environment conflicts with system modules, potential storage bloat. Often better for interactive work or specific workflows than core HPC tasks.</p></li>
+<li><p>uv: https://docs.astral.sh/uv/ A modern , fast, and it is becoming the standard.</p></li>
+<li><p>EasyBuild: Another widely used HPC-centric build automation tool, similar in scope to Spack.</p></li>
+<li><p>Containers (Singularity/Apptainer): Alternative way to package and run software with its entire environment. They solve similar problems but work differently (packaging vs. native installation). high importance for portability and reproducibility, especially across different clusters.</p></li>
+</ul>
+<section id="shell-env-vars-introduction">
+<h2><span class="section-number">6.1. </span>Shell env vars introduction<a class="headerlink" href="#shell-env-vars-introduction" title="Link to this heading">#</a></h2>
+<p>Environment variables are dynamic values that affect how processes run on a computer. They are part of the environment in which a process runs and can influence program behavior without requiring code changes. These variables are crucial for configuring system behavior, program execution paths, and runtime behavior.</p>
+<p>There are modern tools that automate setting env vars per project, like <code class="docutils literal notranslate"><span class="pre">.env</span></code> files, <a class="reference external" href="https://direnv.net/">direnv</a>, and even dockerfiles.</p>
+<section id="key-environment-variables">
+<h3><span class="section-number">6.1.1. </span>Key Environment Variables<a class="headerlink" href="#key-environment-variables" title="Link to this heading">#</a></h3>
+<section id="path">
+<h4><span class="section-number">6.1.1.1. </span>PATH<a class="headerlink" href="#path" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable is one of the most important environment variables. It specifies a list of directories where the shell looks for executable programs.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># View your current PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+
+<span class="c1"># Example output</span>
+/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+</pre></div>
+</div>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Determines which programs can be run without specifying their full path</p></li>
+<li><p>Affects which versions of programs are executed when multiple versions exist</p></li>
+<li><p>Essential for running commands from any directory without typing the full path</p></li>
+</ul>
+<p><strong>Example usage:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adding a directory to PATH temporarily</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/path/to/your/directory
+
+<span class="c1"># Adding permanently (in your shell profile file like .bashrc or .zshrc)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=$PATH:/path/to/your/directory&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+</section>
+<section id="ld-library-path">
+<h4><span class="section-number">6.1.1.2. </span>LD_LIBRARY_PATH<a class="headerlink" href="#ld-library-path" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> specifies directories where the dynamic linker should look for shared libraries before checking the standard locations.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># View current LD_LIBRARY_PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$LD_LIBRARY_PATH</span>
+</pre></div>
+</div>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Critical for running programs that depend on specific library versions</p></li>
+<li><p>Essential when installing software in non-standard locations</p></li>
+<li><p>Helps resolve “library not found” errors without system-wide installation</p></li>
+</ul>
+<p><strong>Example usage:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setting LD_LIBRARY_PATH temporarily</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/path/to/libraries:<span class="nv">$LD_LIBRARY_PATH</span>
+
+<span class="c1"># Running a program with a specific library path</span>
+<span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/path/to/libs<span class="w"> </span>./your_program
+</pre></div>
+</div>
+</section>
+<section id="other-important-environment-variables">
+<h4><span class="section-number">6.1.1.3. </span>Other Important Environment Variables<a class="headerlink" href="#other-important-environment-variables" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>PYTHONPATH</strong>: Directories where Python looks for modules</p></li>
+<li><p><strong>JAVA_HOME</strong>: Base directory of your Java installation</p></li>
+<li><p><strong>LANG</strong> and <strong>LC_ALL</strong>: Control system locale and language settings</p></li>
+<li><p><strong>HOME</strong>: Path to the current user’s home directory</p></li>
+<li><p><strong>USER</strong>: Current username</p></li>
+</ul>
+</section>
+</section>
+<section id="setting-and-using-environment-variables">
+<h3><span class="section-number">6.1.2. </span>Setting and Using Environment Variables<a class="headerlink" href="#setting-and-using-environment-variables" title="Link to this heading">#</a></h3>
+<section id="temporary-setting-current-session-only">
+<h4><span class="section-number">6.1.2.1. </span>Temporary Setting (Current Session Only)<a class="headerlink" href="#temporary-setting-current-session-only" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">VARIABLE_NAME</span><span class="o">=</span>value
+</pre></div>
+</div>
+</section>
+<section id="permanent-setting">
+<h4><span class="section-number">6.1.2.2. </span>Permanent Setting<a class="headerlink" href="#permanent-setting" title="Link to this heading">#</a></h4>
+<p>Add to your shell profile file (<code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>, <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code>, etc.):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export VARIABLE_NAME=value&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+</section>
+<section id="using-variables-in-scripts">
+<h4><span class="section-number">6.1.2.3. </span>Using Variables in Scripts<a class="headerlink" href="#using-variables-in-scripts" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Your PATH is: </span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;LD_LIBRARY_PATH is not set&quot;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Libraries will be searched in: </span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="practical-applications">
+<h3><span class="section-number">6.1.3. </span>Practical Applications<a class="headerlink" href="#practical-applications" title="Link to this heading">#</a></h3>
+<section id="compiling-programs">
+<h4><span class="section-number">6.1.3.1. </span>Compiling Programs<a class="headerlink" href="#compiling-programs" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>CPATH/C_INCLUDE_PATH</strong>: Directories for C header files</p></li>
+<li><p><strong>LIBRARY_PATH</strong>: Directories for static libraries during link time</p></li>
+</ul>
+</section>
+<section id="running-programs-with-custom-libraries">
+<h4><span class="section-number">6.1.3.2. </span>Running Programs with Custom Libraries<a class="headerlink" href="#running-programs-with-custom-libraries" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Running with specific library paths</span>
+<span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/opt/custom/lib<span class="w"> </span>./my_program
+
+<span class="c1"># Compiling with specific include paths</span>
+<span class="nv">CPATH</span><span class="o">=</span>/opt/custom/include<span class="w"> </span>gcc<span class="w"> </span>-o<span class="w"> </span>program<span class="w"> </span>program.c
+</pre></div>
+</div>
+</section>
+<section id="debugging-environment-issues">
+<h4><span class="section-number">6.1.3.3. </span>Debugging Environment Issues<a class="headerlink" href="#debugging-environment-issues" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print all environment variables</span>
+env
+
+<span class="c1"># Check if a program can find its libraries</span>
+ldd<span class="w"> </span>./my_program
+</pre></div>
+</div>
+</section>
+</section>
+</section>
 <section id="spack-automatic-load-for-programs-and-containers">
-<h2><span class="section-number">6.1. </span>Spack: automatic load for programs and containers<a class="headerlink" href="#spack-automatic-load-for-programs-and-containers" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>Spack: automatic load for programs and containers<a class="headerlink" href="#spack-automatic-load-for-programs-and-containers" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://spack.readthedocs.io/en/latest/">Spack</a> was designed by llnl
 and is targeted to simplify the installation and managment of HPC
-programs with many possible versions and dependencies. Check the docs at
-<a class="reference external" href="https://spack.readthedocs.io/en/latest/tutorial.html">https://spack.readthedocs.io/en/latest/tutorial.html</a> or
-<a class="reference external" href="https://bluewaters.ncsa.illinois.edu/webinars/software-ecosystems/spack">https://bluewaters.ncsa.illinois.edu/webinars/software-ecosystems/spack</a>
-. For now let’s just install it, configure it, and install some simple
-tools.</p>
+programs with many possible versions and dependencies. Check the docs at</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://spack.readthedocs.io/en/latest/tutorial.html">https://spack.readthedocs.io/en/latest/tutorial.html</a></p></li>
+<li><p><a class="reference external" href="https://bluewaters.ncsa.illinois.edu/webinars/software-ecosystems/spack">https://bluewaters.ncsa.illinois.edu/webinars/software-ecosystems/spack</a></p></li>
+</ul>
+<p>For now let’s just install it, configure it, and install some simple
+tools. A spack command table is found at <a class="reference external" href="https://spack.readthedocs.io/en/latest/command_index.html">https://spack.readthedocs.io/en/latest/command_index.html</a> . Also, as a tip for the future, it is recommended that you use a spack environment: <a class="reference external" href="https://spack.readthedocs.io/en/latest/environments.html">https://spack.readthedocs.io/en/latest/environments.html</a></p>
 <section id="installation">
-<h3><span class="section-number">6.1.1. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
-<p>Following the official docs, just clone the repository</p>
+<h3><span class="section-number">6.2.1. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
+<p>Actually, spack is already installed at the computer room. Yet you can use your own spack installation together with an upstream one, configuring it using <a class="reference external" href="https://spack.readthedocs.io/en/latest/chain.html">https://spack.readthedocs.io/en/latest/chain.html</a>.</p>
+<p>To isntall spack, go to the Downloads folder (you DO NOT want to put the spack repo inside your class codes repo) , and then, following the official docs, just clone the repository</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/spack/spack.git<span class="w"> </span><span class="c1"># clones the repo</span>
 <span class="nb">cd</span><span class="w"> </span>spack
-<span class="c1">#git checkout releases/v0.17 # Checkout the latest stable release</span>
+git<span class="w"> </span>checkout<span class="w"> </span>v0.23.1<span class="w"> </span><span class="c1"># Checkout the latest stable release</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
 <span class="nb">source</span><span class="w"> </span>share/spack/setup-env.sh<span class="w"> </span><span class="c1"># Setup the environment , this command should go in ~/.bashrc</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
 </pre></div>
 </div>
 <p>Now you can check what can be installed</p>
@@ -519,10 +714,12 @@ tools.</p>
 <p>To be able to use spack easily in the future, it is recommended to add
 the source command to your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>, so just add the following at the
 end of the file</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source $HOME/PATHTOREPO/share/spack/setup-env.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/PATHTOREPO/share/spack/setup-env.sh
 </pre></div>
 </div>
 <p>and then close and open the terminal.</p>
+<section id="not-needed-troubleshooting-the-openssl-lib">
+<h4><span class="section-number">6.2.1.1. </span>NOT NEEDED Troubleshooting the openssl lib<a class="headerlink" href="#not-needed-troubleshooting-the-openssl-lib" title="Link to this heading">#</a></h4>
 <p>In our computer room there has been a problem with spack and openssl. It
 is better to instruct spack to use the local openssl version instead of
 building one. To do so, add the following to your spack package config
@@ -539,14 +736,22 @@ file, <code class="docutils literal notranslate"><span class="pre">$SPACK_REPO/e
 to be able to run your installed programs on several computers with
 different processors, use the flag <code class="docutils literal notranslate"><span class="pre">target=x86_64</span></code> .</p>
 </section>
+</section>
+</section>
 <section id="installing-some-tools-with-spack">
-<h3><span class="section-number">6.1.2. </span>Installing some tools with spack<a class="headerlink" href="#installing-some-tools-with-spack" title="Link to this heading">#</a></h3>
-<p>Now let’s just install the <code class="docutils literal notranslate"><span class="pre">gsl</span></code> scientific library and some <code class="docutils literal notranslate"><span class="pre">eigen</span></code>
-alternative versions:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>info<span class="w"> </span>gsl<span class="w"> </span><span class="c1"># Get some information about versions, deps, etc</span>
-spack<span class="w"> </span>install<span class="w"> </span>gsl@2.5
-spack<span class="w"> </span>install<span class="w"> </span>gsl@2.4
-module<span class="w"> </span>avail
+<h2><span class="section-number">6.3. </span>Installing some tools with spack<a class="headerlink" href="#installing-some-tools-with-spack" title="Link to this heading">#</a></h2>
+<p>Before installing some software, first, we need to deactivate the already installed environment, just to play a bit with a clean environment.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+spack<span class="w"> </span>env<span class="w"> </span>deactivate
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+</pre></div>
+</div>
+<p>Notice that this will be like a virgin installation, not using the global spack install.</p>
+<p>Now let’s install zlib, with several versions</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>info<span class="w"> </span>zlib<span class="w"> </span><span class="c1"># Get some information about versions, deps, etc</span>
+spack<span class="w"> </span>install<span class="w"> </span>zlib@1.3<span class="w"> </span><span class="nv">target</span><span class="o">=</span>x86_64_v3
+spack<span class="w"> </span>install<span class="w"> </span>zlib@1.2.13<span class="w"> </span><span class="nv">target</span><span class="o">=</span>x86_64_v3
+spack<span class="w"> </span>find
 </pre></div>
 </div>
 <p>To check the installed software, you can use the <code class="docutils literal notranslate"><span class="pre">module</span></code> command as
@@ -554,7 +759,14 @@ module<span class="w"> </span>avail
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>avail
 </pre></div>
 </div>
-<p>Now you will see that you have two versions of the gsl. If you want to
+<p>NOTE: This is not configured yet to use spack so it will not show anything.</p>
+<p>Please install to versions for the gsl</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>install<span class="w"> </span>gsl@2.7<span class="w"> </span><span class="nv">target</span><span class="o">=</span>x86_64_v3
+spack<span class="w"> </span>install<span class="w"> </span>gsl@2.6<span class="w"> </span><span class="nv">target</span><span class="o">=</span>x86_64_v3
+spack<span class="w"> </span>find
+</pre></div>
+</div>
+<p>Now you will see that you have two versions of the zlib or gsl. If you want to
 use one of them, you will load it with spack. The check the change in
 environment, first check the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, then load, then compare</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
@@ -562,8 +774,8 @@ environment, first check the <code class="docutils literal notranslate"><span cl
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$LD_LIBRARY_PATH</span>
 </pre></div>
 </div>
-<p>Now load the gsl version 2.5,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>load<span class="w"> </span>gsl@2.5
+<p>Now load the gsl version 2.8,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>load<span class="w"> </span>gsl@2.8
 </pre></div>
 </div>
 <p>and check the new paths</p>
@@ -572,8 +784,8 @@ environment, first check the <code class="docutils literal notranslate"><span cl
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$LD_LIBRARY_PATH</span>
 </pre></div>
 </div>
-<p>If you unload the gsl 2.5, everything goes back to normal,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>unload<span class="w"> </span>gsl@2.5
+<p>If you unload the gsl 2.8, everything goes back to normal,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>unload<span class="w"> </span>gsl@2.8
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$C_INCLUDE_PATH</span>
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$LD_LIBRARY_PATH</span>
@@ -583,12 +795,62 @@ environment, first check the <code class="docutils literal notranslate"><span cl
 following we will use it to play with several packages in parallel
 programming. Is voro++ available? what about eigen?</p>
 </section>
+<section id="activating-modules">
+<h2><span class="section-number">6.4. </span>Activating modules<a class="headerlink" href="#activating-modules" title="Link to this heading">#</a></h2>
+<p>You can generate modules using (see <a class="reference external" href="https://spack.readthedocs.io/en/latest/module_file_support.html">https://spack.readthedocs.io/en/latest/module_file_support.html</a>)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>module<span class="w"> </span>tcl<span class="w"> </span>refresh
+spack<span class="w"> </span>module<span class="w"> </span>lmod<span class="w"> </span>refresh
+</pre></div>
+</div>
+<p>And then setup module to find your modules as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MODULEPATH</span><span class="o">=</span><span class="nv">$MODULEPATH</span>:~/Downloads/spack/share/spack/modules/linux-slackware15-x86_64_v3
+<span class="c1">#export MODULEPATH=$MODULEPATH:~/Downloads/spack/share/spack/modules/linux-slackware15-zen3</span>
+module<span class="w"> </span>avail
+</pre></div>
+</div>
+<p>and then you can load using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>...
+</pre></div>
+</div>
+</section>
+<section id="using-a-module-spack-package">
+<h2><span class="section-number">6.5. </span>Using a module/spack package<a class="headerlink" href="#using-a-module-spack-package" title="Link to this heading">#</a></h2>
+<p>Once you have verified that your package is installed, or you have installed it, then you can use it. Let’s usse the following program that simply prints the gsl version in use</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;gsl/gsl_version.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;GNU Scientific Library (GSL) Version: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">GSL_VERSION</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can compile it as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>gsl.c
+</pre></div>
+</div>
+<p>and then run it. In the computer room, the gsl version already installed is 2.8. Now load the version 2.7 with <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">load</span> <span class="pre">gsl&#64;2.7.1</span></code> and recompile as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>-I<span class="w"> </span><span class="nv">$GSL_ROOT_DIR</span>/include<span class="w"> </span>gsl.c
+</pre></div>
+</div>
+<p>and re-run. Do you get something different?
+Of course the large <code class="docutils literal notranslate"><span class="pre">-I</span></code> specification is too much and we can reconfigure spack to always modify the C_INCLUDE_PATH to not need this things.</p>
+<p>Finally, open a new terminal. You will return to the original global spack installation. Remember, if you want ot use your own, you need to configure upstreams and so on.</p>
+</section>
+<section id="using-the-global-spack-installation">
+<h2><span class="section-number">6.6. </span>Using the global spack installation<a class="headerlink" href="#using-the-global-spack-installation" title="Link to this heading">#</a></h2>
+<p>You can use the global installation by adding a new upstream as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>config<span class="w"> </span>--scope<span class="w"> </span>site<span class="w"> </span>add<span class="w"> </span>upstreams:spack-instance-1:install_tree:/mnt/scratch/salafis/v1/spack-packages
+</pre></div>
+</div>
+<p>Now execute <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">find</span></code> and you will have available all the global and local packages.</p>
 </section>
 <section id="how-to-install-programs-from-source">
-<h2><span class="section-number">6.2. </span>How to install programs from source<a class="headerlink" href="#how-to-install-programs-from-source" title="Link to this heading">#</a></h2>
-<p>In this workshop we will learn how to install a program or library from
+<h2><span class="section-number">6.7. </span>How to install programs from source<a class="headerlink" href="#how-to-install-programs-from-source" title="Link to this heading">#</a></h2>
+<p>Sometimes you actually need to install programs from source.
+In this workshop we will learn how to install a program or library from
 source to the home directory of the user. This is useful when you need a
-programa but it is not available in the system you are working on. Also,
+program but it is not available in the system you are working on. Also,
 It could be that you actually need a newer version than the installed
 one. We will use the following programs, some of them already available
 at the computer room:</p>
@@ -602,19 +864,19 @@ at the computer room:</p>
 <tbody>
 <tr class="row-even"><td><p><a class="reference external" href="http://www.fftw.org/">fftw</a></p></td>
 <td><p>3.3.4</p></td>
-<td><p>3.3.8</p></td>
+<td><p>3.3.10</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference external" href="http://eigen.tuxfamily.org/index.php?title%3DMain_Page">Eigen C++</a></p></td>
 <td><p>3.2.7</p></td>
-<td><p>3.3.7</p></td>
+<td><p>3.4.0</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference external" href="http://math.lbl.gov/voro%2B%2B/">voro++</a></p></td>
 <td><p>Not installed</p></td>
 <td><p>0.4.6</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://gcc.gnu.org/">g++ 9.x</a></p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://gcc.gnu.org/">g++ 15.x</a></p></td>
 <td><p>Not installed</p></td>
-<td><p>9.2</p></td>
+<td><p>15.1</p></td>
 </tr>
 </tbody>
 </table>
@@ -624,8 +886,15 @@ very useful to know, and also using a new tool aimed for supercomputers,
 called <a class="reference external" href="https://spack.readthedocs.io/en/latest/">spack</a> , that
 simplifies the installation of software and also allows to have many
 versions of the same library, something not easy done manually.</p>
+<p>Notice that we use the most common/established tools, but there are other tools, like:</p>
+<ul class="simple">
+<li><p>CMake (cmake .. &amp;&amp; make &amp;&amp; make install) — It’s very common now (e.g., scientific libraries, Eigen, OpenCV, Trilinos).</p></li>
+<li><p>Meson + Ninja — Even more modern (but more niche).</p></li>
+<li><p>Environment Modules (module load, module avail).</p></li>
+<li><p>Virtual Environments for Python (uv, venv, conda).</p></li>
+</ul>
 <section id="preliminary-concepts">
-<h3><span class="section-number">6.2.1. </span>Preliminary concepts<a class="headerlink" href="#preliminary-concepts" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.7.1. </span>Preliminary concepts<a class="headerlink" href="#preliminary-concepts" title="Link to this heading">#</a></h3>
 <p>It is important for you to know a little how your operating system and
 the shell look for commands. In general, the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable stores the
 directories where the shell interpreter will look for a given command.
@@ -676,7 +945,7 @@ sometimes difficult, so tools like <code class="docutils literal notranslate"><s
 this.</p>
 </section>
 <section id="checking-the-version-for-already-installed-programs">
-<h3><span class="section-number">6.2.2. </span>Checking the version for already installed programs<a class="headerlink" href="#checking-the-version-for-already-installed-programs" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.7.2. </span>Checking the version for already installed programs<a class="headerlink" href="#checking-the-version-for-already-installed-programs" title="Link to this heading">#</a></h3>
 <p>If you are used to <code class="docutils literal notranslate"><span class="pre">apt-get</span></code> or something related, you can use the
 package manager to check. But, in general, you can check the versions by
 looking at the appropriate places on your system. Typically, if you are
@@ -697,7 +966,7 @@ version by using the following</p>
 <p>where <code class="docutils literal notranslate"><span class="pre">programname</span></code> is the name of the command.</p>
 </section>
 <section id="preparing-the-local-places-to-install-the-utilities">
-<h3><span class="section-number">6.2.3. </span>Preparing the local places to install the utilities<a class="headerlink" href="#preparing-the-local-places-to-install-the-utilities" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.7.3. </span>Preparing the local places to install the utilities<a class="headerlink" href="#preparing-the-local-places-to-install-the-utilities" title="Link to this heading">#</a></h3>
 <p>In this case we will install everything under the <code class="docutils literal notranslate"><span class="pre">$HOME/local</span></code>
 subdirectory inside your home, so please create it. Remember that the
 symbol <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> means your home directory. The utilies will then create
@@ -705,7 +974,7 @@ the appropriate folders there. <strong>NOTE:</strong> Better use the <code class
 instead of <code class="docutils literal notranslate"><span class="pre">~</span></code>, which is another way to state the name of your home.</p>
 </section>
 <section id="typical-installation-algorithm">
-<h3><span class="section-number">6.2.4. </span>Typical installation algorithm<a class="headerlink" href="#typical-installation-algorithm" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.7.4. </span>Typical installation algorithm<a class="headerlink" href="#typical-installation-algorithm" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p>Download the source from the project page. This normally implies
 downloading a tarball (file ending with <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> or <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code>) .</p></li>
@@ -796,8 +1065,22 @@ if your library is called libfftw, you need to write <code class="docutils liter
 </li>
 </ol>
 </section>
+</section>
+<section id="challenges">
+<h2><span class="section-number">6.8. </span>Challenges<a class="headerlink" href="#challenges" title="Link to this heading">#</a></h2>
+<section id="source-code-install-challenges">
+<h3><span class="section-number">6.8.1. </span>Source Code Install Challenges<a class="headerlink" href="#source-code-install-challenges" title="Link to this heading">#</a></h3>
+<p><strong>Basic Challenge</strong>:
+Download and install a simple program like htop, zlib, or hello-c manually. Install into the ~/mysoftware/ directory.</p>
+<p><strong>Medium Challenge</strong>:
+Install a CMake-based library, e.g., Eigen or fmt. Perform an out-of-source build.</p>
+<p><strong>Advanced Challenge</strong>:
+Install something with dependencies: like  GROMACS or LAMMPS from source. It needs MPI installed, maybe link it against a manually installed MPI (OpenMPI).
+They must configure with a custom –prefix and show a working simple simulation.</p>
+</section>
+</section>
 <section id="workshop">
-<h3><span class="section-number">6.2.5. </span>Workshop<a class="headerlink" href="#workshop" title="Link to this heading">#</a></h3>
+<h2><span class="section-number">6.9. </span>Workshop<a class="headerlink" href="#workshop" title="Link to this heading">#</a></h2>
 <p>For each of the proposed utilities written at the beginning, follow the
 next procedure:</p>
 <ul class="simple">
@@ -812,11 +1095,10 @@ line.</p></li>
 to put that as suffix to the commands and avoid collisions with the
 compiler already installed in the system. This can be done by adding the
 flag <code class="docutils literal notranslate"><span class="pre">--program-suffix=-9</span></code> to the <code class="docutils literal notranslate"><span class="pre">configure</span></code> command.</p>
-</section>
 <section id="test-programs">
-<h3><span class="section-number">6.2.6. </span>Test Programs<a class="headerlink" href="#test-programs" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.9.1. </span>Test Programs<a class="headerlink" href="#test-programs" title="Link to this heading">#</a></h3>
 <section id="fftw">
-<h4><span class="section-number">6.2.6.1. </span>fftw<a class="headerlink" href="#fftw" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">6.9.1.1. </span>fftw<a class="headerlink" href="#fftw" title="Link to this heading">#</a></h4>
 <p>This is a c code. Save it as testfftw.c and compile with <code class="docutils literal notranslate"><span class="pre">gcc</span></code> instead
 of <code class="docutils literal notranslate"><span class="pre">g++</span></code> .</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// From : https://github.com/undees/fftw-example</span>
@@ -888,7 +1170,7 @@ of <code class="docutils literal notranslate"><span class="pre">g++</span></code
 </div>
 </section>
 <section id="eigen-c">
-<h4><span class="section-number">6.2.6.2. </span>Eigen C++<a class="headerlink" href="#eigen-c" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">6.9.1.2. </span>Eigen C++<a class="headerlink" href="#eigen-c" title="Link to this heading">#</a></h4>
 <p>These are <code class="docutils literal notranslate"><span class="pre">C++</span></code> codes. Save them, compile, run and explain what they do.</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
@@ -970,7 +1252,7 @@ of <code class="docutils literal notranslate"><span class="pre">g++</span></code
 </section>
 </section>
 <section id="voro">
-<h3><span class="section-number">6.2.7. </span>Voro++<a class="headerlink" href="#voro" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.9.2. </span>Voro++<a class="headerlink" href="#voro" title="Link to this heading">#</a></h3>
 <p>Use the example
 <a class="reference external" href="http://math.lbl.gov/voro%2B%2B/examples/random_points/"><a class="reference external" href="http://math.lbl.gov/voro++/examples/random_points/">http://math.lbl.gov/voro++/examples/random_points/</a></a></p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Voronoi calculation example code</span>
@@ -1036,7 +1318,7 @@ of <code class="docutils literal notranslate"><span class="pre">g++</span></code
 </div>
 </section>
 <section id="g-9-2">
-<h3><span class="section-number">6.2.8. </span>g++ 9.2<a class="headerlink" href="#g-9-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.9.3. </span>g++ 9.2<a class="headerlink" href="#g-9-2" title="Link to this heading">#</a></h3>
 <p>Just run the command and check the version,</p>
 <p>Now run any of the special functions examples that required <code class="docutils literal notranslate"><span class="pre">-std=c++17</span></code>
 .</p>
@@ -1108,24 +1390,57 @@ of <code class="docutils literal notranslate"><span class="pre">g++</span></code
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spack-automatic-load-for-programs-and-containers">6.1. Spack: automatic load for programs and containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">6.1.1. Installation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-some-tools-with-spack">6.1.2. Installing some tools with spack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-env-vars-introduction">6.1. Shell env vars introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-environment-variables">6.1.1. Key Environment Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#path">6.1.1.1. PATH</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ld-library-path">6.1.1.2. LD_LIBRARY_PATH</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-important-environment-variables">6.1.1.3. Other Important Environment Variables</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-programs-from-source">6.2. How to install programs from source</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-concepts">6.2.1. Preliminary concepts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-version-for-already-installed-programs">6.2.2. Checking the version for already installed programs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-local-places-to-install-the-utilities">6.2.3. Preparing the local places to install the utilities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-installation-algorithm">6.2.4. Typical installation algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop">6.2.5. Workshop</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-programs">6.2.6. Test Programs</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fftw">6.2.6.1. fftw</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c">6.2.6.2. Eigen C++</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-and-using-environment-variables">6.1.2. Setting and Using Environment Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#temporary-setting-current-session-only">6.1.2.1. Temporary Setting (Current Session Only)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#permanent-setting">6.1.2.2. Permanent Setting</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-variables-in-scripts">6.1.2.3. Using Variables in Scripts</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voro">6.2.7. Voro++</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-9-2">6.2.8. g++ 9.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications">6.1.3. Practical Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-programs">6.1.3.1. Compiling Programs</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-programs-with-custom-libraries">6.1.3.2. Running Programs with Custom Libraries</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-environment-issues">6.1.3.3. Debugging Environment Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spack-automatic-load-for-programs-and-containers">6.2. Spack: automatic load for programs and containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">6.2.1. Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#not-needed-troubleshooting-the-openssl-lib">6.2.1.1. NOT NEEDED Troubleshooting the openssl lib</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-some-tools-with-spack">6.3. Installing some tools with spack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activating-modules">6.4. Activating modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-module-spack-package">6.5. Using a module/spack package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-global-spack-installation">6.6. Using the global spack installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-programs-from-source">6.7. How to install programs from source</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-concepts">6.7.1. Preliminary concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-version-for-already-installed-programs">6.7.2. Checking the version for already installed programs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-local-places-to-install-the-utilities">6.7.3. Preparing the local places to install the utilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-installation-algorithm">6.7.4. Typical installation algorithm</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges">6.8. Challenges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#source-code-install-challenges">6.8.1. Source Code Install Challenges</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop">6.9. Workshop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-programs">6.9.1. Test Programs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fftw">6.9.1.1. fftw</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c">6.9.1.2. Eigen C++</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voro">6.9.2. Voro++</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-9-2">6.9.3. g++ 9.2</a></li>
 </ul>
 </li>
 </ul>
