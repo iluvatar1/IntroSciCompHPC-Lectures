@@ -452,15 +452,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catch2">8.1. Catch2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-catch2">8.1.1. Install catch2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-example-factorial">8.1.2. Tutorial example: factorial</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#including-a-test-using-catch2">8.1.3. Including a test using catch2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-of-tests">8.1. Type of tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-with-catch2">8.2. Testing with Catch2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-catch2">8.2.1. Installing catch2</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-test">8.2. Google test</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.2.1. Installation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.2.2. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-example-factorial">8.3. Tutorial example: factorial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">8.4. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-a-test-using-catch2">8.5. Including a test using catch2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.5.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.5.2. Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-test">8.6. Google test</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.6.1. Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.6.2. Example</a></li>
 </ul>
 </li>
 </ul>
@@ -482,7 +488,7 @@ written (or even before in TTD) or a bug is fixed, it is necessary to
 write a test that ensures the function to work properly in limit cases
 or the bug to not reappear in the future. There are several levels
 associated with <a class="reference external" href="https://en.wikipedia.org/wiki/Unit_testing">unit testing
-.</a></p>
+.</a>, and check <a class="reference external" href="https://matklad.github.io/2021/05/31/how-to-test.html">https://matklad.github.io/2021/05/31/how-to-test.html</a>. Also, check unit testing numerical libraries: https://news.ycombinator.com/item?id=42115161</p>
 <p>In this unit we will learn the general philosophy behind it and a couple
 of tools to implement very basic tests, althoguh the list of <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks">testing
 frameworks</a>
@@ -490,59 +496,77 @@ is very large. Furthermore, modularization will be very important, so
 you must have a clear understanding on how to split some given code into
 headers, source files, and how to compile objects and then link them
 using the linker, hopefully through a Makefile.</p>
-<p>It is worth mentioning that catching an exception (<code class="docutils literal notranslate"><span class="pre">try</span></code> and <code class="docutils literal notranslate"><span class="pre">catch</span></code> blocks) also helps with handling runtime errors and reacting correspondingly. Also, using logging libraries like logger or loguru (python), or <code class="docutils literal notranslate"><span class="pre">spdlog</span></code>, https://github.com/gabime/spdlog, (c++) allows to print useful logging messages that also helps when you try to understand what is going on with your program.</p>
-<p><a class="reference external" href="https://matklad.github.io/2021/05/31/how-to-test.html">https://matklad.github.io/2021/05/31/how-to-test.html</a></p>
+<p>It is worth mentioning that catching an exception (<code class="docutils literal notranslate"><span class="pre">try</span></code> and <code class="docutils literal notranslate"><span class="pre">catch</span></code> blocks) also helps with handling runtime errors and reacting correspondingly (see <a class="reference external" href="https://hackingcpp.com/cpp/lang/exceptions.html">c++ exceptions</a> and <a class="reference external" href="https://docs.python.org/3/tutorial/errors.html">python exceptions</a> ). Also, using logging libraries like logger or <a class="reference external" href="https://github.com/Delgan/loguru"><code class="docutils literal notranslate"><span class="pre">loguru</span></code> (python)</a>, or <a class="reference external" href="https://github.com/gabime/spdlog"><code class="docutils literal notranslate"><span class="pre">spdlog</span></code> c++</a>, allows to print useful logging messages that also helps when you try to understand what is going on with your program.</p>
+<p>But, how to write and run tests? A test is:</p>
 <ul class="simple">
-<li><p>Unit testing numerical libraries: https://news.ycombinator.com/item?id=42115161</p></li>
+<li><p>a small piece of code that compares the actual vs. expected behaviour of your software.</p></li>
+<li><p>some code that you have to write.</p></li>
+<li><p>should run as automatically as possible.</p></li>
+<li><p>should run fast.</p></li>
+<li><p>should fail fast.</p></li>
+<li><p>should report its status</p></li>
+<li><p>should track previous results and performance.</p></li>
 </ul>
-<section id="catch2">
-<h2><span class="section-number">8.1. </span>Catch2<a class="headerlink" href="#catch2" title="Link to this heading">#</a></h2>
+<p>For this, it is much better to use a test framework, which will run all test and report back results statistics. It can also be integrated with revision control systems, automatic and deployment tasks. For C++, one can use google test, catch2, boost test, cppunit, …, and for python: pytest, unittest, doctest,  and so on.</p>
+<section id="type-of-tests">
+<h2><span class="section-number">8.1. </span>Type of tests<a class="headerlink" href="#type-of-tests" title="Link to this heading">#</a></h2>
+<p>A unit test should be small, concrete and precise, and run independent of other tests. Actually, you can tests at several levels:</p>
+<ul class="simple">
+<li><p>Unit test: Tests if a software unit (like a function) works as expected.</p></li>
+<li><p>Stress test: Checks if the software behave as expected with large/challenging inputs or environments. Can use fuzzy testing.</p></li>
+<li><p>Integration test: Test if several software parts work together correctly even if they all pass unit testing.</p></li>
+<li><p>System test: Interaction with larger software, even the OS.</p></li>
+<li><p>Regression test: Checks if the software behaves as it did before</p></li>
+<li><p>Performance test: is kind of a regression test, ensuring that performance is not affected by new changes.</p></li>
+<li><p>UI/UX tests</p></li>
+<li><p>…</p></li>
+</ul>
+<img alt="under-over-truncation" class="centerimg50" src="../_images/unit-integration.jpg" />
+</section>
+<section id="testing-with-catch2">
+<h2><span class="section-number">8.2. </span>Testing with Catch2<a class="headerlink" href="#testing-with-catch2" title="Link to this heading">#</a></h2>
 <p>Our goal here is to learn to use
 <a class="reference external" href="https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md#top">catch2</a>
 to test a very simple function extracted from their tutorial. Later we
 will modularize the code to practice that and write a useful <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>.</p>
-<section id="install-catch2">
-<h3><span class="section-number">8.1.1. </span>Install catch2<a class="headerlink" href="#install-catch2" title="Link to this heading">#</a></h3>
-<p>If you don’t have it installed, you can use <code class="docutils literal notranslate"><span class="pre">spack</span></code>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>install<span class="w"> </span>catch2
+<section id="installing-catch2">
+<h3><span class="section-number">8.2.1. </span>Installing catch2<a class="headerlink" href="#installing-catch2" title="Link to this heading">#</a></h3>
+<p>If you don’t have it installed, you can installl it from source, or you can use <code class="docutils literal notranslate"><span class="pre">spack</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>install<span class="w"> </span>catch2
 </pre></div>
 </div>
+<p>If you are using a global spack install, check if catch2 is not already installed.</p>
+</section>
 </section>
 <section id="tutorial-example-factorial">
-<h3><span class="section-number">8.1.2. </span>Tutorial example: factorial<a class="headerlink" href="#tutorial-example-factorial" title="Link to this heading">#</a></h3>
+<h2><span class="section-number">8.3. </span>Tutorial example: factorial<a class="headerlink" href="#tutorial-example-factorial" title="Link to this heading">#</a></h2>
 <p>Here we will follow the tutorial , testing a factorial function implementation. To do so, we need, first, to modularize our code:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">factorial.h</span></code> :</p></li>
-</ul>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<p>Header file with declarations <code class="docutils literal notranslate"><span class="pre">factorial.h</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="cp">#pragma once</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
 </pre></div>
 </div>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">factorial.cpp</span></code>:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;factorial.h&quot;</span>
+<p>Source file with implementations <code class="docutils literal notranslate"><span class="pre">factorial.cpp</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;factorial.h&quot;</span>
 
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="n">number</span><span class="mi">-1</span><span class="p">)</span><span class="o">*</span><span class="n">number</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-</pre></div>
-</div>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">main_factorial.cpp</span></code></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="w">  </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;factorial.h&quot;</span>
-
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="n">number</span><span class="mi">-1</span><span class="p">)</span><span class="o">*</span><span class="n">number</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</li>
-</ul>
-<p>With these three files we have the basic utilities to use the factorial function. To compile, we must run something like</p>
+<p>And a first main file to use the function: <code class="docutils literal notranslate"><span class="pre">main_factorial.cpp</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;factorial.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With these three files, we have the basic utilities to use the factorial function. To compile, we must run something like</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-c<span class="w"> </span>factorial.cpp
 g++<span class="w"> </span>-c<span class="w"> </span>main_factorial.cpp
 g++<span class="w"> </span>factorial.o<span class="w"> </span>main_factorial.o<span class="w"> </span>-o<span class="w"> </span>factorial_test.x
@@ -553,23 +577,27 @@ g++<span class="w"> </span>factorial.o<span class="w"> </span>main_factorial.o<s
 </pre></div>
 </div>
 <p>The compilation can be automated with a  <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> as</p>
-<div class="highlight-Makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">all</span><span class="o">:</span><span class="w"> </span><span class="n">main_factorial</span>.<span class="n">x</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>all:<span class="w"> </span>main_factorial.x
 
-<span class="nf">%.x</span><span class="o">:</span><span class="w"> </span>%.<span class="n">o</span> <span class="n">factorial</span>.<span class="n">o</span>
+%.x:<span class="w"> </span>%.o<span class="w"> </span>factorial.o
 <span class="w">	</span>g++<span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
 
-<span class="nf">%.o</span><span class="o">:</span><span class="w"> </span>%.<span class="n">cpp</span>
+%.o:<span class="w"> </span>%.cpp
 <span class="w">	</span>g++<span class="w"> </span>-c<span class="w"> </span>$&lt;
 
-<span class="nf">clean</span><span class="o">:</span>
+clean:
 <span class="w">	</span>rm<span class="w"> </span>-f<span class="w"> </span>*.o<span class="w"> </span>*.x
 </pre></div>
 </div>
 </section>
+<section id="exercise">
+<h2><span class="section-number">8.4. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<p>Now please modify the main file, to compute the factorial of some cases that you think of. Is it working correctly? try 0, 0-1, 2. You have found some bugs. Now we need to both fix the function AND create test cases for those bugs to check that they are fixed always.</p>
+</section>
 <section id="including-a-test-using-catch2">
-<h3><span class="section-number">8.1.3. </span>Including a test using catch2<a class="headerlink" href="#including-a-test-using-catch2" title="Link to this heading">#</a></h3>
-<p>This is the file example extracted from <code class="docutils literal notranslate"><span class="pre">catch2</span></code> tutorial.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define CATCH_CONFIG_MAIN  </span><span class="c1">// This tells Catch to provide a main() - only do this in one cpp file</span>
+<h2><span class="section-number">8.5. </span>Including a test using catch2<a class="headerlink" href="#including-a-test-using-catch2" title="Link to this heading">#</a></h2>
+<p>This is the file example extracted from <code class="docutils literal notranslate"><span class="pre">catch2</span></code> tutorial. The following would be the <code class="docutils literal notranslate"><span class="pre">main_test.cpp</span></code> file:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#define CATCH_CONFIG_MAIN  </span><span class="c1">// This tells Catch to provide a main() - only do this in one cpp file</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;catch2/catch_test_macros.hpp&quot;</span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;factorial.h&quot;</span>
@@ -595,7 +623,7 @@ g++<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o<s
 -I/usr/local/include<span class="w"> </span><span class="c1"># This result can change if catch2 is installed on other systems</span>
 </pre></div>
 </div>
-<p>or for the libs path</p>
+<p>or, for the libs path</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pkg-config<span class="w"> </span>--libs-only-L<span class="w"> </span>catch2
 -L/usr/local/lib<span class="w">  </span><span class="c1"># This result can change if catch2 is installed on other systems</span>
 </pre></div>
@@ -605,32 +633,26 @@ g++<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o<s
 </pre></div>
 </div>
 <p>Again, it is better to include this in a Makefile:</p>
-<div class="highlight-Makefile notranslate"><div class="highlight"><pre><span></span><span class="nv">SHELL</span><span class="o">:=</span>/bin/bash
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>SHELL:<span class="o">=</span>/bin/bash
 
-<span class="nf">all</span><span class="o">:</span><span class="w"> </span><span class="n">main_factorial</span>.<span class="n">x</span>
+all:<span class="w"> </span>main_factorial.x
 
-<span class="nf">%.x</span><span class="o">:</span><span class="w"> </span>%.<span class="n">o</span> <span class="n">factorial</span>.<span class="n">o</span>
+%.x:<span class="w"> </span>%.o<span class="w"> </span>factorial.o
 <span class="w">	</span>g++<span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
 
-<span class="nf">test_factorial.x</span><span class="o">:</span><span class="w"> </span><span class="n">test_factorial</span>.<span class="n">o</span> <span class="n">factorial</span>.<span class="n">o</span>
+test_factorial.x:<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o
 <span class="w">	</span>g++<span class="w"> </span><span class="nv">$$</span><span class="o">(</span>pkg-config<span class="w"> </span>--cflags<span class="o">)</span><span class="w"> </span><span class="nv">$$</span><span class="o">(</span>pkg-config<span class="w"> </span>--libs-only-L<span class="w"> </span>catch2<span class="o">)</span><span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span>-l<span class="w"> </span>Catch2Main<span class="w"> </span>-l<span class="w"> </span>Catch2
 
-<span class="nf">test</span><span class="o">:</span><span class="w"> </span><span class="n">test_factorial</span>.<span class="n">x</span>
+test:<span class="w"> </span>test_factorial.x
 <span class="w">	</span>./test_factorial.x
 
-<span class="nf">%.o</span><span class="o">:</span><span class="w"> </span>%.<span class="n">cpp</span>
+%.o:<span class="w"> </span>%.cpp
 <span class="w">	</span>g++<span class="w"> </span>-c<span class="w"> </span>$&lt;
 
-<span class="nf">clean</span><span class="o">:</span>
+clean:
 <span class="w">	</span>rm<span class="w"> </span>-f<span class="w"> </span>*.o<span class="w"> </span>*.x
 </pre></div>
 </div>
-<p>This way, when you write</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">test</span>
-</pre></div>
-</div>
-<p>it will compile and then run all the test.</p>
-<p>Please uncomment the commented line in the test, analyze and fix the factorial function. Also implemente more tests, for large numbers, negative numbers, and so on.</p>
 <p>NOTE: if you are using spack, you might need to add more code to your target commands</p>
 <div class="highlight-Makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">%.x</span><span class="o">:</span><span class="w"> </span>%.<span class="n">o</span> <span class="n">factorial</span>.<span class="n">o</span>
 <span class="w">    </span><span class="nb">source</span><span class="w"> </span><span class="nv">$$</span>HOME/repos/spack/share/spack/setup-env.sh<span class="p">;</span><span class="w"> </span><span class="se">\</span>
@@ -638,16 +660,28 @@ g++<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o<s
 <span class="w">    </span>g++<span class="w"> </span><span class="nv">$$</span><span class="o">(</span>pkg-config<span class="w"> </span>--cflags<span class="w"> </span>catch2<span class="o">)</span><span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
 </pre></div>
 </div>
+<p>This way, when you write</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">test</span>
+</pre></div>
+</div>
+<p>it will compile and then run all the test.</p>
+<section id="id1">
+<h3><span class="section-number">8.5.1. </span>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Please uncomment the commented line in the test, analyze and fix the factorial function. Also, implement more tests, for large numbers, negative numbers, and so on.</p>
+</section>
+<section id="id2">
+<h3><span class="section-number">8.5.2. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Check the documentation for more options, like <code class="docutils literal notranslate"><span class="pre">SECTIONS</span></code>, <code class="docutils literal notranslate"><span class="pre">tags</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">generators</span></code>, <code class="docutils literal notranslate"><span class="pre">signature</span> <span class="pre">based</span> <span class="pre">test</span></code>, …</p>
 </section>
 </section>
 <section id="google-test">
-<h2><span class="section-number">8.2. </span>Google test<a class="headerlink" href="#google-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.6. </span>Google test<a class="headerlink" href="#google-test" title="Link to this heading">#</a></h2>
 <p>Google test is a famous and advance unit framework that goes well beyond
 of what is shown here. You are invited to follow the
 <a class="reference external" href="https://github.com/google/googletest/blob/master/googletest/docs/primer.md">docs</a>
 to learn more.</p>
 <section id="installation">
-<h3><span class="section-number">8.2.1. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.6.1. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
 <p>Again, we will use spack</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>install<span class="w"> </span>googletest
 mkdir<span class="w"> </span>googletest
@@ -655,12 +689,10 @@ mkdir<span class="w"> </span>googletest
 </div>
 </section>
 <section id="example">
-<h3><span class="section-number">8.2.2. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.6.2. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
 <p>This is an example, already modularized.</p>
-<ul class="simple">
-<li><p>Factorial and isprime header:</p></li>
-</ul>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef GTEST_SAMPLES_SAMPLE1_H_</span>
+<p>Factorial and isprime header:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef GTEST_SAMPLES_SAMPLE1_H_</span>
 <span class="cp">#define GTEST_SAMPLES_SAMPLE1_H_</span>
 
 <span class="c1">// Returns n! (the factorial of n).  For negative n, n! is defined to be 1.</span>
@@ -672,10 +704,8 @@ mkdir<span class="w"> </span>googletest
 <span class="cp">#endif  </span><span class="c1">// GTEST_SAMPLES_SAMPLE1_H_</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Source file</p></li>
-</ul>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;factorial.h&quot;</span>
+<p>Source file</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;factorial.h&quot;</span>
 
 <span class="c1">// Returns n! (the factorial of n).  For negative n, n! is defined to be 1.</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">Factorial</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -712,10 +742,8 @@ mkdir<span class="w"> </span>googletest
 <span class="p">}</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Test source file (to be compiled as an object)</p></li>
-</ul>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;limits.h&gt;</span>
+<p>Test source file (to be compiled as an object)</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;limits.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;factorial.h&quot;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gtest/gtest.h&quot;</span>
 <span class="k">namespace</span><span class="w"> </span><span class="p">{</span>
@@ -767,10 +795,8 @@ mkdir<span class="w"> </span>googletest
 <span class="p">}</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Main google test file</p></li>
-</ul>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+<p>Main google test file</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gtest/gtest.h&quot;</span>
 
 <span class="n">GTEST_API_</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -848,15 +874,21 @@ mkdir<span class="w"> </span>googletest
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catch2">8.1. Catch2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-catch2">8.1.1. Install catch2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-example-factorial">8.1.2. Tutorial example: factorial</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#including-a-test-using-catch2">8.1.3. Including a test using catch2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-of-tests">8.1. Type of tests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-with-catch2">8.2. Testing with Catch2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-catch2">8.2.1. Installing catch2</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-test">8.2. Google test</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.2.1. Installation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.2.2. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-example-factorial">8.3. Tutorial example: factorial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">8.4. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-a-test-using-catch2">8.5. Including a test using catch2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.5.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.5.2. Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-test">8.6. Google test</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.6.1. Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.6.2. Example</a></li>
 </ul>
 </li>
 </ul>
