@@ -960,13 +960,10 @@ will see how to use cachegrind, to check for cache misses, and
 callgrind, for a calling graph much like tools like perf and gprof.</p>
 <section id="cache-checker-cachegrind">
 <h3><span class="section-number">10.7.1. </span>Cache checker : cachegrind<a class="headerlink" href="#cache-checker-cachegrind" title="Link to this heading">#</a></h3>
+<p>From <a class="reference external" href="http://valgrind.org/docs/manual/cg-manual.html#cg-manual.overview">cachegrind</a></p>
 <blockquote>
-<div><p>From
-<a class="reference external" href="http://valgrind.org/docs/manual/cg-manual.html#cg-manual.overview">cachegrind</a></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Cachegrind<span class="w"> </span>simulates<span class="w"> </span>how<span class="w"> </span>your<span class="w"> </span>program<span class="w"> </span>interacts<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>machine<span class="err">&#39;</span>s
-</pre></div>
-</div>
-<p>cache hierarchy and (optionally) branch predictor. It simulates a
+<div><p>Cachegrind simulates how your program interacts with a machine’s
+cache hierarchy and (optionally) branch predictor. It simulates a
 machine with independent first-level instruction and data caches (I1
 and D1), backed by a unified second-level cache (L2). This exactly
 matches the configuration of many modern machines.</p>

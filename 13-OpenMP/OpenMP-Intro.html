@@ -489,7 +489,7 @@ cores, and shared memory. For much more info, see
 <section id="introduction-hello-world-and-threadid">
 <h2><span class="section-number">14.1. </span>Introduction: Hello world and threadid<a class="headerlink" href="#introduction-hello-world-and-threadid" title="Link to this heading">#</a></h2>
 <p>Typical Hello world,</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;omp.h&quot;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
@@ -513,7 +513,7 @@ Test it. What happens if you write</p>
 </div>
 <p>and then you run the executable?</p>
 <p>The actual directive is like</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma omp parallel [clause ...]  newline </span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma omp parallel [clause ...]  newline </span>
 <span class="w">                   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">scalar_expression</span><span class="p">)</span><span class="w"> </span>
 <span class="w">                   </span><span class="k">private</span><span class="w"> </span><span class="p">(</span><span class="n">list</span><span class="p">)</span><span class="w"> </span>
 <span class="w">                   </span><span class="n">shared</span><span class="w"> </span><span class="p">(</span><span class="n">list</span><span class="p">)</span><span class="w"> </span>
@@ -535,7 +535,7 @@ conditions, etc.</p>
 </pre></div>
 </div>
 <p>inside your code, as in the following,</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span><span class="c1"> // printf</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span><span class="c1"> // printf</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
@@ -579,7 +579,7 @@ conditions, etc.</p>
 <section id="private-and-shared-variables">
 <h2><span class="section-number">14.2. </span>Private and shared variables<a class="headerlink" href="#private-and-shared-variables" title="Link to this heading">#</a></h2>
 <p>Shared and private</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
@@ -606,7 +606,7 @@ conditions, etc.</p>
 </div>
 <p>In this example we see the memory address for shared and private
 variables to illustrate those concepts:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 
@@ -1017,7 +1017,7 @@ and test your prediction (from
 <li><p>Write a program to compute the mean and the standard deviation for a
 large array using OpenMP, with only one reduction. Also compute the
 parallel metrics.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// stats.cpp</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// stats.cpp</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
@@ -1093,7 +1093,7 @@ trhead has N intervals.</p></li>
 precision and the time?</p>
 </li>
 </ol>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
 
 <span class="k">using</span><span class="w"> </span><span class="n">fptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span>
@@ -1151,11 +1151,11 @@ precision and the time?</p>
 <li><p>Parallelize a Matrix-Matrix multiplication. Compare the performance
 when you use one, two, three, for threads.</p></li>
 <li><p>Is this loop parallelizable? If not, why?</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma omp parallel for</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="err">–</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="err">–</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
-<span class="p">}</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#pragma omp parallel for</span>
+<span class="k">for</span><span class="w"> </span><span class="o">(</span>int<span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span>N<span class="p">;</span><span class="w"> </span>i++<span class="o">)</span>
+<span class="o">{</span>
+<span class="w">  </span>A<span class="o">[</span>i<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>B<span class="o">[</span>i<span class="o">]</span><span class="w"> </span>–<span class="w"> </span>A<span class="o">[</span>i<span class="w"> </span>–<span class="w"> </span><span class="m">1</span><span class="o">]</span><span class="p">;</span>
+<span class="o">}</span>
 </pre></div>
 </div>
 </li>
