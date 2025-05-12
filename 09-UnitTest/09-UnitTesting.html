@@ -471,14 +471,18 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.6.1. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opt-google-test-example">8.7. [OPT] Google test example</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.7.1. Installation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.7.2. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-integration">8.7. Continuous integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exeercise">8.7.1. Exeercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-unit-testing-with-pytest">8.8. Python Unit Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-pytest">8.8.1. Getting Started with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-randomized-testing-with-pytest">8.8.2. Bonus: Randomized Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opt-google-test-example">8.8. [OPT] Google test example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.8.1. Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.8.2. Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-unit-testing-with-pytest">8.9. Python Unit Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-pytest">8.9.1. Getting Started with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-randomized-testing-with-pytest">8.9.2. Bonus: Randomized Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -821,6 +825,12 @@ test:<span class="w"> </span>test_factorial.x
 <span class="w">        </span>./test_factorial.x
 
 <span class="c1"># TODO: target coverage</span>
+<span class="o">===</span><span class="w"> </span>BEGIN<span class="w"> </span>MARK<span class="w"> </span><span class="nv">SCHEME</span><span class="w"> </span><span class="o">===</span>
+coverage:<span class="w"> </span>test_factorial.x
+<span class="w">        </span>./$&lt;
+<span class="w">        </span>gcov<span class="w"> </span>factorial.cpp<span class="w"> </span>test_factorial.cpp
+<span class="w">        </span>genhtml<span class="w"> </span>lcov-report/coverage.info<span class="w"> </span>--output-directory<span class="w"> </span>lcov-report
+<span class="o">===</span><span class="w"> </span>END<span class="w"> </span>MARK<span class="w"> </span><span class="nv">SCHEME</span><span class="w"> </span><span class="o">===</span>
 
 
 clean:
@@ -829,14 +839,69 @@ clean:
 </div>
 </section>
 </section>
+<section id="continuous-integration">
+<h2><span class="section-number">8.7. </span>Continuous integration<a class="headerlink" href="#continuous-integration" title="Link to this heading">#</a></h2>
+<p>Automating testing can also happen remotely when running a Continuous Integration (CI) pipeline. To do so, tools like GitHub Actions or GitLab CI/CD can be used for this purpose, which in turn use container under the hood. In the following, and example using a github CI pipeline will be shown.</p>
+<p>To start, you will need to create a file inside your repo called <code class="docutils literal notranslate"><span class="pre">.github/workflows/cpp-ci.yml</span></code>. The directory <code class="docutils literal notranslate"><span class="pre">.github/workflows/</span></code> is where you put all actions you expect to be run when you push or perform other action (for example, check the workflows in this book repo). Inside the file, you can put something like</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C++ CI</span>
+
+<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout code</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies (g++, make, Catch2)</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">sudo apt-get update</span>
+<span class="w">        </span><span class="no">sudo apt-get install -y g++ make catch2</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build with Makefile</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make test_factorial.x</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run tests</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./test_factorial.x</span>
+</pre></div>
+</div>
+<p>This will run this workflow every time there is a push or pull_request. What this actually do is</p>
+<ul class="simple">
+<li><p>It spins up a clean and new irtual machine (ubuntu-latest)</p></li>
+<li><p>Checkouts the repo in that specific container image</p></li>
+<li><p>Install dependencies (depends on OS, in ubuntu it uses <code class="docutils literal notranslate"><span class="pre">apt</span></code>)</p></li>
+<li><p>Compile the default target for testing.</p></li>
+<li><p>Runs the executable.</p></li>
+</ul>
+<p>You will get a report in the actions tab. If everything is ok, you will see a nice green checkmark in your repo.</p>
+<p>For running actions only in a particular repository, you can adapt the workflow as</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">defaults</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">working-directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">09-testing</span>
+
+<span class="nn">...</span>
+</pre></div>
+</div>
+<section id="exeercise">
+<h3><span class="section-number">8.7.1. </span>Exeercise<a class="headerlink" href="#exeercise" title="Link to this heading">#</a></h3>
+<p>Add continuous integration to your repo and check it is running in the remote repo.</p>
+</section>
+</section>
 <section id="opt-google-test-example">
-<h2><span class="section-number">8.7. </span>[OPT] Google test example<a class="headerlink" href="#opt-google-test-example" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.8. </span>[OPT] Google test example<a class="headerlink" href="#opt-google-test-example" title="Link to this heading">#</a></h2>
 <p>Google test is a famous and advance unit framework that goes well beyond
 of what is shown here. You are invited to follow the
 <a class="reference external" href="https://github.com/google/googletest/blob/master/googletest/docs/primer.md">docs</a>
 to learn more.</p>
 <section id="installation">
-<h3><span class="section-number">8.7.1. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.8.1. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
 <p>Again, we will use spack</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>install<span class="w"> </span>googletest
 mkdir<span class="w"> </span>googletest
@@ -844,7 +909,7 @@ mkdir<span class="w"> </span>googletest
 </div>
 </section>
 <section id="example">
-<h3><span class="section-number">8.7.2. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.8.2. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
 <p>This is an example, already modularized.</p>
 <p>Factorial and isprime header:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef GTEST_SAMPLES_SAMPLE1_H_</span>
@@ -964,7 +1029,7 @@ mkdir<span class="w"> </span>googletest
 </section>
 </section>
 <section id="python-unit-testing-with-pytest">
-<h2><span class="section-number">8.8. </span>Python Unit Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#python-unit-testing-with-pytest" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.9. </span>Python Unit Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#python-unit-testing-with-pytest" title="Link to this heading">#</a></h2>
 <p>While C++ has great tools like catch2 or GTest for unit testing, <strong>Python</strong> also has a rich ecosystem for writing and running tests. The most commonly used testing framework in Python is <a class="reference external" href="https://docs.pytest.org/en/stable/"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></p>
 <p>Other popular tools include:</p>
 <ul class="simple">
@@ -974,7 +1039,7 @@ mkdir<span class="w"> </span>googletest
 </ul>
 <hr class="docutils" />
 <section id="getting-started-with-pytest">
-<h3><span class="section-number">8.8.1. </span>Getting Started with <code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#getting-started-with-pytest" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.9.1. </span>Getting Started with <code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#getting-started-with-pytest" title="Link to this heading">#</a></h3>
 <p>Install <code class="docutils literal notranslate"><span class="pre">pytest</span></code> if it’s not already installed:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pytest
 </pre></div>
@@ -1018,7 +1083,7 @@ test_math_utils.py<span class="w"> </span>..<span class="w">                    
 </div>
 </section>
 <section id="bonus-randomized-testing-with-pytest">
-<h3><span class="section-number">8.8.2. </span>Bonus: Randomized Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#bonus-randomized-testing-with-pytest" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.9.2. </span>Bonus: Randomized Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#bonus-randomized-testing-with-pytest" title="Link to this heading">#</a></h3>
 <p>You can also try simple randomized tests using Python’s random module:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 
@@ -1127,14 +1192,18 @@ test_math_utils.py<span class="w"> </span>..<span class="w">                    
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.6.1. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opt-google-test-example">8.7. [OPT] Google test example</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.7.1. Installation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.7.2. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-integration">8.7. Continuous integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exeercise">8.7.1. Exeercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-unit-testing-with-pytest">8.8. Python Unit Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-pytest">8.8.1. Getting Started with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-randomized-testing-with-pytest">8.8.2. Bonus: Randomized Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opt-google-test-example">8.8. [OPT] Google test example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.8.1. Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.8.2. Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-unit-testing-with-pytest">8.9. Python Unit Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-pytest">8.9.1. Getting Started with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-randomized-testing-with-pytest">8.9.2. Bonus: Randomized Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
 </ul>
 </li>
 </ul>
