@@ -460,13 +460,25 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-example-factorial">8.3. Tutorial example: factorial</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">8.4. Exercise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-a-test-using-catch2">8.5. Including a test using catch2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.5.1. Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.5.2. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tip-when-having-problems-finding-the-library">8.5.1. Tip when having problems finding the library</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-getting-more-info-about-test">8.5.2. Tips for getting more info about test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.5.3. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.5.4. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.5.5. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-test">8.6. Google test</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.6.1. Installation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.6.2. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-coverage">8.6. Test coverage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.6.1. Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opt-google-test-example">8.7. [OPT] Google test example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.7.1. Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.7.2. Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-unit-testing-with-pytest">8.8. Python Unit Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-pytest">8.8.1. Getting Started with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-randomized-testing-with-pytest">8.8.2. Bonus: Randomized Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -508,6 +520,12 @@ using the linker, hopefully through a Makefile.</p>
 <li><p>should track previous results and performance.</p></li>
 </ul>
 <p>For this, it is much better to use a test framework, which will run all test and report back results statistics. It can also be integrated with revision control systems, automatic and deployment tasks. For C++, one can use google test, catch2, boost test, cppunit, …, and for python: pytest, unittest, doctest,  and so on.</p>
+<p>If possible, try to test all your code or lines of code (code coverage 100%), but do not obsese with it. You can use tools like <a class="reference external" href="https://gcc.gnu.org/onlinedocs/gcc/Gcov.html">gcov</a>, <a class="reference external" href="https://llvm.org/docs/CommandGuide/llvm-cov.html">llvm-cov</a> and so on.</p>
+<p>Another tip: you can run your test automatically when doing a commit, and if a test is not passed, the commit is not allowed. That keeps your code clean and forces you to commit only passing code. Of course your test must be fast. To configure this, check git pre-commit hooks:</p>
+<ul class="simple">
+<li><p>https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks</p></li>
+<li><p>https://pre-commit.com/</p></li>
+</ul>
 <section id="type-of-tests">
 <h2><span class="section-number">8.1. </span>Type of tests<a class="headerlink" href="#type-of-tests" title="Link to this heading">#</a></h2>
 <p>A unit test should be small, concrete and precise, and run independent of other tests. Actually, you can tests at several levels:</p>
@@ -519,9 +537,12 @@ using the linker, hopefully through a Makefile.</p>
 <li><p>Regression test: Checks if the software behaves as it did before</p></li>
 <li><p>Performance test: is kind of a regression test, ensuring that performance is not affected by new changes.</p></li>
 <li><p>UI/UX tests</p></li>
+<li><p>Boundary test: Testing edge cases or very large numbers.</p></li>
+<li><p>Error handling test: making sure we are catching and processing all tests.</p></li>
 <li><p>…</p></li>
 </ul>
 <img alt="under-over-truncation" class="centerimg50" src="../_images/unit-integration.jpg" />
+<p>Sometimes, is necessary to emulate some complex datatypes through mocking/stubing. Make sure your framework does that.</p>
 </section>
 <section id="testing-with-catch2">
 <h2><span class="section-number">8.2. </span>Testing with Catch2<a class="headerlink" href="#testing-with-catch2" title="Link to this heading">#</a></h2>
@@ -536,14 +557,18 @@ will modularize the code to practice that and write a useful <code class="docuti
 </pre></div>
 </div>
 <p>If you are using a global spack install, check if catch2 is not already installed.</p>
+<p>Then load it as usual</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>load<span class="w"> </span>catch2
+</pre></div>
+</div>
 </section>
 </section>
 <section id="tutorial-example-factorial">
 <h2><span class="section-number">8.3. </span>Tutorial example: factorial<a class="headerlink" href="#tutorial-example-factorial" title="Link to this heading">#</a></h2>
 <p>Here we will follow the tutorial , testing a factorial function implementation. To do so, we need, first, to modularize our code:</p>
 <p>Header file with declarations <code class="docutils literal notranslate"><span class="pre">factorial.h</span></code></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="cp">#pragma once</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Source file with implementations <code class="docutils literal notranslate"><span class="pre">factorial.cpp</span></code></p>
@@ -618,7 +643,44 @@ g++<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o<s
 ./test_factorial.x
 </pre></div>
 </div>
-<p>The last two flags, <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">Catch2Main</span> <span class="pre">-l</span> <span class="pre">Catch2</span></code>, are used to link the program with the catch implementations. Sometimes, for non standard installations, it is useful to configure the paths to find both the includes and libs, and this can be done with the <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> utility. For example, to get the include path one can use</p>
+<p>The last two flags, <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">Catch2Main</span> <span class="pre">-l</span> <span class="pre">Catch2</span></code>, are used to link the program with the catch implementations. After running, and if all test passed, you will get something like</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Randomness<span class="w"> </span>seeded<span class="w"> </span>to:<span class="w"> </span><span class="nv">2222863459</span>
+<span class="o">===============================================================================</span>
+All<span class="w"> </span>tests<span class="w"> </span>passed<span class="w"> </span><span class="o">(</span><span class="m">4</span><span class="w"> </span>assertions<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="k">case</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Modify your Makefile accordingly (add a test target)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>all:<span class="w"> </span>main_factorial.x
+
+%.x:<span class="w"> </span>%.o<span class="w"> </span>factorial.o
+<span class="w">        </span>g++<span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+
+%.o:<span class="w"> </span>%.cpp
+<span class="w">        </span>g++<span class="w"> </span>-c<span class="w"> </span>$&lt;
+
+test_factorial.x:<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o
+<span class="w">        </span>g++<span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span>-l<span class="w"> </span>Catch2Main<span class="w"> </span>-l<span class="w"> </span>Catch2
+
+test:<span class="w"> </span>test_factorial.x
+<span class="w">        </span>./test_factorial.x
+
+clean:
+<span class="w">        </span>rm<span class="w"> </span>-f<span class="w"> </span>*.o<span class="w"> </span>*.x
+</pre></div>
+</div>
+<p>After running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> you will get</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-c<span class="w"> </span>test_factorial.cpp
+g++<span class="w"> </span>-c<span class="w"> </span>factorial.cpp
+g++<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o<span class="w"> </span>-o<span class="w"> </span>test_factorial.x<span class="w"> </span>-l<span class="w"> </span>Catch2Main<span class="w"> </span>-l<span class="w"> </span>Catch2
+./test_factorial.x
+Randomness<span class="w"> </span>seeded<span class="w"> </span>to:<span class="w"> </span><span class="nv">3097615407</span>
+<span class="o">===============================================================================</span>
+All<span class="w"> </span>tests<span class="w"> </span>passed<span class="w"> </span><span class="o">(</span><span class="m">4</span><span class="w"> </span>assertions<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="k">case</span><span class="o">)</span>
+</pre></div>
+</div>
+<section id="tip-when-having-problems-finding-the-library">
+<h3><span class="section-number">8.5.1. </span>Tip when having problems finding the library<a class="headerlink" href="#tip-when-having-problems-finding-the-library" title="Link to this heading">#</a></h3>
+<p>Sometimes, for non standard installations, it is useful to configure the paths to find both the includes and libs, and this can be done with the <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> utility. For example, to get the include path one can use</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pkg-config<span class="w"> </span>--cflags<span class="w"> </span>catch2
 -I/usr/local/include<span class="w"> </span><span class="c1"># This result can change if catch2 is installed on other systems</span>
 </pre></div>
@@ -665,23 +727,116 @@ clean:
 </pre></div>
 </div>
 <p>it will compile and then run all the test.</p>
+</section>
+<section id="tips-for-getting-more-info-about-test">
+<h3><span class="section-number">8.5.2. </span>Tips for getting more info about test<a class="headerlink" href="#tips-for-getting-more-info-about-test" title="Link to this heading">#</a></h3>
+<p>Catch2 also adds several cli options, check them as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./test_factorial.x<span class="w"> </span>--help<span class="w"> </span>
+</pre></div>
+</div>
+<p>If you have several test cases, you can called them by name/tag like (see previous example)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./test_factorial.x<span class="w"> </span><span class="s2">&quot;Factorials are computed&quot;</span>
+Filters:<span class="w"> </span><span class="s2">&quot;Factorials are computed&quot;</span>
+Randomness<span class="w"> </span>seeded<span class="w"> </span>to:<span class="w"> </span><span class="nv">133418804</span>
+<span class="o">===============================================================================</span>
+All<span class="w"> </span>tests<span class="w"> </span>passed<span class="w"> </span><span class="o">(</span><span class="m">4</span><span class="w"> </span>assertions<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="k">case</span><span class="o">)</span>
+</pre></div>
+</div>
+</section>
 <section id="id1">
-<h3><span class="section-number">8.5.1. </span>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.5.3. </span>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>Please uncomment the commented line in the test, analyze and fix the factorial function. Also, implement more tests, for large numbers, negative numbers, and so on.</p>
 </section>
 <section id="id2">
-<h3><span class="section-number">8.5.2. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.5.4. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Check property based and random testing. Imagine a function like</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">doubleIt</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and a test like</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">TEST</span><span class="p">(</span><span class="n">RandomTests</span><span class="p">,</span><span class="w"> </span><span class="n">DoubleIsEven</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+<span class="w">        </span><span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">doubleIt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here you are checking that all the returned numbers are even, a property. And also you are using random numbers to test. Create a full example to run this. Also, instead of restricting yourself to positive numbers, check what happens with random numbers in the full range. For any bug found, create a particular test case, fix the bug and run again everything.</p>
+<p>Note: for more elaborated testing you can check</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/google/fuzztest">Google fuzztest</a></p></li>
+<li><p><a class="reference external" href="https://llvm.org/docs/LibFuzzer.html">libfuzzer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/AFLplusplus/AFLplusplus">aflplus</a></p></li>
+<li><p>…</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3><span class="section-number">8.5.5. </span>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>Check the documentation for more options, like <code class="docutils literal notranslate"><span class="pre">SECTIONS</span></code>, <code class="docutils literal notranslate"><span class="pre">tags</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">generators</span></code>, <code class="docutils literal notranslate"><span class="pre">signature</span> <span class="pre">based</span> <span class="pre">test</span></code>, …</p>
 </section>
 </section>
-<section id="google-test">
-<h2><span class="section-number">8.6. </span>Google test<a class="headerlink" href="#google-test" title="Link to this heading">#</a></h2>
+<section id="test-coverage">
+<h2><span class="section-number">8.6. </span>Test coverage<a class="headerlink" href="#test-coverage" title="Link to this heading">#</a></h2>
+<p>Test coverage refers to the amount of code you are testing. it is good to try to have 100% test coverage, but this depend on your project context.</p>
+<p>To do check test coverage, you can use gcov or llmv-cov,a mong others. Let’s see and example for the first one.</p>
+<p>First, you will need to compile your application as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-fprofile-arcs<span class="w"> </span>-ftest-coverage<span class="w"> </span>-o<span class="w"> </span>mytest<span class="w"> </span>mycode.cpp<span class="w"> </span>mytest.cpp<span class="w"> </span>-lgtest<span class="w"> </span>-pthread
+</pre></div>
+</div>
+<p>Then you run your tests</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mytest
+</pre></div>
+</div>
+<p>and, finally, you produce a coverage report</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcov<span class="w"> </span>mycode.cpp
+</pre></div>
+</div>
+<p>Optionally you can also have an html report using lcov. After installing it, you can run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lcov<span class="w"> </span>--capture<span class="w"> </span>--directory<span class="w"> </span>.<span class="w"> </span>--output-file<span class="w"> </span>coverage.info
+genhtml<span class="w"> </span>coverage.info<span class="w"> </span>--output-directory<span class="w"> </span>coverage
+firefox<span class="w"> </span>coverage/index.html
+</pre></div>
+</div>
+<p>Note to self: genhtml needs the date module from perl. Install as <code class="docutils literal notranslate"><span class="pre">yes</span> <span class="pre">|</span> <span class="pre">perl</span> <span class="pre">-MCPAN</span> <span class="pre">-e</span> <span class="pre">'install</span> <span class="pre">Date::Parse'</span></code></p>
+<section id="id4">
+<h3><span class="section-number">8.6.1. </span>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>Run a test coverage pass on the factorial example. Are you getting 100% coverage? Add a new function, with not test, and check the report. Update your makefile to generate a test coverage report.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CXXFLAGS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-fprofile-arcs<span class="w"> </span>-ftest-coverage
+
+all:<span class="w"> </span>main_factorial.x
+
+%.x:<span class="w"> </span>%.o<span class="w"> </span>factorial.o
+<span class="w">        </span>g++<span class="w"> </span><span class="k">$(</span>CXXFLAGS<span class="k">)</span><span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+
+%.o:<span class="w"> </span>%.cpp
+<span class="w">        </span>g++<span class="w"> </span><span class="k">$(</span>CXXFLAGS<span class="k">)</span><span class="w"> </span>-c<span class="w"> </span>$&lt;
+
+test_factorial.x:<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o
+<span class="w">        </span>g++<span class="w"> </span><span class="k">$(</span>CXXFLAGS<span class="k">)</span><span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span>-l<span class="w"> </span>Catch2Main<span class="w"> </span>-l<span class="w"> </span>Catch2
+
+test:<span class="w"> </span>test_factorial.x
+<span class="w">        </span>./test_factorial.x
+
+<span class="c1"># TODO: target coverage</span>
+
+
+clean:
+<span class="w">        </span>rm<span class="w"> </span>-f<span class="w"> </span>*.o<span class="w"> </span>*.x<span class="w"> </span>*.gcov<span class="w"> </span>*.gcno<span class="w"> </span>*.gcda<span class="w"> </span>*~<span class="w"> </span>a.out
+</pre></div>
+</div>
+</section>
+</section>
+<section id="opt-google-test-example">
+<h2><span class="section-number">8.7. </span>[OPT] Google test example<a class="headerlink" href="#opt-google-test-example" title="Link to this heading">#</a></h2>
 <p>Google test is a famous and advance unit framework that goes well beyond
 of what is shown here. You are invited to follow the
 <a class="reference external" href="https://github.com/google/googletest/blob/master/googletest/docs/primer.md">docs</a>
 to learn more.</p>
 <section id="installation">
-<h3><span class="section-number">8.6.1. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.7.1. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
 <p>Again, we will use spack</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>install<span class="w"> </span>googletest
 mkdir<span class="w"> </span>googletest
@@ -689,7 +844,7 @@ mkdir<span class="w"> </span>googletest
 </div>
 </section>
 <section id="example">
-<h3><span class="section-number">8.6.2. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.7.2. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
 <p>This is an example, already modularized.</p>
 <p>Factorial and isprime header:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef GTEST_SAMPLES_SAMPLE1_H_</span>
@@ -808,6 +963,85 @@ mkdir<span class="w"> </span>googletest
 </div>
 </section>
 </section>
+<section id="python-unit-testing-with-pytest">
+<h2><span class="section-number">8.8. </span>Python Unit Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#python-unit-testing-with-pytest" title="Link to this heading">#</a></h2>
+<p>While C++ has great tools like catch2 or GTest for unit testing, <strong>Python</strong> also has a rich ecosystem for writing and running tests. The most commonly used testing framework in Python is <a class="reference external" href="https://docs.pytest.org/en/stable/"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></p>
+<p>Other popular tools include:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/unittest.html"><code class="docutils literal notranslate"><span class="pre">unittest</span></code></a>: Built-in module inspired by JUnit</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/doctest.html"><code class="docutils literal notranslate"><span class="pre">doctest</span></code></a>: Test code inside docstrings</p></li>
+<li><p><a class="reference external" href="https://hypothesis.readthedocs.io/"><code class="docutils literal notranslate"><span class="pre">hypothesis</span></code></a>: Property-based testing (like fuzzing)</p></li>
+</ul>
+<hr class="docutils" />
+<section id="getting-started-with-pytest">
+<h3><span class="section-number">8.8.1. </span>Getting Started with <code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#getting-started-with-pytest" title="Link to this heading">#</a></h3>
+<p>Install <code class="docutils literal notranslate"><span class="pre">pytest</span></code> if it’s not already installed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pytest
+</pre></div>
+</div>
+<p>Create a file <code class="docutils literal notranslate"><span class="pre">math_utils.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Division by zero!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>Now create a test file <code class="docutils literal notranslate"><span class="pre">test_math_utils.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">divide</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_add</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+    <span class="k">assert</span> <span class="n">add</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_divide</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+        <span class="n">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To run all tests:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+<p>You’ll see output like:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">===========================</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>session<span class="w"> </span><span class="nv">starts</span><span class="w"> </span><span class="o">============================</span>
+collected<span class="w"> </span><span class="m">2</span><span class="w"> </span>items
+
+test_math_utils.py<span class="w"> </span>..<span class="w">                                             </span><span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
+
+<span class="o">============================</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>passed<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span>.01s<span class="w"> </span><span class="o">=============================</span>
+</pre></div>
+</div>
+</section>
+<section id="bonus-randomized-testing-with-pytest">
+<h3><span class="section-number">8.8.2. </span>Bonus: Randomized Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#bonus-randomized-testing-with-pytest" title="Link to this heading">#</a></h3>
+<p>You can also try simple randomized tests using Python’s random module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_add_random</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>For more powerful property-based testing, look into <code class="docutils literal notranslate"><span class="pre">hypothesis</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">given</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hypothesis.strategies</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+
+<span class="nd">@given</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">integers</span><span class="p">(),</span> <span class="n">st</span><span class="o">.</span><span class="n">integers</span><span class="p">())</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_add_hypothesis</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+</pre></div>
+</div>
+<p>You can also test for coverage with <code class="docutils literal notranslate"><span class="pre">pytest-cov</span></code> or benchmarking with <code class="docutils literal notranslate"><span class="pre">pytest-benchmark</span></code>.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -882,13 +1116,25 @@ mkdir<span class="w"> </span>googletest
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-example-factorial">8.3. Tutorial example: factorial</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">8.4. Exercise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-a-test-using-catch2">8.5. Including a test using catch2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.5.1. Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.5.2. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tip-when-having-problems-finding-the-library">8.5.1. Tip when having problems finding the library</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-getting-more-info-about-test">8.5.2. Tips for getting more info about test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.5.3. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.5.4. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.5.5. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-test">8.6. Google test</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.6.1. Installation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.6.2. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-coverage">8.6. Test coverage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.6.1. Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opt-google-test-example">8.7. [OPT] Google test example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">8.7.1. Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">8.7.2. Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-unit-testing-with-pytest">8.8. Python Unit Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-pytest">8.8.1. Getting Started with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-randomized-testing-with-pytest">8.8.2. Bonus: Randomized Testing with <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
 </ul>
 </li>
 </ul>
