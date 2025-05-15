@@ -460,15 +460,20 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-example-factorial">8.3. Tutorial example: factorial</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">8.4. Exercise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-a-test-using-catch2">8.5. Including a test using catch2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tip-when-having-problems-finding-the-library">8.5.1. Tip when having problems finding the library</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.5.1. Exercise</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-getting-more-info-about-test">8.5.2. Tips for getting more info about test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.5.3. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tip-when-having-problems-finding-the-library">8.5.3. Tip when having problems finding the library</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.5.4. Exercise</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.5.5. Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-coverage">8.6. Test coverage</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.6.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-and-html-report">8.6.1. Generating and html report</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-with-gocvr">8.6.1.1. Reporting with <code class="docutils literal notranslate"><span class="pre">gocvr</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-with-lcov">8.6.1.2. Reporting with <code class="docutils literal notranslate"><span class="pre">lcov</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.6.2. Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-integration">8.7. Continuous integration</a><ul class="nav section-nav flex-column">
@@ -605,23 +610,16 @@ g++<span class="w"> </span>factorial.o<span class="w"> </span>main_factorial.o<s
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./factorial_test.x
 </pre></div>
 </div>
-<p>The compilation can be automated with a  <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> as</p>
+<p>The compilation can be automated with a  <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> as (complete it)</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>all:<span class="w"> </span>main_factorial.x
 
-%.x:<span class="w"> </span>%.o<span class="w"> </span>factorial.o
-<span class="w">	</span>g++<span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
-
-%.o:<span class="w"> </span>%.cpp
-<span class="w">	</span>g++<span class="w"> </span>-c<span class="w"> </span>$&lt;
-
-clean:
-<span class="w">	</span>rm<span class="w"> </span>-f<span class="w"> </span>*.o<span class="w"> </span>*.x
+<span class="c1"># TODO</span>
 </pre></div>
 </div>
 </section>
 <section id="exercise">
 <h2><span class="section-number">8.4. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
-<p>Now please modify the main file, to compute the factorial of some cases that you think of. Is it working correctly? try 0, 0-1, 2. You have found some bugs. Now we need to both fix the function AND create test cases for those bugs to check that they are fixed always.</p>
+<p>Now, please modify the main file, to compute the factorial of some cases that you think of. Is it working correctly? try 0, -1, 2, large numbeers, and so on. You have found some bugs. Now we need to both fix the function AND create test cases for those bugs to check that they are fixed always.</p>
 </section>
 <section id="including-a-test-using-catch2">
 <h2><span class="section-number">8.5. </span>Including a test using catch2<a class="headerlink" href="#including-a-test-using-catch2" title="Link to this heading">#</a></h2>
@@ -640,7 +638,7 @@ clean:
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>To compile, you need to also link with the corresponging catch2 flags (if you are using spack, do not forget to load catch2, <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">load</span> <span class="pre">catch2</span></code>)</p>
+<p>To compile, you need to also link with the corresponding catch2 flags (if you are using spack, do not forget to load catch2, <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">load</span> <span class="pre">catch2</span></code>)</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-c<span class="w"> </span>test_factorial.cpp
 g++<span class="w"> </span>-c<span class="w"> </span>factorial.cpp
 g++<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o<span class="w"> </span>-o<span class="w"> </span>test_factorial.x<span class="w"> </span>-l<span class="w"> </span>Catch2Main<span class="w"> </span>-l<span class="w"> </span>Catch2
@@ -656,17 +654,7 @@ All<span class="w"> </span>tests<span class="w"> </span>passed<span class="w"> <
 <p>Modify your Makefile accordingly (add a test target)</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>all:<span class="w"> </span>main_factorial.x
 
-%.x:<span class="w"> </span>%.o<span class="w"> </span>factorial.o
-<span class="w">        </span>g++<span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
-
-%.o:<span class="w"> </span>%.cpp
-<span class="w">        </span>g++<span class="w"> </span>-c<span class="w"> </span>$&lt;
-
-test_factorial.x:<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o
-<span class="w">        </span>g++<span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span>-l<span class="w"> </span>Catch2Main<span class="w"> </span>-l<span class="w"> </span>Catch2
-
-test:<span class="w"> </span>test_factorial.x
-<span class="w">        </span>./test_factorial.x
+<span class="c1"># TODO</span>
 
 clean:
 <span class="w">        </span>rm<span class="w"> </span>-f<span class="w"> </span>*.o<span class="w"> </span>*.x
@@ -682,8 +670,27 @@ Randomness<span class="w"> </span>seeded<span class="w"> </span>to:<span class="
 All<span class="w"> </span>tests<span class="w"> </span>passed<span class="w"> </span><span class="o">(</span><span class="m">4</span><span class="w"> </span>assertions<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="k">case</span><span class="o">)</span>
 </pre></div>
 </div>
+<section id="id1">
+<h3><span class="section-number">8.5.1. </span>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Please uncomment the commented line in the test, analyze and fix the factorial function. Also, implement more tests, for large numbers, negative numbers, and so on.</p>
+</section>
+<section id="tips-for-getting-more-info-about-test">
+<h3><span class="section-number">8.5.2. </span>Tips for getting more info about test<a class="headerlink" href="#tips-for-getting-more-info-about-test" title="Link to this heading">#</a></h3>
+<p>Catch2 also adds several cli options, check them as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./test_factorial.x<span class="w"> </span>--help<span class="w"> </span>
+</pre></div>
+</div>
+<p>If you have several test cases, you can called them by name/tag like (see previous example)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./test_factorial.x<span class="w"> </span><span class="s2">&quot;Factorials are computed&quot;</span>
+Filters:<span class="w"> </span><span class="s2">&quot;Factorials are computed&quot;</span>
+Randomness<span class="w"> </span>seeded<span class="w"> </span>to:<span class="w"> </span><span class="nv">133418804</span>
+<span class="o">===============================================================================</span>
+All<span class="w"> </span>tests<span class="w"> </span>passed<span class="w"> </span><span class="o">(</span><span class="m">4</span><span class="w"> </span>assertions<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="k">case</span><span class="o">)</span>
+</pre></div>
+</div>
+</section>
 <section id="tip-when-having-problems-finding-the-library">
-<h3><span class="section-number">8.5.1. </span>Tip when having problems finding the library<a class="headerlink" href="#tip-when-having-problems-finding-the-library" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">8.5.3. </span>Tip when having problems finding the library<a class="headerlink" href="#tip-when-having-problems-finding-the-library" title="Link to this heading">#</a></h3>
 <p>Sometimes, for non standard installations, it is useful to configure the paths to find both the includes and libs, and this can be done with the <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> utility. For example, to get the include path one can use</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pkg-config<span class="w"> </span>--cflags<span class="w"> </span>catch2
 -I/usr/local/include<span class="w"> </span><span class="c1"># This result can change if catch2 is installed on other systems</span>
@@ -701,20 +708,12 @@ All<span class="w"> </span>tests<span class="w"> </span>passed<span class="w"> <
 <p>Again, it is better to include this in a Makefile:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>SHELL:<span class="o">=</span>/bin/bash
 
-all:<span class="w"> </span>main_factorial.x
-
-%.x:<span class="w"> </span>%.o<span class="w"> </span>factorial.o
-<span class="w">	</span>g++<span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+<span class="c1"># ...</span>
 
 test_factorial.x:<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o
 <span class="w">	</span>g++<span class="w"> </span><span class="nv">$$</span><span class="o">(</span>pkg-config<span class="w"> </span>--cflags<span class="o">)</span><span class="w"> </span><span class="nv">$$</span><span class="o">(</span>pkg-config<span class="w"> </span>--libs-only-L<span class="w"> </span>catch2<span class="o">)</span><span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span>-l<span class="w"> </span>Catch2Main<span class="w"> </span>-l<span class="w"> </span>Catch2
 
-test:<span class="w"> </span>test_factorial.x
-<span class="w">	</span>./test_factorial.x
-
-%.o:<span class="w"> </span>%.cpp
-<span class="w">	</span>g++<span class="w"> </span>-c<span class="w"> </span>$&lt;
-
+<span class="c1"># ...</span>
 clean:
 <span class="w">	</span>rm<span class="w"> </span>-f<span class="w"> </span>*.o<span class="w"> </span>*.x
 </pre></div>
@@ -726,30 +725,6 @@ clean:
 <span class="w">    </span>g++<span class="w"> </span><span class="nv">$$</span><span class="o">(</span>pkg-config<span class="w"> </span>--cflags<span class="w"> </span>catch2<span class="o">)</span><span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
 </pre></div>
 </div>
-<p>This way, when you write</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">test</span>
-</pre></div>
-</div>
-<p>it will compile and then run all the test.</p>
-</section>
-<section id="tips-for-getting-more-info-about-test">
-<h3><span class="section-number">8.5.2. </span>Tips for getting more info about test<a class="headerlink" href="#tips-for-getting-more-info-about-test" title="Link to this heading">#</a></h3>
-<p>Catch2 also adds several cli options, check them as</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./test_factorial.x<span class="w"> </span>--help<span class="w"> </span>
-</pre></div>
-</div>
-<p>If you have several test cases, you can called them by name/tag like (see previous example)</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./test_factorial.x<span class="w"> </span><span class="s2">&quot;Factorials are computed&quot;</span>
-Filters:<span class="w"> </span><span class="s2">&quot;Factorials are computed&quot;</span>
-Randomness<span class="w"> </span>seeded<span class="w"> </span>to:<span class="w"> </span><span class="nv">133418804</span>
-<span class="o">===============================================================================</span>
-All<span class="w"> </span>tests<span class="w"> </span>passed<span class="w"> </span><span class="o">(</span><span class="m">4</span><span class="w"> </span>assertions<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="k">case</span><span class="o">)</span>
-</pre></div>
-</div>
-</section>
-<section id="id1">
-<h3><span class="section-number">8.5.3. </span>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<p>Please uncomment the commented line in the test, analyze and fix the factorial function. Also, implement more tests, for large numbers, negative numbers, and so on.</p>
 </section>
 <section id="id2">
 <h3><span class="section-number">8.5.4. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
@@ -787,7 +762,7 @@ All<span class="w"> </span>tests<span class="w"> </span>passed<span class="w"> <
 <p>Test coverage refers to the amount of code you are testing. it is good to try to have 100% test coverage, but this depend on your project context.</p>
 <p>To do check test coverage, you can use gcov or llmv-cov,a mong others. Let’s see and example for the first one.</p>
 <p>First, you will need to compile your application as</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-fprofile-arcs<span class="w"> </span>-ftest-coverage<span class="w"> </span>-o<span class="w"> </span>mytest<span class="w"> </span>mycode.cpp<span class="w"> </span>mytest.cpp<span class="w"> </span>-lgtest<span class="w"> </span>-pthread
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-g<span class="w"> </span>-coverage<span class="w"> </span>-fprofile-arcs<span class="w"> </span>-ftest-coverage<span class="w"> </span>-o<span class="w"> </span>mytest<span class="w"> </span>mycode.cpp<span class="w"> </span>mytest.cpp<span class="w"> </span>-lgtest<span class="w"> </span>-pthread
 </pre></div>
 </div>
 <p>Then you run your tests</p>
@@ -798,16 +773,37 @@ All<span class="w"> </span>tests<span class="w"> </span>passed<span class="w"> <
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcov<span class="w"> </span>mycode.cpp
 </pre></div>
 </div>
-<p>Optionally you can also have an html report using lcov. After installing it, you can run</p>
+<p>This will generate a bunch of gocov, gcno , gcda files  with the reports Only focus on the ones you are interested in.</p>
+<section id="generating-and-html-report">
+<h3><span class="section-number">8.6.1. </span>Generating and html report<a class="headerlink" href="#generating-and-html-report" title="Link to this heading">#</a></h3>
+<p>To do so, you can use wither <code class="docutils literal notranslate"><span class="pre">gcovr</span></code> or <code class="docutils literal notranslate"><span class="pre">lcov</span></code>. Let’s show examples with both.</p>
+<section id="reporting-with-gocvr">
+<h4><span class="section-number">8.6.1.1. </span>Reporting with <code class="docutils literal notranslate"><span class="pre">gocvr</span></code><a class="headerlink" href="#reporting-with-gocvr" title="Link to this heading">#</a></h4>
+<p>See: https://gcovr.com/en/stable/</p>
+<p>First, install it as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>gcovr
+</pre></div>
+</div>
+<p>After you have run <code class="docutils literal notranslate"><span class="pre">gcov</span></code>, create the html report as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcovr<span class="w"> </span>--html-details<span class="w"> </span>coverage.html
+</pre></div>
+</div>
+<p>And then open the html file.</p>
+</section>
+<section id="reporting-with-lcov">
+<h4><span class="section-number">8.6.1.2. </span>Reporting with <code class="docutils literal notranslate"><span class="pre">lcov</span></code><a class="headerlink" href="#reporting-with-lcov" title="Link to this heading">#</a></h4>
+<p>Optionally you can also have an html report using <code class="docutils literal notranslate"><span class="pre">lcov</span></code>. After installing it, you can run</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lcov<span class="w"> </span>--capture<span class="w"> </span>--directory<span class="w"> </span>.<span class="w"> </span>--output-file<span class="w"> </span>coverage.info
 genhtml<span class="w"> </span>coverage.info<span class="w"> </span>--output-directory<span class="w"> </span>coverage
 firefox<span class="w"> </span>coverage/index.html
 </pre></div>
 </div>
 <p>Note to self: genhtml needs the date module from perl. Install as <code class="docutils literal notranslate"><span class="pre">yes</span> <span class="pre">|</span> <span class="pre">perl</span> <span class="pre">-MCPAN</span> <span class="pre">-e</span> <span class="pre">'install</span> <span class="pre">Date::Parse'</span></code></p>
+</section>
+</section>
 <section id="id4">
-<h3><span class="section-number">8.6.1. </span>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
-<p>Run a test coverage pass on the factorial example. Are you getting 100% coverage? Add a new function, with not test, and check the report. Update your makefile to generate a test coverage report.</p>
+<h3><span class="section-number">8.6.2. </span>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>Run a test coverage pass on the factorial example. Are you getting 100% coverage? Add a new function, with not test, and check the report. Update your makefile to generate a test coverage report. Create and html report.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CXXFLAGS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-fprofile-arcs<span class="w"> </span>-ftest-coverage
 
 all:<span class="w"> </span>main_factorial.x
@@ -815,22 +811,7 @@ all:<span class="w"> </span>main_factorial.x
 %.x:<span class="w"> </span>%.o<span class="w"> </span>factorial.o
 <span class="w">        </span>g++<span class="w"> </span><span class="k">$(</span>CXXFLAGS<span class="k">)</span><span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
 
-%.o:<span class="w"> </span>%.cpp
-<span class="w">        </span>g++<span class="w"> </span><span class="k">$(</span>CXXFLAGS<span class="k">)</span><span class="w"> </span>-c<span class="w"> </span>$&lt;
-
-test_factorial.x:<span class="w"> </span>test_factorial.o<span class="w"> </span>factorial.o
-<span class="w">        </span>g++<span class="w"> </span><span class="k">$(</span>CXXFLAGS<span class="k">)</span><span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span>-l<span class="w"> </span>Catch2Main<span class="w"> </span>-l<span class="w"> </span>Catch2
-
-test:<span class="w"> </span>test_factorial.x
-<span class="w">        </span>./test_factorial.x
-
-<span class="c1"># TODO: target coverage</span>
-<span class="o">===</span><span class="w"> </span>BEGIN<span class="w"> </span>MARK<span class="w"> </span><span class="nv">SCHEME</span><span class="w"> </span><span class="o">===</span>
-coverage:<span class="w"> </span>test_factorial.x
-<span class="w">        </span>./$&lt;
-<span class="w">        </span>gcov<span class="w"> </span>factorial.cpp<span class="w"> </span>test_factorial.cpp
-<span class="w">        </span>genhtml<span class="w"> </span>lcov-report/coverage.info<span class="w"> </span>--output-directory<span class="w"> </span>lcov-report
-<span class="o">===</span><span class="w"> </span>END<span class="w"> </span>MARK<span class="w"> </span><span class="nv">SCHEME</span><span class="w"> </span><span class="o">===</span>
+<span class="c1"># TODO</span>
 
 
 clean:
@@ -1181,15 +1162,20 @@ test_math_utils.py<span class="w"> </span>..<span class="w">                    
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-example-factorial">8.3. Tutorial example: factorial</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">8.4. Exercise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-a-test-using-catch2">8.5. Including a test using catch2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tip-when-having-problems-finding-the-library">8.5.1. Tip when having problems finding the library</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.5.1. Exercise</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-getting-more-info-about-test">8.5.2. Tips for getting more info about test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.5.3. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tip-when-having-problems-finding-the-library">8.5.3. Tip when having problems finding the library</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.5.4. Exercise</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.5.5. Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-coverage">8.6. Test coverage</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.6.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-and-html-report">8.6.1. Generating and html report</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-with-gocvr">8.6.1.1. Reporting with <code class="docutils literal notranslate"><span class="pre">gocvr</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reporting-with-lcov">8.6.1.2. Reporting with <code class="docutils literal notranslate"><span class="pre">lcov</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.6.2. Exercise</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-integration">8.7. Continuous integration</a><ul class="nav section-nav flex-column">
