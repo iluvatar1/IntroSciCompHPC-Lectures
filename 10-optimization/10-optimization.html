@@ -457,17 +457,42 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">9.2. Memory layout</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.2.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.2.1. Blocking multiplication</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-structures-to-use">9.3. What data structures to use?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.3.1. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-gnu-parallel">9.3. Introduction to gnu parallel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-syntax">9.3.1. Basic Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-examples">9.3.2. Basic Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-multiple-commands-in-parallel">9.3.2.1. Running Multiple Commands in Parallel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-files-in-parallel">9.3.2.2. Processing Files in Parallel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-combinations">9.3.2.3. Parameter Combinations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.4. Blocking multiplication</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.4.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-examples">9.3.3. Advanced Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#system-administration">9.3.3.1. System Administration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing">9.3.3.2. Data Processing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-image-video-processing">9.3.3.3. Batch Image/Video Processing</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-options-and-features">9.3.4. Key Options and Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-parallelism">9.3.4.1. Controlling Parallelism</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-and-monitoring">9.3.4.2. Progress and Monitoring</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">9.3.4.3. Error Handling</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-other-tools">9.3.5. Comparison with Other Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-xargs-p">9.3.5.1. vs. xargs -P</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-bash-background-jobs">9.3.5.2. vs. Bash Background Jobs (&amp;)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-make-j">9.3.5.3. vs. Make -j</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-custom-shell-scripts">9.3.5.4. vs. Custom Shell Scripts</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-advantages-of-gnu-parallel">9.3.6. Key Advantages of GNU Parallel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">9.3.7. Best Practices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-example">9.3.8. Performance Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-model-simple-matrices">9.4. How to model simple matrices?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">9.5. Using scientific libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">9.6. Other optimization techniques</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">9.7. Other resources</a></li>
@@ -605,9 +630,23 @@ will greatly affect a program performance. Always measure with a
 profiler and if possible with cachegrind in order to detect possible
 excessive cache misses.</p>
 <p>See Cache Nightmares: <a class="reference external" href="https://www.youtube.com/watch?v=xFMXIgvlgcY">https://www.youtube.com/watch?v=xFMXIgvlgcY</a></p>
+<p>Being nice to the cache comes from the modern cpu architecture, as shown
+in the next figure</p>
+<p>L1, L2 and L3 caches. Source
+<a class="reference external" href="https://medium.com/software-design/why-software-developers-should-care-about-cpu-caches-8da04355bb8a">https://medium.com/software-design/why-software-developers-should-care-about-cpu-caches-8da04355bb8a</a></p>
+<img alt="../_images/cpu-caches.png" class="centerimg80" src="../_images/cpu-caches.png" />
+<p>The relative bandwidth across the different cpu and momory controllers
+explain why it is important to have the processed data as much time as
+possible in the cache</p>
+<p>Relative bandwidth across different cpu and computer parts. Credit:
+&lt;https://cs.brown.edu/courses/csci1310/2020/assign/labs/lab4.html</p>
+<img alt="../_images/bandwidth.png" class="centerimg80" src="../_images/bandwidth.png" />
+<p>Since c/c++ store matrices in row major order, then accesing the memory
+in the same way will benefit the cache and therefore increases our
+program performance.</p>
 <p>The following code shows how a simple index change in a matrix operation
 could have a huge impact on the app performance:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Credit Ivan Pulido</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Credit Ivan Pulido</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;time.h&gt;</span>
@@ -651,145 +690,23 @@ could have a huge impact on the app performance:</p>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
+
 </pre></div>
 </div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>codes/cache_lines.c
+<p>To compile,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>cache_lines.c
 ./a.out
 </pre></div>
 </div>
-<p>Being nice to the cache comes from the modern cpu architecture, as shown
-in the next figure</p>
-<p>L1, L2 and L3 caches. Source
-<a class="reference external" href="https://medium.com/software-design/why-software-developers-should-care-about-cpu-caches-8da04355bb8a">https://medium.com/software-design/why-software-developers-should-care-about-cpu-caches-8da04355bb8a</a></p>
-<img alt="../_images/cpu-caches.png" class="centerimg80" src="../_images/cpu-caches.png" />
-<p>The relative bandwidth across the different cpu and momory controllers
-explain why it is important to have the processed data as much time as
-possible in the cache</p>
-<p>Relative bandwidth across different cpu and computer parts. Credit:
-&lt;https://cs.brown.edu/courses/csci1310/2020/assign/labs/lab4.html</p>
-<img alt="../_images/bandwidth.png" class="centerimg80" src="../_images/bandwidth.png" />
-<p>Since c/c++ store matrices in row major order, then accesing the memory
-in the same way will benefit the cache and therefore increases our
-program performance.</p>
-<section id="id1">
-<h3><span class="section-number">9.2.1. </span>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Exercise</strong></p>
 <ul class="simple">
 <li><p>Vary again the matrix size. Is the time difference important for all sizes? plot it.</p></li>
 <li><p>Explore the effect of different optimization flags</p></li>
 </ul>
-</section>
-</section>
-<section id="what-data-structures-to-use">
-<h2><span class="section-number">9.3. </span>What data structures to use?<a class="headerlink" href="#what-data-structures-to-use" title="Link to this heading">#</a></h2>
-<p>It depends greatly from the problem. But for the typical applications of
-vector and matrix computations, we can expect that homogeneous and
-contiguous arrays are the data structures to go. In that case, it is
-advisable to use <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> as the go to data struct since it is as
-efficient as an primitive arra, handles automatically the dynamic memory
-in the heap, and plays nice with the C++ STL.</p>
-<p>A primitive static array is limited by the stack. Play with the values
-of M and N in the following code until you get a seg fault just by
-running the code.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7000</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">M</span><span class="p">][</span><span class="n">N</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="mf">0.0</span><span class="p">}};</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">M</span><span class="o">/</span><span class="mi">2</span><span class="p">][</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Is the maximum size related somehow with the output of the command
-<code class="docutils literal notranslate"><span class="pre">ulimit</span> <span class="pre">-s</span></code> ?</p>
-<p>To be able to use more memory, you could better use dynamic memory with
-primitive arrays, but you will have to manage the <code class="docutils literal notranslate"><span class="pre">new/delete</span></code> parts in
-your code. Check that foloowing code does not die on the same sizes as
-the previous one</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7000</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="o">**</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="p">[</span><span class="n">M</span><span class="p">];</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">){</span>
-<span class="w">        </span><span class="n">data</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">M</span><span class="o">/</span><span class="mi">2</span><span class="p">][</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">){</span>
-<span class="w">        </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">ii</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>But be careful, memory obtained susing double/multiple pointers is not
-guaranteed to be contigous, so it is much better to just ask for a large
-one-dimensional array and just model the 2D shape with smart indexes</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7000</span><span class="p">;</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
-
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<span class="w">  </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">[</span><span class="n">M</span><span class="o">*</span><span class="n">N</span><span class="p">];</span>
-
-<span class="w">  </span><span class="c1">// [id][jd] -&gt; id*N + jd</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">M</span><span class="o">*</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>This is an example of a 2d array actually stored as a 1d array in memory:
-<img alt="../_images/2d-array-memory.png" class="centerimg80" src="../_images/2d-array-memory.png" /></p>
-<p>And this is the illustration of the mapping that allows us to go to/from different dimensions:
-<img alt="../_images/1d-2d-mapping.png" class="centerimg80" src="../_images/1d-2d-mapping.png" /></p>
-<p>Finally, to avoid managing manually the memory, it is much better to use
-<code class="docutils literal notranslate"><span class="pre">std::vector</span></code>,</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7000</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
-<span class="w">    </span><span class="n">data</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">M</span><span class="o">*</span><span class="n">N</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// [id][jd] -&gt; id*N + jd</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">M</span><span class="o">*</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<section id="id2">
-<h3><span class="section-number">9.3.1. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Test the stack program to find the maximum matrix size you can use</p></li>
-<li><p>Do the same for the last one using a vector, what is the maximum size you can reserve?</p></li>
-</ul>
-</section>
-</section>
+</div></blockquote>
 <section id="blocking-multiplication">
-<h2><span class="section-number">9.4. </span>Blocking multiplication<a class="headerlink" href="#blocking-multiplication" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">9.2.1. </span>Blocking multiplication<a class="headerlink" href="#blocking-multiplication" title="Link to this heading">#</a></h3>
 <p>See <a class="reference external" href="https://malithjayaweera.com/2020/07/blocked-matrix-multiplication/">https://malithjayaweera.com/2020/07/blocked-matrix-multiplication/</a></p>
 <p>Blocking techniques are neat examples that show how being aware of the
 cache allows you to increase the performance dramatically. For instance,
@@ -870,12 +787,355 @@ performance advantage:</p>
 </div>
 <p>The second one shows how being cache friendly really helps the
 performance.</p>
-<section id="id3">
-<h3><span class="section-number">9.4.1. </span>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Exercise</strong></p>
 <ul class="simple">
 <li><p>Plot the time with the direct and the blocking approaches as functions of size, using <code class="docutils literal notranslate"><span class="pre">-O2</span></code>. What can you conclude?</p></li>
 </ul>
+</div></blockquote>
 </section>
+</section>
+<section id="introduction-to-gnu-parallel">
+<h2><span class="section-number">9.3. </span>Introduction to gnu parallel<a class="headerlink" href="#introduction-to-gnu-parallel" title="Link to this heading">#</a></h2>
+<p>Up to now we have been running each program serially. We needed to run several parameters combinations, but we were always running them one after the other even though our computer is multicore. Here we will  learn a tool, called <code class="docutils literal notranslate"><span class="pre">gnu</span> <span class="pre">parallel</span></code>, which allows you to run several tasks in parallel.</p>
+<p>GNU Parallel is a powerful command-line tool that allows you to execute multiple jobs in parallel, making efficient use of multiple CPU cores and dramatically reducing execution time for batch operations.</p>
+<section id="basic-syntax">
+<h3><span class="section-number">9.3.1. </span>Basic Syntax<a class="headerlink" href="#basic-syntax" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>parallel<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>arguments
+parallel<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span>::::<span class="w"> </span>input-file
+</pre></div>
+</div>
+</section>
+<section id="basic-examples">
+<h3><span class="section-number">9.3.2. </span>Basic Examples<a class="headerlink" href="#basic-examples" title="Link to this heading">#</a></h3>
+<section id="running-multiple-commands-in-parallel">
+<h4><span class="section-number">9.3.2.1. </span>Running Multiple Commands in Parallel<a class="headerlink" href="#running-multiple-commands-in-parallel" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Execute multiple independent commands</span>
+parallel<span class="w"> </span>:::<span class="w"> </span><span class="s2">&quot;echo &#39;Task 1&#39;&quot;</span><span class="w"> </span><span class="s2">&quot;sleep 2; echo &#39;Task 2&#39;&quot;</span><span class="w"> </span><span class="s2">&quot;echo &#39;Task 3&#39;&quot;</span>
+
+<span class="c1"># Download multiple files simultaneously</span>
+parallel<span class="w"> </span>wget<span class="w"> </span>:::<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://example.com/file1.zip<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://example.com/file2.zip<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://example.com/file3.zip
+</pre></div>
+</div>
+</section>
+<section id="processing-files-in-parallel">
+<h4><span class="section-number">9.3.2.2. </span>Processing Files in Parallel<a class="headerlink" href="#processing-files-in-parallel" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compress multiple files</span>
+parallel<span class="w"> </span>gzip<span class="w"> </span>:::<span class="w"> </span>*.txt
+
+<span class="c1"># Convert images with ImageMagick</span>
+parallel<span class="w"> </span>convert<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="o">{</span>.<span class="o">}</span>.jpg<span class="w"> </span>:::<span class="w"> </span>*.png
+
+<span class="c1"># Process log files</span>
+parallel<span class="w"> </span><span class="s2">&quot;grep &#39;ERROR&#39; {} &gt; {.}_errors.log&quot;</span><span class="w"> </span>:::<span class="w"> </span>/var/log/*.log
+</pre></div>
+</div>
+</section>
+<section id="parameter-combinations">
+<h4><span class="section-number">9.3.2.3. </span>Parameter Combinations<a class="headerlink" href="#parameter-combinations" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiple parameter sets</span>
+parallel<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing {1} with {2}&quot;</span><span class="w"> </span>:::<span class="w"> </span>file1<span class="w"> </span>file2<span class="w"> </span>file3<span class="w"> </span>:::<span class="w"> </span>option-a<span class="w"> </span>option-b
+
+<span class="c1"># Cartesian product of parameters</span>
+parallel<span class="w"> </span><span class="s2">&quot;convert {1} -resize {2} resized_{1}&quot;</span><span class="w"> </span>:::<span class="w"> </span>*.jpg<span class="w"> </span>:::<span class="w"> </span><span class="m">50</span>%<span class="w"> </span><span class="m">75</span>%<span class="w"> </span><span class="m">100</span>%
+
+<span class="c1"># Using input files for parameters</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;param1\nparam2\nparam3&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>parallel<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing: {}&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-examples">
+<h3><span class="section-number">9.3.3. </span>Advanced Examples<a class="headerlink" href="#advanced-examples" title="Link to this heading">#</a></h3>
+<section id="system-administration">
+<h4><span class="section-number">9.3.3.1. </span>System Administration<a class="headerlink" href="#system-administration" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check disk usage on multiple servers</span>
+parallel<span class="w"> </span>-j10<span class="w"> </span><span class="s2">&quot;ssh {} &#39;df -h&#39;&quot;</span><span class="w"> </span>:::<span class="w"> </span>server1<span class="w"> </span>server2<span class="w"> </span>server3
+
+<span class="c1"># Update packages on multiple systems</span>
+parallel<span class="w"> </span><span class="s2">&quot;ssh {} &#39;sudo apt update &amp;&amp; sudo apt upgrade -y&#39;&quot;</span><span class="w"> </span>:::<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>user@server1<span class="w"> </span>user@server2<span class="w"> </span>user@server3
+</pre></div>
+</div>
+</section>
+<section id="data-processing">
+<h4><span class="section-number">9.3.3.2. </span>Data Processing<a class="headerlink" href="#data-processing" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process CSV files with different tools</span>
+parallel<span class="w"> </span><span class="s2">&quot;cut -d&#39;,&#39; -f{2} {1} &gt; {1.}_{2}.csv&quot;</span><span class="w"> </span>:::<span class="w"> </span>data*.csv<span class="w"> </span>:::<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span>
+
+<span class="c1"># Run analysis scripts with different parameters</span>
+parallel<span class="w"> </span><span class="s2">&quot;./analyze.py --input {} --threshold {2}&quot;</span><span class="w"> </span>:::<span class="w"> </span>*.dat<span class="w"> </span>:::<span class="w"> </span><span class="m">0</span>.1<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="m">0</span>.9
+</pre></div>
+</div>
+</section>
+<section id="batch-image-video-processing">
+<h4><span class="section-number">9.3.3.3. </span>Batch Image/Video Processing<a class="headerlink" href="#batch-image-video-processing" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resize images to multiple sizes</span>
+parallel<span class="w"> </span><span class="s2">&quot;convert {} -resize {2}x{2} {1/.}_{2}.{1/}&quot;</span><span class="w"> </span>:::<span class="w"> </span>*.jpg<span class="w"> </span>:::<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="m">300</span>
+
+<span class="c1"># Extract video thumbnails at different timestamps</span>
+parallel<span class="w"> </span><span class="s2">&quot;ffmpeg -i video.mp4 -ss {1} -vframes 1 thumb_{1}.jpg&quot;</span><span class="w"> </span>:::<span class="w"> </span><span class="m">00</span>:10<span class="w"> </span><span class="m">00</span>:30<span class="w"> </span><span class="m">01</span>:00
+</pre></div>
+</div>
+</section>
+</section>
+<section id="key-options-and-features">
+<h3><span class="section-number">9.3.4. </span>Key Options and Features<a class="headerlink" href="#key-options-and-features" title="Link to this heading">#</a></h3>
+<section id="controlling-parallelism">
+<h4><span class="section-number">9.3.4.1. </span>Controlling Parallelism<a class="headerlink" href="#controlling-parallelism" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Limit number of parallel jobs</span>
+parallel<span class="w"> </span>-j4<span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>args
+
+<span class="c1"># Use all available CPU cores</span>
+parallel<span class="w"> </span>-j0<span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>args
+
+<span class="c1"># Run jobs sequentially (useful for debugging)</span>
+parallel<span class="w"> </span>-j1<span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>args
+</pre></div>
+</div>
+</section>
+<section id="progress-and-monitoring">
+<h4><span class="section-number">9.3.4.2. </span>Progress and Monitoring<a class="headerlink" href="#progress-and-monitoring" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show progress bar</span>
+parallel<span class="w"> </span>--progress<span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>args
+
+<span class="c1"># Show which command is running</span>
+parallel<span class="w"> </span>--verbose<span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>args
+
+<span class="c1"># Combine both</span>
+parallel<span class="w"> </span>--progress<span class="w"> </span>--verbose<span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>args
+</pre></div>
+</div>
+</section>
+<section id="error-handling">
+<h4><span class="section-number">9.3.4.3. </span>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Continue on errors, collect failed jobs</span>
+parallel<span class="w"> </span>--keep-order<span class="w"> </span>--joblog<span class="w"> </span>logfile<span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>args
+
+<span class="c1"># Retry failed jobs</span>
+parallel<span class="w"> </span>--retry-failed<span class="w"> </span>--joblog<span class="w"> </span>logfile
+
+<span class="c1"># Resume interrupted jobs</span>
+parallel<span class="w"> </span>--resume<span class="w"> </span>--joblog<span class="w"> </span>logfile<span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>args
+</pre></div>
+</div>
+</section>
+</section>
+<section id="comparison-with-other-tools">
+<h3><span class="section-number">9.3.5. </span>Comparison with Other Tools<a class="headerlink" href="#comparison-with-other-tools" title="Link to this heading">#</a></h3>
+<section id="vs-xargs-p">
+<h4><span class="section-number">9.3.5.1. </span>vs. xargs -P<a class="headerlink" href="#vs-xargs-p" title="Link to this heading">#</a></h4>
+<p><strong>GNU Parallel Advantages:</strong></p>
+<ul class="simple">
+<li><p>More intuitive syntax for complex parameter combinations</p></li>
+<li><p>Better job control and monitoring</p></li>
+<li><p>Built-in resume functionality</p></li>
+<li><p>Superior error handling and logging</p></li>
+<li><p>More flexible input methods</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># xargs approach</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;file1\nfile2\nfile3&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-P4<span class="w"> </span>-I<span class="o">{}</span><span class="w"> </span>gzip<span class="w"> </span><span class="o">{}</span>
+
+<span class="c1"># GNU Parallel approach (cleaner)</span>
+parallel<span class="w"> </span>gzip<span class="w"> </span>:::<span class="w"> </span>file1<span class="w"> </span>file2<span class="w"> </span>file3
+</pre></div>
+</div>
+</section>
+<section id="vs-bash-background-jobs">
+<h4><span class="section-number">9.3.5.2. </span>vs. Bash Background Jobs (&amp;)<a class="headerlink" href="#vs-bash-background-jobs" title="Link to this heading">#</a></h4>
+<p><strong>GNU Parallel Advantages:</strong></p>
+<ul class="simple">
+<li><p>Automatic job limiting (prevents system overload)</p></li>
+<li><p>Built-in progress monitoring</p></li>
+<li><p>Better error collection and handling</p></li>
+<li><p>Automatic cleanup of completed jobs</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bash background jobs (manual management)</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.txt<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>gzip<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="k">done</span>
+<span class="nb">wait</span>
+
+<span class="c1"># GNU Parallel (automatic management)</span>
+parallel<span class="w"> </span>gzip<span class="w"> </span>:::<span class="w"> </span>*.txt
+</pre></div>
+</div>
+</section>
+<section id="vs-make-j">
+<h4><span class="section-number">9.3.5.3. </span>vs. Make -j<a class="headerlink" href="#vs-make-j" title="Link to this heading">#</a></h4>
+<p><strong>GNU Parallel Advantages:</strong></p>
+<ul class="simple">
+<li><p>No need to write Makefiles for simple parallel tasks</p></li>
+<li><p>Dynamic job creation from command-line arguments</p></li>
+<li><p>Better suited for data processing pipelines</p></li>
+<li><p>More flexible parameter handling</p></li>
+</ul>
+</section>
+<section id="vs-custom-shell-scripts">
+<h4><span class="section-number">9.3.5.4. </span>vs. Custom Shell Scripts<a class="headerlink" href="#vs-custom-shell-scripts" title="Link to this heading">#</a></h4>
+<p><strong>GNU Parallel Advantages:</strong></p>
+<ul class="simple">
+<li><p>No need to write custom parallel execution logic</p></li>
+<li><p>Built-in job queuing and resource management</p></li>
+<li><p>Extensive logging and monitoring capabilities</p></li>
+<li><p>Cross-platform compatibility</p></li>
+</ul>
+</section>
+</section>
+<section id="key-advantages-of-gnu-parallel">
+<h3><span class="section-number">9.3.6. </span>Key Advantages of GNU Parallel<a class="headerlink" href="#key-advantages-of-gnu-parallel" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Simplicity</strong>: Easy to parallelize existing sequential commands</p></li>
+<li><p><strong>Flexibility</strong>: Handles complex parameter combinations effortlessly</p></li>
+<li><p><strong>Resource Management</strong>: Automatically manages CPU and memory usage</p></li>
+<li><p><strong>Robustness</strong>: Built-in error handling, logging, and resume capabilities</p></li>
+<li><p><strong>Monitoring</strong>: Real-time progress tracking and verbose output options</p></li>
+<li><p><strong>Scalability</strong>: Can distribute jobs across multiple machines</p></li>
+<li><p><strong>Compatibility</strong>: Works with any command-line tool</p></li>
+<li><p><strong>Performance</strong>: Significant speedup for I/O and CPU-intensive tasks</p></li>
+</ol>
+</section>
+<section id="best-practices">
+<h3><span class="section-number">9.3.7. </span>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Start with low parallelism</strong> (<code class="docutils literal notranslate"><span class="pre">-j2</span></code> or <code class="docutils literal notranslate"><span class="pre">-j4</span></code>) and increase gradually</p></li>
+<li><p><strong>Use <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code></strong> to test commands before execution</p></li>
+<li><p><strong>Monitor system resources</strong> to avoid overloading</p></li>
+<li><p><strong>Use <code class="docutils literal notranslate"><span class="pre">--joblog</span></code></strong> for long-running tasks</p></li>
+<li><p><strong>Test with small datasets</strong> before processing large amounts of data</p></li>
+<li><p><strong>Consider I/O bottlenecks</strong> when setting parallelism levels</p></li>
+</ol>
+</section>
+<section id="performance-example">
+<h3><span class="section-number">9.3.8. </span>Performance Example<a class="headerlink" href="#performance-example" title="Link to this heading">#</a></h3>
+<p>Sequential processing of 100 files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">time</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>file*.txt<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>gzip<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+<span class="c1"># Real: 2m30s</span>
+</pre></div>
+</div>
+<p>Parallel processing with GNU Parallel:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">time</span><span class="w"> </span>parallel<span class="w"> </span>gzip<span class="w"> </span>:::<span class="w"> </span>file*.txt
+<span class="c1"># Real: 0m25s (10x speedup on 8-core system)</span>
+</pre></div>
+</div>
+<p>GNU Parallel is an essential tool for anyone working with batch processing, data analysis, or system administration tasks where parallel execution can provide significant performance improvements.</p>
+<blockquote>
+<div><p><strong>Exercise</strong>
+Plot the Run the cache lines examples for several optimization levels and matrix sizes. Run the simulations in parallel using gnu parallel.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="how-to-model-simple-matrices">
+<h2><span class="section-number">9.4. </span>How to model simple matrices?<a class="headerlink" href="#how-to-model-simple-matrices" title="Link to this heading">#</a></h2>
+<p>It depends greatly from the problem. But for the typical applications of
+vector and matrix computations, we can expect that homogeneous and
+contiguous arrays are the data structures to go. In that case, it is
+advisable to use <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> as the go to data struct since it is as
+efficient as an primitive arra, handles automatically the dynamic memory
+in the heap, and plays nice with the C++ STL.</p>
+<p>A primitive static array is limited by the stack. Play with the values
+of M and N in the following code until you get a seg fault just by
+running the code.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7000</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">M</span><span class="p">][</span><span class="n">N</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="mf">0.0</span><span class="p">}};</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">M</span><span class="o">/</span><span class="mi">2</span><span class="p">][</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Is the maximum size related somehow with the output of the command
+<code class="docutils literal notranslate"><span class="pre">ulimit</span> <span class="pre">-s</span></code> ?</p>
+<p>To be able to use more memory, you could better use dynamic memory with
+primitive arrays, but you will have to manage the <code class="docutils literal notranslate"><span class="pre">new/delete</span></code> parts in
+your code. Check that foloowing code does not die on the same sizes as
+the previous one</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7000</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="o">**</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="p">[</span><span class="n">M</span><span class="p">];</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">){</span>
+<span class="w">        </span><span class="n">data</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">M</span><span class="o">/</span><span class="mi">2</span><span class="p">][</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">){</span>
+<span class="w">        </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">ii</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>But be careful, memory obtained using double/multiple pointers is not
+guaranteed to be contiguous, so it is much better to just ask for a large
+one-dimensional array and just model the 2D shape with smart indexes</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7000</span><span class="p">;</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">  </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">[</span><span class="n">M</span><span class="o">*</span><span class="n">N</span><span class="p">];</span>
+
+<span class="w">  </span><span class="c1">// [id][jd] -&gt; id*N + jd</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">M</span><span class="o">*</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is an example of a 2d array actually stored as a 1d array in memory:
+<img alt="../_images/2d-array-memory.png" class="centerimg80" src="../_images/2d-array-memory.png" /></p>
+<p>And this is the illustration of the mapping that allows us to go to/from different dimensions:
+<img alt="../_images/1d-2d-mapping.png" class="centerimg80" src="../_images/1d-2d-mapping.png" /></p>
+<p>Finally, to avoid managing manually the memory, it is much better to use
+<code class="docutils literal notranslate"><span class="pre">std::vector</span></code>,</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7000</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="w">    </span><span class="n">data</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">M</span><span class="o">*</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// [id][jd] -&gt; id*N + jd</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">M</span><span class="o">*</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Exercise</strong></p>
+<ul class="simple">
+<li><p>Test the stack program to find the maximum matrix size you can use</p></li>
+<li><p>Do the same for the last one using a vector, what is the maximum size you can reserve?</p></li>
+</ul>
+</div></blockquote>
 </section>
 <section id="using-scientific-libraries">
 <h2><span class="section-number">9.5. </span>Using scientific libraries<a class="headerlink" href="#using-scientific-libraries" title="Link to this heading">#</a></h2>
@@ -886,8 +1146,7 @@ instead of writting everything from scratch. Sometimes even automatic
 parallelization comes for free. Examples are the Intel or AMD math
 libraries, the Cuda toolkit for programming on nvidia cards, and so on.</p>
 <p>The following examples shows the time taken to transpose a matrix using
-a traditional approach, a blocking approach , and the eigen c++ library.</p>
-<p>giving the following results:</p>
+a traditional approach, a blocking approach , and the eigen c++ library, giving the following results:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>memory<span class="w"> </span>allocation:<span class="w"> </span><span class="m">0</span>.315618
 Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>filling:<span class="w"> </span><span class="m">3</span>.607817
 Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>direct<span class="w"> </span>transposition:<span class="w"> </span><span class="m">2</span>.870691
@@ -906,6 +1165,134 @@ Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>tr
 the transpose but just creating an expression to access the original
 matrix, hence the huge speeedup and also the slow down when fully
 creating a copy.</p>
+<p>The code used is</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ctime&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cassert&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
+
+<span class="cp">#define min( a, b ) ( ((a) &lt; (b)) ? (a) : (b) )</span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="nf">verify_transpose</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">m1</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">m2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">U</span><span class="o">&gt;</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">verify_transpose</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">m1</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">m2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12000</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">csize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="o">**</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">clock_t</span><span class="w"> </span><span class="n">cputime1</span><span class="p">,</span><span class="w"> </span><span class="n">cputime2</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">ii</span><span class="p">,</span><span class="n">jj</span><span class="p">,</span><span class="n">kk</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Allocating memory for array/matrix</span>
+<span class="w">    </span><span class="n">cputime1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">        </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">        </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// eigen matrices</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXf</span><span class="w"> </span><span class="n">M2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXf</span><span class="o">::</span><span class="n">Constant</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cputime2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cputime1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Time for memory allocation: %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">cputime2</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Filling matrices with zeros</span>
+<span class="w">    </span><span class="n">cputime1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.3</span><span class="o">*</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-2.3</span><span class="o">*</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.8</span><span class="o">*</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.1</span><span class="p">;</span>
+<span class="w">            </span><span class="n">M2</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.3</span><span class="o">*</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="n">cputime2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cputime1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Time for filling: %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">cputime2</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Direct (inefficient) transposition</span>
+<span class="w">    </span><span class="n">cputime1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
+<span class="w">            </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="n">cputime2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cputime1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Time for direct transposition: %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">cputime2</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="p">);</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">verify_transpose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Transposition using cache-blocking</span>
+<span class="w">    </span><span class="n">cputime1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ii</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="o">+=</span><span class="n">csize</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">jj</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">jj</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">jj</span><span class="o">+=</span><span class="n">csize</span><span class="p">)</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">ii</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">min</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">ii</span><span class="o">+</span><span class="n">csize</span><span class="mi">-1</span><span class="p">);</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="n">jj</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">&lt;</span><span class="n">min</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">jj</span><span class="o">+</span><span class="n">csize</span><span class="mi">-1</span><span class="p">);</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">verify_transpose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">));</span>
+<span class="w">    </span><span class="n">cputime2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cputime1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Time for blocked transposition: %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">cputime2</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// eigen</span>
+<span class="w">    </span><span class="n">cputime1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//M1.noalias() = M2.transpose();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">M1</span><span class="p">{</span><span class="n">M2</span><span class="p">.</span><span class="n">transpose</span><span class="p">()};</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">verify_transpose</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">));</span>
+<span class="w">    </span><span class="n">cputime2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cputime1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Time for transposition with eigen: %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">cputime2</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cputime1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">M3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M2</span><span class="p">.</span><span class="n">transpose</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cputime2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cputime1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Time for transposition with copy in eigen: %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">cputime2</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cputime1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXf</span><span class="w"> </span><span class="n">M4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M2</span><span class="p">.</span><span class="n">transpose</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cputime2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cputime1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Time for transposition with full copy in eigen: %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">cputime2</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="p">);</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">verify_transpose</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">));</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">verify_transpose</span><span class="p">(</span><span class="n">M3</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">));</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">verify_transpose</span><span class="p">(</span><span class="n">M4</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// use data</span>
+<span class="w">    </span><span class="n">M1</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.9876</span><span class="p">;</span>
+<span class="w">    </span><span class="n">M2</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">=</span><span class="w"> </span><span class="mf">9.88</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">][</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">][</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">M1</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">M2</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">M3</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="nf">verify_transpose</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">m1</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">m2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">jj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m1</span><span class="p">[</span><span class="n">ii</span><span class="p">][</span><span class="n">jj</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">m2</span><span class="p">[</span><span class="n">jj</span><span class="p">][</span><span class="n">ii</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">U</span><span class="o">&gt;</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">verify_transpose</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">m1</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">m2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">jj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m1</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span><span class="w"> </span><span class="n">jj</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">m2</span><span class="p">(</span><span class="n">jj</span><span class="p">,</span><span class="w"> </span><span class="n">ii</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 <section id="other-optimization-techniques">
 <h2><span class="section-number">9.6. </span>Other optimization techniques<a class="headerlink" href="#other-optimization-techniques" title="Link to this heading">#</a></h2>
@@ -915,12 +1302,12 @@ situations, like</p>
 <li><p>Loop interchanges</p></li>
 <li><p>Loop unrolling</p></li>
 </ul>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">ii</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">ii</span><span class="p">;</span>
 <span class="w">    </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">    </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">ii</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span>
@@ -1016,17 +1403,42 @@ the clarity of the program first and let the compiler do its job.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">9.2. Memory layout</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.2.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.2.1. Blocking multiplication</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-structures-to-use">9.3. What data structures to use?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.3.1. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-gnu-parallel">9.3. Introduction to gnu parallel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-syntax">9.3.1. Basic Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-examples">9.3.2. Basic Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-multiple-commands-in-parallel">9.3.2.1. Running Multiple Commands in Parallel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-files-in-parallel">9.3.2.2. Processing Files in Parallel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-combinations">9.3.2.3. Parameter Combinations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.4. Blocking multiplication</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.4.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-examples">9.3.3. Advanced Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#system-administration">9.3.3.1. System Administration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing">9.3.3.2. Data Processing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-image-video-processing">9.3.3.3. Batch Image/Video Processing</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-options-and-features">9.3.4. Key Options and Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-parallelism">9.3.4.1. Controlling Parallelism</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-and-monitoring">9.3.4.2. Progress and Monitoring</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">9.3.4.3. Error Handling</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-other-tools">9.3.5. Comparison with Other Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-xargs-p">9.3.5.1. vs. xargs -P</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-bash-background-jobs">9.3.5.2. vs. Bash Background Jobs (&amp;)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-make-j">9.3.5.3. vs. Make -j</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-custom-shell-scripts">9.3.5.4. vs. Custom Shell Scripts</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-advantages-of-gnu-parallel">9.3.6. Key Advantages of GNU Parallel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">9.3.7. Best Practices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-example">9.3.8. Performance Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-model-simple-matrices">9.4. How to model simple matrices?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">9.5. Using scientific libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">9.6. Other optimization techniques</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">9.7. Other resources</a></li>
