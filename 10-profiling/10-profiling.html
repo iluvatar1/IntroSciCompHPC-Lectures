@@ -537,6 +537,7 @@ of this course.</p>
 
 <span class="kt">void</span><span class="w"> </span><span class="nf">option1</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">option2</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">option3</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
 <span class="p">{</span>
@@ -727,16 +728,13 @@ Index<span class="w"> </span>by<span class="w"> </span><span class="k">function<
 <li><p><em>Call graph:</em> The call graph shows how much time was spent in each function and its children.</p></li>
 </ul>
 <p>To create flamegraphs, you can try to setup a complicated script to transform the gprof output into something readable by the <a class="reference external" href="https://github.com/brendangregg/FlameGraph">flamegraphs</a> scripts, or better use perf.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 <section id="id2">
 <h3><span class="section-number">10.5.1. </span>Exercise<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<p>Create both the gprof analysisfor the previous code. Where would you focus your efforts to optimize this program?</p>
+<p>Create the gprof analysis for the previous code. Where would you focus your efforts to optimize this program?</p>
 </section>
 <section id="id3">
 <h3><span class="section-number">10.5.2. </span>Exercise<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
-<p>Create both the gprof analysis for the following code. Where would you focus your efforts to optimize this program?</p>
+<p>Create the gprof analysis for the following code. Where would you focus your efforts to optimize this program?</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">//test_gprof.c</span>
 <span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span>
 
@@ -821,7 +819,7 @@ was (this needs root privileges)</p>
 </pre></div>
 </div>
 <p>This will generate something like</p>
-<a class="reference internal image-reference" href="../_images/perf-report.png"><img alt="" class="align-center" src="../_images/perf-report.png" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/perf-report.png"><img alt="" class="align-center" src="../_images/perf-report.png" style="width: 70%;" /></a>
 <p>There are several command options</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">perf</span> <span class="pre">stat</span></code>: obtain event counts</p></li>
