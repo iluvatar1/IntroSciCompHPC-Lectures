@@ -27,7 +27,7 @@ parts:
     chapters:
     - file: 10-optimization/10-optimization.ipynb
     - file: 10-profiling/10-profiling.ipynb
-    - file: 11-matrices-numericallibs/11-matrices-numericallibs.ipynb
+    #- file: 11-matrices-numericallibs/11-matrices-numericallibs.ipynb
     - file: 11-matrix-performance/11-matrix-performance.ipynb
     - file: 12-IntroHPC/ParallelProgramming-Intro.ipynb
     - file: 13-OpenMP/OpenMP-Intro.ipynb
