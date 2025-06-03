@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>19. Git introduction &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>18. Git introduction &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -62,7 +62,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="18. Some extra tools for development" href="../16-Extra/ExtraToolsForDevelopment.html" />
+    <link rel="prev" title="17. Some extra tools for development" href="../16-Extra/ExtraToolsForDevelopment.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -195,18 +195,17 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">11. Numerical libraries in Matrix Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Performance measurement for some matrix ops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">14. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">15. HPC resource manager: Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">16. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">17. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">18. Some extra tools for development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Computational linear algebra: Performance exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">17. Some extra tools for development</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">19. Git introduction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">18. Git introduction</a></li>
 </ul>
 
     </div>
@@ -451,18 +450,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">19.1. Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-repo">19.2. The first repo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-git-individual-repo-or-installation">19.3. Configuring git (individual repo or installation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#committing-files-to-the-repo">19.4. Committing files to the repo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-git-log-command">19.5. The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undoing-changes">19.6. Undoing changes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-branches">19.7. Git branches</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-history">19.8. Modifying the history</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remote-repositories">19.9. Remote repositories</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-updates">19.9.1. Fetching updates</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-updates">19.9.2. Pulling updates</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-updates">19.9.3. Pushing updates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">18.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-repo">18.2. The first repo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-git-individual-repo-or-installation">18.3. Configuring git (individual repo or installation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#committing-files-to-the-repo">18.4. Committing files to the repo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-git-log-command">18.5. The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undoing-changes">18.6. Undoing changes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-branches">18.7. Git branches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-history">18.8. Modifying the history</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remote-repositories">18.9. Remote repositories</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-updates">18.9.1. Fetching updates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-updates">18.9.2. Pulling updates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-updates">18.9.3. Pushing updates</a></li>
 </ul>
 </li>
 </ul>
@@ -477,7 +476,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="git-introduction">
-<h1><span class="section-number">19. </span>Git introduction<a class="headerlink" href="#git-introduction" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">18. </span>Git introduction<a class="headerlink" href="#git-introduction" title="Link to this heading">#</a></h1>
 <p>A version control system allows to keep record of every change done on a
 given set of files, and also encourages and easies collaboration. It
 works better for plain text files (source code, latex, txt, etc).</p>
@@ -490,7 +489,7 @@ control with a bitbucket repository.</p>
 <li><p><a class="reference external" href="https://www.digitalocean.com/community/cheatsheets/how-to-use-git-a-reference-guide">https://www.digitalocean.com/community/cheatsheets/how-to-use-git-a-reference-guide</a></p></li>
 </ul>
 <section id="introduction">
-<h2><span class="section-number">19.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>Git:</p>
 <ul class="simple">
 <li><p>is a de-centralized version control system. Every contributor has a
@@ -518,7 +517,7 @@ command, like <code class="docutils literal notranslate"><span class="pre">commi
 </div>
 </section>
 <section id="the-first-repo">
-<h2><span class="section-number">19.2. </span>The first repo<a class="headerlink" href="#the-first-repo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.2. </span>The first repo<a class="headerlink" href="#the-first-repo" title="Link to this heading">#</a></h2>
 <p>Open the terminal. Create a directory for this first example repository:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>$<span class="w"> </span>mkdir<span class="w"> </span>myfirstrepo
 <span class="w">    </span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>myfirstrepo
@@ -565,7 +564,7 @@ them synced. Do not forget to start your work with a <code class="docutils liter
 it with a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>.</p>
 </section>
 <section id="configuring-git-individual-repo-or-installation">
-<h2><span class="section-number">19.3. </span>Configuring git (individual repo or installation)<a class="headerlink" href="#configuring-git-individual-repo-or-installation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.3. </span>Configuring git (individual repo or installation)<a class="headerlink" href="#configuring-git-individual-repo-or-installation" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code> command allows to configure the individual repository
 preferences or the global options for the installations. To read the
 help, please write</p>
@@ -640,7 +639,7 @@ files to be ignored.</p>
 </div>
 </section>
 <section id="committing-files-to-the-repo">
-<h2><span class="section-number">19.4. </span>Committing files to the repo<a class="headerlink" href="#committing-files-to-the-repo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.4. </span>Committing files to the repo<a class="headerlink" href="#committing-files-to-the-repo" title="Link to this heading">#</a></h2>
 <p>The typical pattern for working inside a repo is edit/stage/commit. You
 perform some edits, then you select some of them as logically related
 and working and then put them inside the staging area, and finally you
@@ -701,7 +700,7 @@ each change perform some commits with an appropiate log message.
 Possibly, add another file and then commit it to the repository.</p>
 </section>
 <section id="the-git-log-command">
-<h2><span class="section-number">19.5. </span>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command<a class="headerlink" href="#the-git-log-command" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.5. </span>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command<a class="headerlink" href="#the-git-log-command" title="Link to this heading">#</a></h2>
 <p>Allows to explore the history of commits. In contrast, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>
 gives information of the current status of the repo: staged files,
 changes, new files, etc.</p>
@@ -717,7 +716,7 @@ changes, new files, etc.</p>
 </div>
 </section>
 <section id="undoing-changes">
-<h2><span class="section-number">19.6. </span>Undoing changes<a class="headerlink" href="#undoing-changes" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.6. </span>Undoing changes<a class="headerlink" href="#undoing-changes" title="Link to this heading">#</a></h2>
 <p>One of the advantages of a version control system is the possibility to
 revert to a previous version of a file if a commit is found to be
 faulty. There are several ways to do that. For example, to get an
@@ -758,7 +757,7 @@ files will be deleted forever.</p>
 log. You can also revert to the first revision of that file.</p>
 </section>
 <section id="git-branches">
-<h2><span class="section-number">19.7. </span>Git branches<a class="headerlink" href="#git-branches" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.7. </span>Git branches<a class="headerlink" href="#git-branches" title="Link to this heading">#</a></h2>
 <p>Branches in git are a natural part of the daily job, and allow to keep
 several development paths that can be merged info the main branch at any
 time. They are very handful for experimental testing and development of
@@ -856,7 +855,7 @@ where all the code. commits, branches, etc can be visualized.</p>
 </div></blockquote>
 </section>
 <section id="modifying-the-history">
-<h2><span class="section-number">19.8. </span>Modifying the history<a class="headerlink" href="#modifying-the-history" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.8. </span>Modifying the history<a class="headerlink" href="#modifying-the-history" title="Link to this heading">#</a></h2>
 <p>It is possible to amend a commit by using the command
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code>. This allows to either combine the staged changes
 with the previous commit or to simply modify the log message. An amended
@@ -865,7 +864,7 @@ history. Other commands to check : <code class="docutils literal notranslate"><s
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span></code>.</p>
 </section>
 <section id="remote-repositories">
-<h2><span class="section-number">19.9. </span>Remote repositories<a class="headerlink" href="#remote-repositories" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">18.9. </span>Remote repositories<a class="headerlink" href="#remote-repositories" title="Link to this heading">#</a></h2>
 <p>Git
 de-centralized approach allows you to have your own copy of the
 repository where you can develop new commits and/or branches and then
@@ -893,7 +892,7 @@ allows you to use <code class="docutils literal notranslate"><span class="pre">&
 remote connection called origin which points to the remote repository.</p>
 </div></blockquote>
 <section id="fetching-updates">
-<h3><span class="section-number">19.9.1. </span>Fetching updates<a class="headerlink" href="#fetching-updates" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">18.9.1. </span>Fetching updates<a class="headerlink" href="#fetching-updates" title="Link to this heading">#</a></h3>
 <p>If you want to get some remote changes from the remote repo but do not
 want yet to merge them into your local repo, you can use</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>git<span class="w"> </span>fetch<span class="w"> </span>&lt;remote&gt;
@@ -908,7 +907,7 @@ remote changes are appropriate, you can merge them into your local
 repository with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>.</p>
 </section>
 <section id="pulling-updates">
-<h3><span class="section-number">19.9.2. </span>Pulling updates<a class="headerlink" href="#pulling-updates" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">18.9.2. </span>Pulling updates<a class="headerlink" href="#pulling-updates" title="Link to this heading">#</a></h3>
 <p>You can also fetch and merge at the same time with a simple</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>git<span class="w"> </span>pull<span class="w"> </span>&lt;remote&gt;
 </pre></div>
@@ -917,7 +916,7 @@ repository with <code class="docutils literal notranslate"><span class="pre">git
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">origin/&lt;current-branch&gt;</span></code>.</p>
 </section>
 <section id="pushing-updates">
-<h3><span class="section-number">19.9.3. </span>Pushing updates<a class="headerlink" href="#pushing-updates" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">18.9.3. </span>Pushing updates<a class="headerlink" href="#pushing-updates" title="Link to this heading">#</a></h3>
 <p>The inverse process, where you publish your result to the remote repo,
 is done by</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>git<span class="w"> </span>push<span class="w"> </span>&lt;remote&gt;<span class="w"> </span>&lt;branch&gt;
@@ -967,7 +966,7 @@ and push.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">18. </span>Some extra tools for development</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>Some extra tools for development</p>
       </div>
     </a>
 </div>
@@ -986,18 +985,18 @@ and push.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">19.1. Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-repo">19.2. The first repo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-git-individual-repo-or-installation">19.3. Configuring git (individual repo or installation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#committing-files-to-the-repo">19.4. Committing files to the repo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-git-log-command">19.5. The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undoing-changes">19.6. Undoing changes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-branches">19.7. Git branches</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-history">19.8. Modifying the history</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remote-repositories">19.9. Remote repositories</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-updates">19.9.1. Fetching updates</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-updates">19.9.2. Pulling updates</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-updates">19.9.3. Pushing updates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">18.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-repo">18.2. The first repo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-git-individual-repo-or-installation">18.3. Configuring git (individual repo or installation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#committing-files-to-the-repo">18.4. Committing files to the repo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-git-log-command">18.5. The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undoing-changes">18.6. Undoing changes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-branches">18.7. Git branches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-history">18.8. Modifying the history</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remote-repositories">18.9. Remote repositories</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-updates">18.9.1. Fetching updates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-updates">18.9.2. Pulling updates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pushing-updates">18.9.3. Pushing updates</a></li>
 </ul>
 </li>
 </ul>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>12. Performance measurement for some matrix ops &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>11. Computational linear algebra: Performance exploration &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -58,12 +58,14 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '11-matrix-performance/11-matrix-performance';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="13. Introduction to High Performance Computing" href="../12-IntroHPC/ParallelProgramming-Intro.html" />
-    <link rel="prev" title="11. Numerical libraries in Matrix Problems" href="../11-matrices-numericallibs/11-matrices-numericallibs.html" />
+    <link rel="next" title="12. Introduction to High Performance Computing" href="../12-IntroHPC/ParallelProgramming-Intro.html" />
+    <link rel="prev" title="10. Profiling" href="../10-profiling/10-profiling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -196,18 +198,17 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">11. Numerical libraries in Matrix Problems</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Performance measurement for some matrix ops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">14. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">15. HPC resource manager: Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">16. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">17. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">18. Some extra tools for development</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Computational linear algebra: Performance exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">17. Some extra tools for development</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">19. Git introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">18. Git introduction</a></li>
 </ul>
 
     </div>
@@ -442,7 +443,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Performance measurement for some matrix ops</h1>
+    <h1>Computational linear algebra: Performance exploration</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -452,14 +453,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lu-operations-to-solve-ax-b">12.1. LU operations to solve Ax = b</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-the-matrix-randomly">12.1.1. Filling the matrix randomly</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-processing-time-only-both-wall-and-cpu-time">12.1.2. Measuring processing time only (both wall and cpu time)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stats">12.1.3. Stats</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">12.1.4. Threads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c-library">11.1. <code class="docutils literal notranslate"><span class="pre">Eigen</span> <span class="pre">c++</span></code> library</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-basic-matrices">11.1.1. Creating basic matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra-with-eigen-c">11.1.2. Linear Algebra with eigen c++</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">12.2. Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-operations-performance-lu-operations-to-solve-ax-b">11.2. Matrix operations performance: LU operations to solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">11.2.1. Threads</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-time-as-a-function-of-size">11.2.2. Measuring time as a function of size</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">11.3. Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization</a></li>
 </ul>
             </nav>
         </div>
@@ -471,18 +475,290 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="performance-measurement-for-some-matrix-ops">
-<h1><span class="section-number">12. </span>Performance measurement for some matrix ops<a class="headerlink" href="#performance-measurement-for-some-matrix-ops" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="computational-linear-algebra-performance-exploration">
+<h1><span class="section-number">11. </span>Computational linear algebra: Performance exploration<a class="headerlink" href="#computational-linear-algebra-performance-exploration" title="Link to this heading">#</a></h1>
 <p>In this section we will learn how to perform some benchmarks on some
 matrix operations to get an idea of the operations performance. This
 will be done manually, but in the future you can use specialized tools
 like google benchmark, <a class="github reference external" href="https://github.com/google/benchmark">google/benchmark</a>, or
-nanobench, <a class="reference external" href="https://nanobench.ankerl.com/">https://nanobench.ankerl.com/</a> , etc. https://news.ycombinator.com/item?id=39714053</p>
-<section id="lu-operations-to-solve-ax-b">
-<h2><span class="section-number">12.1. </span>LU operations to solve Ax = b<a class="headerlink" href="#lu-operations-to-solve-ax-b" title="Link to this heading">#</a></h2>
+nanobench, <a class="reference external" href="https://nanobench.ankerl.com/">https://nanobench.ankerl.com/</a> , etc.</p>
+<p>You can explore some general remarks and specific techniques at</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=fDAPJ7rvcUw">https://www.youtube.com/watch?v=fDAPJ7rvcUw</a> (mat mul)</p></li>
+<li><p><a class="reference external" href="https://old.reddit.com/r/cpp/comments/128tnij/which_is_the_best_way_to_work_with_matrices_and/">https://old.reddit.com/r/cpp/comments/128tnij/which_is_the_best_way_to_work_with_matrices_and/</a></p></li>
+<li><p><a class="reference external" href="https://youtu.be/ioJkA7Mw2-U?si=9htzDJ4vA6F3cZRO">https://youtu.be/ioJkA7Mw2-U?si=9htzDJ4vA6F3cZRO</a> : heap is slow</p></li>
+<li><p><a class="reference external" href="https://news.ycombinator.com/item?id=39714053">https://news.ycombinator.com/item?id=39714053</a></p></li>
+</ul>
+<p>In our example, we will use the <code class="docutils literal notranslate"><span class="pre">eigen</span> <span class="pre">c++</span></code> library. Therefore, we will start with some <code class="docutils literal notranslate"><span class="pre">eigen</span> <span class="pre">c++</span></code> examples.</p>
+<section id="eigen-c-library">
+<h2><span class="section-number">11.1. </span><code class="docutils literal notranslate"><span class="pre">Eigen</span> <span class="pre">c++</span></code> library<a class="headerlink" href="#eigen-c-library" title="Link to this heading">#</a></h2>
+<p>“Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.”  Taken from <a class="reference external" href="http://eigen.tuxfamily.org/index.php?title=Main_Page">http://eigen.tuxfamily.org/index.php?title=Main_Page</a></p>
+<p>For a quick start go to: <a class="reference external" href="http://eigen.tuxfamily.org/dox/GettingStarted.html">http://eigen.tuxfamily.org/dox/GettingStarted.html</a></p>
+<section id="creating-basic-matrices">
+<h3><span class="section-number">11.1.1. </span>Creating basic matrices<a class="headerlink" href="#creating-basic-matrices" title="Link to this heading">#</a></h3>
+<p>The following shows how to create a dynamic 2x2 matrix of doubles (<code class="docutils literal notranslate"><span class="pre">X</span></code> means dynamic, <code class="docutils literal notranslate"><span class="pre">d</span></code> means double), and also show how to access a given element.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">m</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-9.877</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>-9.877</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following shows how to create a random matrix</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">//const int SEED = std::atoi(argv[1]);</span>
+<span class="w">    </span><span class="c1">//srand(SEED); // control seed</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.680375</p></td>
+<td><p>-0.604897</p></td>
+<td><p>-0.0452059</p></td>
+<td><p>0.83239</p></td>
+<td><p>-0.967399</p></td>
+</tr>
+<tr class="row-odd"><td><p>-0.211234</p></td>
+<td><p>-0.329554</p></td>
+<td><p>0.257742</p></td>
+<td><p>0.271423</p></td>
+<td><p>-0.514226</p></td>
+</tr>
+<tr class="row-even"><td><p>0.566198</p></td>
+<td><p>0.536459</p></td>
+<td><p>-0.270431</p></td>
+<td><p>0.434594</p></td>
+<td><p>-0.725537</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.59688</p></td>
+<td><p>-0.444451</p></td>
+<td><p>0.0268018</p></td>
+<td><p>-0.716795</p></td>
+<td><p>0.608354</p></td>
+</tr>
+<tr class="row-even"><td><p>0.823295</p></td>
+<td><p>0.10794</p></td>
+<td><p>0.904459</p></td>
+<td><p>0.213938</p></td>
+<td><p>-0.686642</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Exercise</strong>: Create a 8x8 random matrix and print it to the screen.
+Control the seed, print it twice to check that the elements are the same.</p>
+<p>Matrix-vector multiplication is very simple with overloaded <code class="docutils literal notranslate"><span class="pre">*</span></code> operator.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">srand</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Constant</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mf">1.2</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;m =&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="n">v</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;m * v =&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="linear-algebra-with-eigen-c">
+<h3><span class="section-number">11.1.2. </span>Linear Algebra with eigen c++<a class="headerlink" href="#linear-algebra-with-eigen-c" title="Link to this heading">#</a></h3>
+<p>In this example we are going to use eigen to solve the system
+<span class="math notranslate nohighlight">\(\boldsymbol{A}\vec x = \vec{x}\)</span> using HouseHolder QR decomposition as
+done in
+<a class="reference external" href="http://eigen.tuxfamily.org/dox/group__TutorialLinearAlgebra.html">http://eigen.tuxfamily.org/dox/group__TutorialLinearAlgebra.html</a> .</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix3f</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3f</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="w">  </span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="w">  </span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Here is the matrix A:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Here is the vector b:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">colPivHouseholderQr</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The solution is:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Verification:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">).</span><span class="n">norm</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Here</p></td>
+<td><p>is</p></td>
+<td><p>the</p></td>
+<td><p>matrix</p></td>
+<td><p>A:</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>8</p></td>
+<td><p>10</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Here</p></td>
+<td><p>is</p></td>
+<td><p>the</p></td>
+<td><p>vector</p></td>
+<td><p>b:</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>The</p></td>
+<td><p>solution</p></td>
+<td><p>is:</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>-2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>0.999997</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Verification:</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>1.43051e-06</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Exercise</strong>: Create a random 40x40 matrix <span class="math notranslate nohighlight">\(A\)</span>, a random vector <span class="math notranslate nohighlight">\(b\)</span> of size 40, and solve the system <span class="math notranslate nohighlight">\(Ax = b\)</span> using <code class="docutils literal notranslate"><span class="pre">FullPivHouseholderQR</span></code>. Compare the execution time with a 100x100 problem size.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Exercise:</strong> Compile the previous example with profiling, run under valgrind cachegrind, and check the output. Can you change or optimize any of that?</p>
+</div></blockquote>
+<p>Now use eigen to compute the eigenvalues of a given matrix:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix2d</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Here is the matrix A:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">SelfAdjointEigenSolver</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix2d</span><span class="o">&gt;</span><span class="w"> </span><span class="n">eigensolver</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The eigenvalues of A are:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">eigensolver</span><span class="p">.</span><span class="n">eigenvalues</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Here&#39;s a matrix whose columns are eigenvectors of A </span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;corresponding to these eigenvalues:</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">eigensolver</span><span class="p">.</span><span class="n">eigenvectors</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Exercise :</strong> Compute the eigen-values of a random matrix of size 20x20.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="matrix-operations-performance-lu-operations-to-solve-ax-b">
+<h2><span class="section-number">11.2. </span>Matrix operations performance: LU operations to solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code><a class="headerlink" href="#matrix-operations-performance-lu-operations-to-solve-ax-b" title="Link to this heading">#</a></h2>
 <p>In the following we want to explore the performance of the following
-program as a function of the system size</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+program as a function of the system size. We will explore the role of the compiler optimization flags, and possibly parallelization using threads. By reading <a class="reference external" href="https://eigen.tuxfamily.org/dox/TopicMultiThreading.html">https://eigen.tuxfamily.org/dox/TopicMultiThreading.html</a>, we see that eigen supports parallelization for some operations, and we will take solving with partial pivote LU as example.</p>
+<p>This is a very simple example on how to use it</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
 
 <span class="kt">void</span><span class="w"> </span><span class="nf">solvesystem</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
@@ -499,6 +775,7 @@ program as a function of the system size</p>
 <span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <span class="w">  </span><span class="c1">// crono star</span>
 <span class="w">  </span><span class="c1">//Eigen::MatrixXd x = A.fullPivLu().solve(b);</span>
+<span class="w">  </span><span class="c1">//Eigen::MatrixXd x = A.partialPivLu().solve(b);</span>
 <span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">lu</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
 <span class="w">  </span><span class="c1">// crono end</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">relative_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">).</span><span class="n">norm</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">norm</span><span class="p">();</span><span class="w"> </span><span class="c1">// norm() is L2 norm</span>
@@ -508,7 +785,7 @@ program as a function of the system size</p>
 <span class="p">}</span>
 
 <span class="c1">// usar chrono para medir el tiempo</span>
-<span class="c1">// gprof</span>
+<span class="c1">// perf</span>
 <span class="c1">// remove printing</span>
 <span class="c1">// modify printing</span>
 </pre></div>
@@ -598,7 +875,8 @@ program as a function of the system size</p>
 </tbody>
 </table>
 </div>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<p>Now, to be able to call this in a parametric way, we can put the solve into a function</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
 
 <span class="kt">void</span><span class="w"> </span><span class="nf">solvesystem</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
@@ -623,7 +901,7 @@ program as a function of the system size</p>
 <span class="p">}</span>
 
 <span class="c1">// usar chrono para medir el tiempo</span>
-<span class="c1">// gprof</span>
+<span class="c1">// gprof / perf</span>
 <span class="c1">// remove printing</span>
 <span class="c1">// modify testing</span>
 </pre></div>
@@ -632,7 +910,7 @@ program as a function of the system size</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">time</span><span class="w"> </span>./a.out
 </pre></div>
 </div>
-<p>you will measuring the whole execution time, including the memory
+<p>you will be measuring the whole execution time, including the memory
 allocation, the actual operation, and the memory freeing. It is much
 better to actually measure only what we are interesting in, which is the
 actual memory operation.</p>
@@ -644,17 +922,16 @@ actual memory operation.</p>
 <li><p>Print the time as function of N and plot (run this in the shell)</p></li>
 <li><p>Use threads (openmp)</p></li>
 </ul>
-<section id="filling-the-matrix-randomly">
-<h3><span class="section-number">12.1.1. </span>Filling the matrix randomly<a class="headerlink" href="#filling-the-matrix-randomly" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<p><strong>Filling the matrix randomly</strong></p>
 <p>For repeatability, we can control the seed with the <code class="docutils literal notranslate"><span class="pre">srand</span></code> instructions
 (check the manual, and also
 <a class="reference external" href="https://stackoverflow.com/questions/67387539/set-random-seed-in-eigen?noredirect=1&amp;amp;lq=1">https://stackoverflow.com/questions/67387539/set-random-seed-in-eigen?noredirect=1&amp;lq=1</a>
 and
 <a class="reference external" href="https://stackoverflow.com/questions/21292881/matrixxfrandom-always-returning-same-matrices">https://stackoverflow.com/questions/21292881/matrixxfrandom-always-returning-same-matrices</a>
 ).</p>
-</section>
-<section id="measuring-processing-time-only-both-wall-and-cpu-time">
-<h3><span class="section-number">12.1.2. </span>Measuring processing time only (both wall and cpu time)<a class="headerlink" href="#measuring-processing-time-only-both-wall-and-cpu-time" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<p><strong>Measuring processing time only (both wall and cpu time)</strong></p>
 <p>To measure only the times associated with the processing , we will use
 the <code class="docutils literal notranslate"><span class="pre">chrono</span></code> library (<a class="reference external" href="https://en.cppreference.com/w/cpp/chrono">https://en.cppreference.com/w/cpp/chrono</a>).
 Before proceeding, please read first the documentation of
@@ -665,20 +942,66 @@ how to measure it? Check:</p>
 <li><p><a class="reference external" href="https://stackoverflow.com/questions/20167685/measuring-cpu-time-in-c">https://stackoverflow.com/questions/20167685/measuring-cpu-time-in-c</a></p></li>
 <li><p><a class="reference external" href="https://en.cppreference.com/w/cpp/chrono/c/clock">https://en.cppreference.com/w/cpp/chrono/c/clock</a></p></li>
 </ul>
-<p>To check:</p>
-<ul class="simple">
-<li><p>[ ] What happens i you comment out the printing and compile with
-<code class="docutils literal notranslate"><span class="pre">-O3</span></code>?</p></li>
-<li><p>[ ] Compare the times you are getting with <code class="docutils literal notranslate"><span class="pre">/usr/bin/time</span></code>.</p></li>
-</ul>
-</section>
-<section id="stats">
-<h3><span class="section-number">12.1.3. </span>Stats<a class="headerlink" href="#stats" title="Link to this heading">#</a></h3>
-<p>Now introduce the ability to repeat the timing many times and compute
-statistics. The number of reps will be a parameter.</p>
-</section>
+<hr class="docutils" />
+<p><strong>Statistics</strong></p>
+<p>We will need a function to repeat the measured function several times, and then compute both the mean,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5db3baaa-84ec-4487-977c-7da521788fec">
+<span class="eqno">(11.1)<a class="headerlink" href="#equation-5db3baaa-84ec-4487-977c-7da521788fec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar x = \dfrac{1}{N} \sum x_i,
+\end{equation}\]</div>
+<p>and the standard deviation,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6349d75a-bfde-4d27-b8ec-33bce98b69dd">
+<span class="eqno">(11.2)<a class="headerlink" href="#equation-6349d75a-bfde-4d27-b8ec-33bce98b69dd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sigma = \sqrt{\dfrac{1}{N-1}\sum (x_i - \bar x)^2}.
+\end{equation}\]</div>
+<p>Your main function must be something  like</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ctime&gt;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
+
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">stats</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">reps</span><span class="p">,</span><span class="w"> </span><span class="c1">// input parameters</span>
+<span class="w">               </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">mean_wtime</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">sigma_wtime</span><span class="p">,</span><span class="w"> </span><span class="c1">// output</span>
+<span class="w">               </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">mean_ctime</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">sigma_ctime</span><span class="p">);</span><span class="w"> </span><span class="c1">// output</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"> </span><span class="c1">// Matrix size</span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="w"> </span><span class="c1">// Repetitions</span>
+
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">mean_wtime</span><span class="p">,</span><span class="w"> </span><span class="n">sigma_wtime</span><span class="p">;</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">mean_ctime</span><span class="p">,</span><span class="w"> </span><span class="n">sigma_ctime</span><span class="p">;</span>
+<span class="w">      </span><span class="n">stats</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="w"> </span><span class="n">mean_wtime</span><span class="p">,</span><span class="w"> </span><span class="n">sigma_wtime</span><span class="p">,</span><span class="w"> </span><span class="n">mean_ctime</span><span class="p">,</span><span class="w"> </span><span class="n">sigma_ctime</span><span class="p">);</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">M</span>
+<span class="w">                </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mean_wtime</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sigma_wtime</span>
+<span class="w">                </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mean_ctime</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sigma_ctime</span>
+<span class="w">                </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Exercise</strong>: Create a function that receives the size and the number of repetitions, and performs the corresponding call to the kernel function and computes and prints the stats.</p>
+</div></blockquote>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">stats</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">reps</span><span class="p">,</span>
+<span class="w">               </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">mean_wtime</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">sigma_wtime</span><span class="p">,</span>
+<span class="w">               </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">mean_ctime</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">sigma_ctime</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">wsum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">wsum2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">csum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">csum2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">wtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ctime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="c1">// TODO</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">M</span>
+<span class="w">          </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mean_wtime</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sigma_wtime</span>
+<span class="w">          </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mean_ctime</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sigma_ctime</span>
+<span class="w">          </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
 <section id="threads">
-<h3><span class="section-number">12.1.4. </span>Threads<a class="headerlink" href="#threads" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.2.1. </span>Threads<a class="headerlink" href="#threads" title="Link to this heading">#</a></h3>
 <p>Eigen c++ includes parallelization with openmp threads. To do so, you
 need to compile with the <code class="docutils literal notranslate"><span class="pre">-fopenmp</span></code> flag and then execute as</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span>n<span class="w"> </span>./a.out<span class="w"> </span>...
@@ -687,13 +1010,19 @@ need to compile with the <code class="docutils literal notranslate"><span class=
 <p>where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of threads. Check the following to see the kind
 of ops that can be parallelized:
 <a class="reference external" href="https://eigen.tuxfamily.org/dox/TopicMultiThreading.html">https://eigen.tuxfamily.org/dox/TopicMultiThreading.html</a></p>
+<p>Run the code for a large enough size and check if the flag has any effect.</p>
+</section>
+<section id="measuring-time-as-a-function-of-size">
+<h3><span class="section-number">11.2.2. </span>Measuring time as a function of size<a class="headerlink" href="#measuring-time-as-a-function-of-size" title="Link to this heading">#</a></h3>
+<p>Now you are ready to measure both the wall and cpu time as a function of size, for at least 5 samples per size, and also for several number of threads. Start using <code class="docutils literal notranslate"><span class="pre">-O3</span> <span class="pre">-fopenmp</span></code> and plot the curves for 1, 2, 4, 8 and the max threads in your pc. Then try the same with <code class="docutils literal notranslate"><span class="pre">-O0</span> <span class="pre">-fopenmp</span></code>, but maybe you will not be able to use large sizes. How will you run this in parallel? take into account the memory consumption and also that <code class="docutils literal notranslate"><span class="pre">parallel</span> <span class="pre">-j</span> <span class="pre">jobs</span></code> is the number of processes which is different to the number of threads (a process can sapwn a lot of threads, and you should not launch more threads than available in your machine)</p>
 </section>
 </section>
 <section id="exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">
-<h2><span class="section-number">12.2. </span>Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization<a class="headerlink" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.3. </span>Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization<a class="headerlink" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization" title="Link to this heading">#</a></h2>
 <p>Now do the same study but with matrix multiplication. Implement the
-matrix matmul with eigen (see the code snippet at the end). Always
-compile with the flags “-fopenmp -O3”. And now execute in the following
+matrix matmul with eigen (see the code snippet at the end). Also implement the typical three-loop matrix multiplication (but does not use for large matrix sizes).
+Always
+compile with the flags <code class="docutils literal notranslate"><span class="pre">-fopenmp</span> <span class="pre">-O3</span></code>. And now execute in the following
 way</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span>VAR<span class="w"> </span>./a.out<span class="w"> </span>...
 </pre></div>
@@ -705,7 +1034,7 @@ resources) with a least 8 threads. Plot the time (with error bars) as a
 function of the system size, and you will have four curves on that
 graph, each one for each VAR value.</p>
 <p>Basic snippet for matmul in eigen:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">  </span><span class="c1">// create matrices</span>
 <span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
@@ -721,75 +1050,6 @@ graph, each one for each VAR value.</p>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">elapsed_seconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">;</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">elapsed_secons</span><span class="p">.</span><span class="n">count</span><span class="p">();</span>
 <span class="p">}</span>
-</pre></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#include &lt;iostream&gt;
-#include &lt;chrono&gt;
-#include &lt;ctime&gt;
-#include &lt;cmath&gt;
-#include &lt;eigen3/Eigen/Dense&gt;
-
-
-void multiply(const int size, double &amp; wtime, double &amp; ctime); // store time spent multiplying
-void stats(const int size, const int reps,
-           double &amp; mean_wtime, double &amp; sigma_wtime,
-           double &amp; mean_ctime, double &amp; sigma_ctime);
-
-int main(int argc, char ** argv)
-{
-  const int M = atoi(argv[1]); // Matrix size
-  const int R = atoi(argv[2]); // Repetitions
-
-  double mean_wtime, sigma_wtime;
-  double mean_ctime, sigma_ctime;
-  stats(M, R, mean_wtime, sigma_wtime, mean_ctime, sigma_ctime);
-  std::cout &lt;&lt; M
-            &lt;&lt; &quot;\t&quot; &lt;&lt; mean_wtime &lt;&lt; &quot;\t&quot; &lt;&lt; sigma_wtime
-            &lt;&lt; &quot;\t&quot; &lt;&lt; mean_ctime &lt;&lt; &quot;\t&quot; &lt;&lt; sigma_ctime
-            &lt;&lt; std::endl;
-
-  return 0;
-}
-void stats(const int size, const int reps,
-           double &amp; mean_wtime, double &amp; sigma_wtime,
-           double &amp; mean_ctime, double &amp; sigma_ctime)
-{
-  double wsum = 0, wsum2 = 0, csum = 0, csum2 = 0;
-  double wtime = 0, ctime = 0;
-  for (int rep = 0; rep &lt; reps; ++rep) {
-    srand(rep+1); // change seed for each repetition
-    multiply(size, wtime, ctime);
-    wsum  += wtime;
-    wsum2 += wtime*wtime;
-    csum  += ctime;
-    csum2 += ctime*ctime;
-  }
-  mean_wtime = wsum/reps;
-  sigma_wtime = std::sqrt(reps*(wsum2/reps - mean_wtime*mean_wtime)/(reps-1));
-  mean_ctime = csum/reps;
-  sigma_ctime = std::sqrt(reps*(csum2/reps - mean_ctime*mean_ctime)/(reps-1));
-}
-
-
-void multiply(const int size, double &amp; wtime, double &amp; ctime)
-{
-  // create matrices
-  Eigen::MatrixXd A = Eigen::MatrixXd::Random(size, size);
-  Eigen::MatrixXd B = Eigen::MatrixXd::Random(size, size);
-
-  auto start = std::chrono::system_clock::now(); // measures wall time
-  std::clock_t c1 = std::clock(); // measures cpu time
-  auto C{A*B}; // MULTIPLY
-  double tmp = C(0, 0); // use the matrix to make eigen compute it
-  auto end = std::chrono::system_clock::now(); // wall time
-  std::clock_t c2 = std::clock(); // cpu time
-
-  std::clog &lt;&lt; tmp &lt;&lt; std::endl; // use the matrix to make eigen compute it
-
-  ctime = 1.0*(c2-c1)/CLOCKS_PER_SEC;
-  std::chrono::duration&lt;double&gt; elapsed_seconds = end-start;
-  wtime = elapsed_seconds.count();
-}
 </pre></div>
 </div>
 </section>
@@ -826,12 +1086,12 @@ void multiply(const int size, double &amp; wtime, double &amp; ctime)
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../11-matrices-numericallibs/11-matrices-numericallibs.html"
+       href="../10-profiling/10-profiling.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">11. </span>Numerical libraries in Matrix Problems</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Profiling</p>
       </div>
     </a>
     <a class="right-next"
@@ -839,7 +1099,7 @@ void multiply(const int size, double &amp; wtime, double &amp; ctime)
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Introduction to High Performance Computing</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Introduction to High Performance Computing</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -859,14 +1119,17 @@ void multiply(const int size, double &amp; wtime, double &amp; ctime)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lu-operations-to-solve-ax-b">12.1. LU operations to solve Ax = b</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-the-matrix-randomly">12.1.1. Filling the matrix randomly</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-processing-time-only-both-wall-and-cpu-time">12.1.2. Measuring processing time only (both wall and cpu time)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stats">12.1.3. Stats</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">12.1.4. Threads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c-library">11.1. <code class="docutils literal notranslate"><span class="pre">Eigen</span> <span class="pre">c++</span></code> library</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-basic-matrices">11.1.1. Creating basic matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra-with-eigen-c">11.1.2. Linear Algebra with eigen c++</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">12.2. Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-operations-performance-lu-operations-to-solve-ax-b">11.2. Matrix operations performance: LU operations to solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">11.2.1. Threads</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-time-as-a-function-of-size">11.2.2. Measuring time as a function of size</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">11.3. Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization</a></li>
 </ul>
   </nav></div>
 

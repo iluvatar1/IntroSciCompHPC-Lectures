@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>15. HPC resource manager: Slurm &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>14. HPC resource manager: Slurm &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -62,8 +62,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="16. Introduction to MPI (distributed memory)" href="../14-MPI/MPI-Intro.html" />
-    <link rel="prev" title="14. Introduction to OpenMp (Shared memory)" href="../13-OpenMP/OpenMP-Intro.html" />
+    <link rel="next" title="15. Introduction to MPI (distributed memory)" href="../14-MPI/MPI-Intro.html" />
+    <link rel="prev" title="13. Introduction to OpenMp (Shared memory)" href="../13-OpenMP/OpenMP-Intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -196,18 +196,17 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">11. Numerical libraries in Matrix Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Performance measurement for some matrix ops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">14. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. HPC resource manager: Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">16. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">17. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">18. Some extra tools for development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Computational linear algebra: Performance exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">17. Some extra tools for development</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">19. Git introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">18. Git introduction</a></li>
 </ul>
 
     </div>
@@ -452,8 +451,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-slurm-scripts">15.1. Creating slurm scripts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">15.2. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-slurm-scripts">14.1. Creating slurm scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">14.2. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -466,7 +465,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hpc-resource-manager-slurm">
-<h1><span class="section-number">15. </span>HPC resource manager: Slurm<a class="headerlink" href="#hpc-resource-manager-slurm" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">14. </span>HPC resource manager: Slurm<a class="headerlink" href="#hpc-resource-manager-slurm" title="Link to this heading">#</a></h1>
 <p>Slurm, <a class="reference external" href="https://slurm.schedmd.com/documentation.html">https://slurm.schedmd.com/documentation.html</a>, is a resource
 manager and job scheduler that allows to organize and share resources in
 a HPC environment to get an optimal usage. It allows to specify usage
@@ -618,7 +617,7 @@ cpus at full (have some <code class="docutils literal notranslate"><span class="
 </pre></div>
 </div>
 <section id="creating-slurm-scripts">
-<h2><span class="section-number">15.1. </span>Creating slurm scripts<a class="headerlink" href="#creating-slurm-scripts" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.1. </span>Creating slurm scripts<a class="headerlink" href="#creating-slurm-scripts" title="Link to this heading">#</a></h2>
 <p>This is very useful, you can just distribute your commands among all the
 computers belonging to a given partition. But in general it is much
 better to write this commands in a script that could be reused.
@@ -679,7 +678,7 @@ and specifiy , for instance, what modules to load, like using
 <code class="docutils literal notranslate"><span class="pre">ml</span> <span class="pre">somehpclib</span></code> or <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">load</span> <span class="pre">something</span></code>.</p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">15.2. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.2. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Create a script to run the stress command in some partition, including several nodes. Log into those nodes and check the actual usage. Share with other students.</p></li>
 <li><p>Create a slurm script to run the openmp vector average, also including the scalling study. Check if sharing the nodes affects or not the times measured.</p></li>
@@ -725,7 +724,7 @@ and specifiy , for instance, what modules to load, like using
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Introduction to OpenMp (Shared memory)</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Introduction to OpenMp (Shared memory)</p>
       </div>
     </a>
     <a class="right-next"
@@ -733,7 +732,7 @@ and specifiy , for instance, what modules to load, like using
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">16. </span>Introduction to MPI (distributed memory)</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Introduction to MPI (distributed memory)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -753,8 +752,8 @@ and specifiy , for instance, what modules to load, like using
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-slurm-scripts">15.1. Creating slurm scripts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">15.2. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-slurm-scripts">14.1. Creating slurm scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">14.2. Exercises</a></li>
 </ul>
   </nav></div>
 
