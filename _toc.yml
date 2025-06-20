@@ -22,6 +22,7 @@ parts:
     - file: 07-Install-Programs-From-Source/07-Install-Programs-From-Source.ipynb
     - file: 09-Debugging/09-Debugging.ipynb
     - file: 09-UnitTest/09-UnitTesting.ipynb
+    - file: 10-RunMultiplePrograms/FarmTask.ipynb
   - caption: "High Performance Computing and Parallel Programming"
     numbered: true
     chapters:
@@ -30,8 +31,8 @@ parts:
     #- file: 11-matrices-numericallibs/11-matrices-numericallibs.ipynb
     - file: 11-matrix-performance/11-matrix-performance.ipynb
     - file: 12-IntroHPC/ParallelProgramming-Intro.ipynb
+    - file: 12-Slurm/Slurm.ipynb
     - file: 13-OpenMP/OpenMP-Intro.ipynb
-    - file: 15-Intro-Slurm/Slurm.ipynb
     - file: 14-MPI/MPI-Intro.ipynb
     - file: 15-Intro-Cuda/cuda.ipynb
     - file: 16-Extra/ExtraToolsForDevelopment.ipynb
