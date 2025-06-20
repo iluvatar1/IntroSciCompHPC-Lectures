@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>16. Ref &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>17. Ref &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -62,8 +62,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="17. Some extra tools for development" href="../16-Extra/ExtraToolsForDevelopment.html" />
-    <link rel="prev" title="15. Introduction to MPI (distributed memory)" href="../14-MPI/MPI-Intro.html" />
+    <link rel="next" title="18. Some extra tools for development" href="../16-Extra/ExtraToolsForDevelopment.html" />
+    <link rel="prev" title="16. Introduction to MPI (distributed memory)" href="../14-MPI/MPI-Intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -191,22 +191,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Making sure your bugs don’t come back</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-RunMultiplePrograms/FarmTask.html">9. Simple parallelization: farm task and gnu parallel or xargs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Computational linear algebra: Performance exploration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">16. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">17. Some extra tools for development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">10. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">11. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Computational linear algebra: Performance exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">15. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">16. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">18. Some extra tools for development</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">18. Git introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">19. Git introduction</a></li>
 </ul>
 
     </div>
@@ -428,7 +429,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -444,6 +447,17 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup-for-cuda">17.1. Environment setup for cuda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-cuda-intro">17.2. <span class="todo TODO">TODO</span> Cuda intro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-openmp-offload-to-gpu">17.3. <span class="todo TODO">TODO</span> Openmp offload to gpu</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-openacc-intro">17.4. <span class="todo TODO">TODO</span> OpenACC intro</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -454,7 +468,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ref">
-<h1><span class="section-number">16. </span>Ref<a class="headerlink" href="#ref" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">17. </span>Ref<a class="headerlink" href="#ref" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p><a class="reference external" href="https://codeconfessions.substack.com/p/gpu-computing">https://codeconfessions.substack.com/p/gpu-computing</a></p></li>
 <li><p><a class="reference external" href="https://libocca.org/#/guide/user-guide/introduction">https://libocca.org/#/guide/user-guide/introduction</a></p></li>
@@ -464,6 +478,632 @@ document.write(`
 <p><a class="reference external" href="https://developer.nvidia.com/blog/multi-gpu-programming-with-standard-parallel-c-part-1/">https://developer.nvidia.com/blog/multi-gpu-programming-with-standard-parallel-c-part-1/</a></p>
 <p>https://www.youtube.com/watch?v=h9Z4oGN89MU : How does a gpu work</p>
 <p>https://news.ycombinator.com/item?id=42042016</p>
+<section id="environment-setup-for-cuda">
+<h2><span class="section-number">17.1. </span>Environment setup for cuda<a class="headerlink" href="#environment-setup-for-cuda" title="Link to this heading">#</a></h2>
+<p>Here I show two ways to setup the dev environment. One is based on a
+local computer with a graphics card, and the other using google collab.</p>
+<ol class="arabic">
+<li><p>Local environment</p>
+<p>Here we will setup a computer which has an Nvidia Quadro P1000 card.
+You need to install both the driver and the cuda toolkit (the later
+better to be installed as a part of the nvidia sdk)</p>
+<ul>
+<li><p>Driver download for quadro P1000:
+<a class="reference external" href="https://www.nvidia.com/Download/driverResults.aspx/204639/en-us/">https://www.nvidia.com/Download/driverResults.aspx/204639/en-us/</a></p></li>
+<li><p>Nvidia sdk: <a class="reference external" href="https://developer.nvidia.com/hpc-sdk-downloads">https://developer.nvidia.com/hpc-sdk-downloads</a></p>
+<ul>
+<li><p>Nvidia singularity: This is the recommended way. The image
+is built at
+/packages/nvhpc<sub>23</sub>.3<sub>devel</sub>.sif. More
+instructions at
+<a class="reference external" href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/nvhpc">https://catalog.ngc.nvidia.com/orgs/nvidia/containers/nvhpc</a></p>
+<ol class="arabic">
+<li><p>Accesing a shell inside the container but with
+visibility to all user account files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span>shell<span class="w"> </span>--nv<span class="w"> </span>/packages/nvhpc_23.3_devel.sif
+</pre></div>
+</div>
+</li>
+<li><p>Compiling</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--nv<span class="w"> </span>/packages/nvhpc_23.3_devel.sif<span class="w"> </span>nvc++<span class="w"> </span>-g<span class="w"> </span>cuda_02.cu
+</pre></div>
+</div>
+</li>
+<li><p>Executing with nvprof</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--nv<span class="w"> </span>/packages/nvhpc_23.3_devel.sif<span class="w"> </span>nvprof<span class="w"> </span>./a.out
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p>Local module: Load the nvidia sdk (sala2):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>/packages/nvidia/hpc_sdk/modulefiles/nvhpc/23.3
+</pre></div>
+</div>
+<p>Compile as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nvc++<span class="w">  </span>-std<span class="o">=</span>c++17<span class="w"> </span>-o<span class="w"> </span>offload.x<span class="w"> </span>offload.cpp
+</pre></div>
+</div>
+</li>
+<li><p>The docker container is installed. Unfortunately it does not
+run since the device compute capability is not enough</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>nvcr.io/nvidia/nvhpc:23.3-devel-cuda_multi-ubuntu20.04
+docker:<span class="w"> </span>Error<span class="w"> </span>response<span class="w"> </span>from<span class="w"> </span>daemon:<span class="w"> </span>could<span class="w"> </span>not<span class="w"> </span><span class="k">select</span><span class="w"> </span>device<span class="w"> </span>driver<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>with<span class="w"> </span>capabilities:<span class="w"> </span><span class="o">[[</span>gpu<span class="o">]]</span>.
+</pre></div>
+</div>
+<p>More info about container:
+<a class="reference external" href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/nvhpc">https://catalog.ngc.nvidia.com/orgs/nvidia/containers/nvhpc</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Google collab</p>
+<p>Open a collab notebook, go to runtime, change runtime type, hardware
+accelerator -&gt; GPU, GPU type -&gt; T4, Save. The you will have a
+runtime with a T4 card, for free. If you want an even better card,
+you can pay for collab pro.</p>
+<p>Inside the notebook, you can run commands with the prefix <code class="docutils literal notranslate"><span class="pre">!</span></code> to run
+then as in a console. For instance, to get the device properties,
+you can run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!nvidia-smi
+</pre></div>
+</div>
+<p>to get something like</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>+-----------------------------------------------------------------------------+
+<span class="p">|</span><span class="w"> </span>NVIDIA-SMI<span class="w"> </span><span class="m">525</span>.85.12<span class="w">    </span>Driver<span class="w"> </span>Version:<span class="w"> </span><span class="m">525</span>.85.12<span class="w">    </span>CUDA<span class="w"> </span>Version:<span class="w"> </span><span class="m">12</span>.0<span class="w">     </span><span class="p">|</span>
+<span class="p">|</span>-------------------------------+----------------------+----------------------+
+<span class="p">|</span><span class="w"> </span>GPU<span class="w">  </span>Name<span class="w">        </span>Persistence-M<span class="p">|</span><span class="w"> </span>Bus-Id<span class="w">        </span>Disp.A<span class="w"> </span><span class="p">|</span><span class="w"> </span>Volatile<span class="w"> </span>Uncorr.<span class="w"> </span>ECC<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>Fan<span class="w">  </span>Temp<span class="w">  </span>Perf<span class="w">  </span>Pwr:Usage/Cap<span class="p">|</span><span class="w">         </span>Memory-Usage<span class="w"> </span><span class="p">|</span><span class="w"> </span>GPU-Util<span class="w">  </span>Compute<span class="w"> </span>M.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w">                      </span><span class="p">|</span><span class="w">               </span>MIG<span class="w"> </span>M.<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="o">===============================</span>+<span class="o">======================</span>+<span class="o">======================</span><span class="p">|</span>
+<span class="p">|</span><span class="w">   </span><span class="m">0</span><span class="w">  </span>Tesla<span class="w"> </span>T4<span class="w">            </span>Off<span class="w">  </span><span class="p">|</span><span class="w"> </span><span class="m">00000000</span>:00:04.0<span class="w"> </span>Off<span class="w"> </span><span class="p">|</span><span class="w">                    </span><span class="m">0</span><span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>N/A<span class="w">   </span>44C<span class="w">    </span>P8<span class="w">     </span>9W<span class="w"> </span>/<span class="w">  </span>70W<span class="w"> </span><span class="p">|</span><span class="w">      </span>0MiB<span class="w"> </span>/<span class="w"> </span>15360MiB<span class="w"> </span><span class="p">|</span><span class="w">      </span><span class="m">0</span>%<span class="w">      </span>Default<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w">                               </span><span class="p">|</span><span class="w">                      </span><span class="p">|</span><span class="w">                  </span>N/A<span class="w"> </span><span class="p">|</span>
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+<span class="p">|</span><span class="w"> </span>Processes:<span class="w">                                                                  </span><span class="p">|</span>
+<span class="p">|</span><span class="w">  </span>GPU<span class="w">   </span>GI<span class="w">   </span>CI<span class="w">        </span>PID<span class="w">   </span>Type<span class="w">   </span>Process<span class="w"> </span>name<span class="w">                  </span>GPU<span class="w"> </span>Memory<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w">        </span>ID<span class="w">   </span>ID<span class="w">                                                   </span>Usage<span class="w">      </span><span class="p">|</span>
+<span class="p">|</span><span class="o">=============================================================================</span><span class="p">|</span>
+<span class="p">|</span><span class="w">  </span>No<span class="w"> </span>running<span class="w"> </span>processes<span class="w"> </span>found<span class="w">                                                 </span><span class="p">|</span>
++-----------------------------------------------------------------------------+
+</pre></div>
+</div>
+<p>To create local files, like <code class="docutils literal notranslate"><span class="pre">filename.cu</span></code>, use the magic
+<code class="docutils literal notranslate"><span class="pre">%%writefile</span> <span class="pre">filename.cu</span></code> at the beginning of the cell and then put the file
+contents in the same cell.</p>
+<p>Finally, to compile and run just execute the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!nvcc<span class="w"> </span>filename.cu<span class="w"> </span>-o<span class="w"> </span>name.x
+!nvprof<span class="w"> </span>./name.x
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="todo-cuda-intro">
+<h2><span class="section-number">17.2. </span><span class="todo TODO">TODO</span> Cuda intro<a class="headerlink" href="#todo-cuda-intro" title="Link to this heading">#</a></h2>
+<p>REF <a class="reference external" href="https://en.wikipedia.org/wiki/CUDA?useskin=vector">https://en.wikipedia.org/wiki/CUDA?useskin=vector</a> Tutorial1:
+<a class="reference external" href="https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/">https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/</a>
+Tutorial2
+<a class="reference external" href="https://developer.nvidia.com/blog/even-easier-introduction-cuda/">https://developer.nvidia.com/blog/even-easier-introduction-cuda/</a></p>
+<ol class="arabic">
+<li><p>Tutorial 1</p>
+<p><a class="reference external" href="https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/">https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/</a>
+Example in c</p>
+<p>Compile as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>example_01.c
+</pre></div>
+</div>
+<p>Now the same but in cuda:</p>
+<p>Compile as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nvcc<span class="w"> </span>example_01.cu
+</pre></div>
+</div>
+<p>Execution will show errors, due to the fact that the code is NOT
+running on the device.</p>
+<p>We need to allocate memory on it(<code class="docutils literal notranslate"><span class="pre">cudaMalloc</span></code> and <code class="docutils literal notranslate"><span class="pre">cudaFree</span></code>), and
+trasfer data to and from it (<code class="docutils literal notranslate"><span class="pre">cudaMemCopy</span></code>).</p>
+</li>
+<li><p>Tutorial 2</p>
+<p><a class="reference external" href="https://developer.nvidia.com/blog/even-easier-introduction-cuda/">https://developer.nvidia.com/blog/even-easier-introduction-cuda/</a></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
+
+<span class="c1">// function to add the elements of two arrays</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">      </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1M elements</span>
+
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+
+<span class="w">  </span><span class="c1">// initialize x and y arrays on the host</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Run kernel on 1M elements on the CPU</span>
+<span class="w">  </span><span class="n">add</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Check for errors (all values should be 3.0f)</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fmax</span><span class="p">(</span><span class="n">maxError</span><span class="p">,</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="mf">-3.0f</span><span class="p">));</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Max error: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Free memory</span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Compile as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-g<span class="w"> </span>-std<span class="o">=</span>c++17<span class="w"> </span>cuda_01.cpp
+</pre></div>
+</div>
+<p>Cuda example</p>
+<div class="highlight-cuda notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
+<span class="c1">// Kernel function to add the elements of two arrays</span>
+<span class="kr">__global__</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Allocate Unified Memory – accessible from CPU or GPU</span>
+<span class="w">  </span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+<span class="w">  </span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+<span class="w">  </span><span class="c1">// initialize x and y arrays on the host</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Run kernel on 1M elements on the GPU</span>
+<span class="w">  </span><span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Wait for GPU to finish before accessing on host</span>
+<span class="w">  </span><span class="n">cudaDeviceSynchronize</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Check for errors (all values should be 3.0f)</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fmax</span><span class="p">(</span><span class="n">maxError</span><span class="p">,</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="mf">-3.0f</span><span class="p">));</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Max error: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Free memory</span>
+<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To compile, use <code class="docutils literal notranslate"><span class="pre">nvc++</span></code>.</p>
+<p>If you have a singularity container with the nvidia sdk, you can
+just run the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--nv<span class="w"> </span>/packages/nvhpc_23.3_devel.sif<span class="w"> </span>nvc++<span class="w"> </span>-g<span class="w"> </span>cuda_02.cu
+singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--nv<span class="w"> </span>/packages/nvhpc_23.3_devel.sif<span class="w"> </span>./a.out
+singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--nv<span class="w"> </span>/packages/nvhpc_23.3_devel.sif<span class="w"> </span>nvprof<span class="w"> </span>./a.out
+</pre></div>
+</div>
+<p>and get something like</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==</span><span class="nv">16094</span><span class="o">==</span><span class="w"> </span>NVPROF<span class="w"> </span>is<span class="w"> </span>profiling<span class="w"> </span>process<span class="w"> </span><span class="m">16094</span>,<span class="w"> </span>command:<span class="w"> </span>./a.out
+Max<span class="w"> </span>error:<span class="w"> </span><span class="nv">0</span>
+<span class="o">==</span><span class="nv">16094</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>application:<span class="w"> </span>./a.out
+<span class="o">==</span><span class="nv">16094</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>result:
+<span class="w">            </span>Type<span class="w">  </span>Time<span class="o">(</span>%<span class="o">)</span><span class="w">      </span>Time<span class="w">     </span>Calls<span class="w">       </span>Avg<span class="w">       </span>Min<span class="w">       </span>Max<span class="w">  </span>Name
+<span class="w"> </span>GPU<span class="w"> </span>activities:<span class="w">  </span><span class="m">100</span>.00%<span class="w">  </span><span class="m">2</span>.54774s<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">2</span>.54774s<span class="w">  </span><span class="m">2</span>.54774s<span class="w">  </span><span class="m">2</span>.54774s<span class="w">  </span>add<span class="o">(</span>int,<span class="w"> </span>float*,<span class="w"> </span>float*<span class="o">)</span>
+<span class="w">      </span>API<span class="w"> </span>calls:<span class="w">   </span><span class="m">93</span>.27%<span class="w">  </span><span class="m">2</span>.54776s<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">2</span>.54776s<span class="w">  </span><span class="m">2</span>.54776s<span class="w">  </span><span class="m">2</span>.54776s<span class="w">  </span>cudaDeviceSynchronize
+<span class="w">                    </span><span class="m">6</span>.71%<span class="w">  </span><span class="m">183</span>.20ms<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">91</span>.602ms<span class="w">  </span><span class="m">20</span>.540us<span class="w">  </span><span class="m">183</span>.18ms<span class="w">  </span>cudaMallocManaged
+<span class="w">                    </span><span class="m">0</span>.02%<span class="w">  </span><span class="m">468</span>.25us<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">234</span>.13us<span class="w">  </span><span class="m">216</span>.27us<span class="w">  </span><span class="m">251</span>.98us<span class="w">  </span>cudaFree
+<span class="w">                    </span><span class="m">0</span>.01%<span class="w">  </span><span class="m">213</span>.75us<span class="w">       </span><span class="m">101</span><span class="w">  </span><span class="m">2</span>.1160us<span class="w">     </span>141ns<span class="w">  </span><span class="m">150</span>.11us<span class="w">  </span>cuDeviceGetAttribute
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">32</span>.127us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">32</span>.127us<span class="w">  </span><span class="m">32</span>.127us<span class="w">  </span><span class="m">32</span>.127us<span class="w">  </span>cudaLaunchKernel
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">22</span>.239us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">22</span>.239us<span class="w">  </span><span class="m">22</span>.239us<span class="w">  </span><span class="m">22</span>.239us<span class="w">  </span>cuDeviceGetName
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">6</span>.1330us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">6</span>.1330us<span class="w">  </span><span class="m">6</span>.1330us<span class="w">  </span><span class="m">6</span>.1330us<span class="w">  </span>cuDeviceGetPCIBusId
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">1</span>.5730us<span class="w">         </span><span class="m">3</span><span class="w">     </span>524ns<span class="w">     </span>197ns<span class="w">  </span><span class="m">1</span>.1650us<span class="w">  </span>cuDeviceGetCount
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>808ns<span class="w">         </span><span class="m">2</span><span class="w">     </span>404ns<span class="w">     </span>141ns<span class="w">     </span>667ns<span class="w">  </span>cuDeviceGet
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>530ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>530ns<span class="w">     </span>530ns<span class="w">     </span>530ns<span class="w">  </span>cuDeviceTotalMem
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>243ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>243ns<span class="w">     </span>243ns<span class="w">     </span>243ns<span class="w">  </span><span class="nv">cuDeviceGetUuid</span>
+
+<span class="o">==</span><span class="nv">16094</span><span class="o">==</span><span class="w"> </span>Unified<span class="w"> </span>Memory<span class="w"> </span>profiling<span class="w"> </span>result:
+Device<span class="w"> </span><span class="s2">&quot;Quadro P1000 (0)&quot;</span>
+<span class="w">   </span>Count<span class="w">  </span>Avg<span class="w"> </span>Size<span class="w">  </span>Min<span class="w"> </span>Size<span class="w">  </span>Max<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Time<span class="w">  </span>Name
+<span class="w">      </span><span class="m">48</span><span class="w">  </span><span class="m">170</span>.67KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">0</span>.9961MB<span class="w">  </span><span class="m">8</span>.000000MB<span class="w">  </span><span class="m">735</span>.2380us<span class="w">  </span>Host<span class="w"> </span>To<span class="w"> </span>Device
+<span class="w">      </span><span class="m">24</span><span class="w">  </span><span class="m">170</span>.67KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">0</span>.9961MB<span class="w">  </span><span class="m">4</span>.000000MB<span class="w">  </span><span class="m">337</span>.3770us<span class="w">  </span>Device<span class="w"> </span>To<span class="w"> </span>Host
+<span class="w">      </span><span class="m">24</span><span class="w">         </span>-<span class="w">         </span>-<span class="w">         </span>-<span class="w">           </span>-<span class="w">  </span><span class="m">2</span>.855987ms<span class="w">  </span>Gpu<span class="w"> </span>page<span class="w"> </span>fault<span class="w"> </span>groups
+Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </span>faults:<span class="w"> </span><span class="m">36</span>
+</pre></div>
+</div>
+<p>You can also run it on google collab, where you will have an nvidia
+T4 card available for free (after changing the runtime), with the
+following typical output</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==</span><span class="nv">18853</span><span class="o">==</span><span class="w"> </span>NVPROF<span class="w"> </span>is<span class="w"> </span>profiling<span class="w"> </span>process<span class="w"> </span><span class="m">18853</span>,<span class="w"> </span>command:<span class="w"> </span>./cuda_02.x
+Max<span class="w"> </span>error:<span class="w"> </span><span class="nv">0</span>
+<span class="o">==</span><span class="nv">18853</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>application:<span class="w"> </span>./cuda_02.x
+<span class="o">==</span><span class="nv">18853</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>result:
+<span class="w">            </span>Type<span class="w">  </span>Time<span class="o">(</span>%<span class="o">)</span><span class="w">      </span>Time<span class="w">     </span>Calls<span class="w">       </span>Avg<span class="w">       </span>Min<span class="w">       </span>Max<span class="w">  </span>Name
+<span class="w"> </span>GPU<span class="w"> </span>activities:<span class="w">  </span><span class="m">100</span>.00%<span class="w">  </span><span class="m">108</span>.83ms<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">108</span>.83ms<span class="w">  </span><span class="m">108</span>.83ms<span class="w">  </span><span class="m">108</span>.83ms<span class="w">  </span>add<span class="o">(</span>int,<span class="w"> </span>float*,<span class="w"> </span>float*<span class="o">)</span>
+<span class="w">      </span>API<span class="w"> </span>calls:<span class="w">   </span><span class="m">72</span>.48%<span class="w">  </span><span class="m">290</span>.34ms<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">145</span>.17ms<span class="w">  </span><span class="m">36</span>.191us<span class="w">  </span><span class="m">290</span>.31ms<span class="w">  </span>cudaMallocManaged
+<span class="w">                   </span><span class="m">27</span>.17%<span class="w">  </span><span class="m">108</span>.84ms<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">108</span>.84ms<span class="w">  </span><span class="m">108</span>.84ms<span class="w">  </span><span class="m">108</span>.84ms<span class="w">  </span>cudaDeviceSynchronize
+<span class="w">                    </span><span class="m">0</span>.28%<span class="w">  </span><span class="m">1</span>.1298ms<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">564</span>.90us<span class="w">  </span><span class="m">537</span>.96us<span class="w">  </span><span class="m">591</span>.84us<span class="w">  </span>cudaFree
+<span class="w">                    </span><span class="m">0</span>.05%<span class="w">  </span><span class="m">182</span>.13us<span class="w">       </span><span class="m">101</span><span class="w">  </span><span class="m">1</span>.8030us<span class="w">     </span>264ns<span class="w">  </span><span class="m">75</span>.268us<span class="w">  </span>cuDeviceGetAttribute
+<span class="w">                    </span><span class="m">0</span>.01%<span class="w">  </span><span class="m">48</span>.553us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">48</span>.553us<span class="w">  </span><span class="m">48</span>.553us<span class="w">  </span><span class="m">48</span>.553us<span class="w">  </span>cudaLaunchKernel
+<span class="w">                    </span><span class="m">0</span>.01%<span class="w">  </span><span class="m">28</span>.488us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">28</span>.488us<span class="w">  </span><span class="m">28</span>.488us<span class="w">  </span><span class="m">28</span>.488us<span class="w">  </span>cuDeviceGetName
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">8</span>.6520us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">8</span>.6520us<span class="w">  </span><span class="m">8</span>.6520us<span class="w">  </span><span class="m">8</span>.6520us<span class="w">  </span>cuDeviceGetPCIBusId
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">2</span>.3140us<span class="w">         </span><span class="m">3</span><span class="w">     </span>771ns<span class="w">     </span>328ns<span class="w">  </span><span class="m">1</span>.6230us<span class="w">  </span>cuDeviceGetCount
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>919ns<span class="w">         </span><span class="m">2</span><span class="w">     </span>459ns<span class="w">     </span>315ns<span class="w">     </span>604ns<span class="w">  </span>cuDeviceGet
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>580ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>580ns<span class="w">     </span>580ns<span class="w">     </span>580ns<span class="w">  </span>cuDeviceTotalMem
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>532ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>532ns<span class="w">     </span>532ns<span class="w">     </span>532ns<span class="w">  </span>cuModuleGetLoadingMode
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>382ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>382ns<span class="w">     </span>382ns<span class="w">     </span>382ns<span class="w">  </span><span class="nv">cuDeviceGetUuid</span>
+
+<span class="o">==</span><span class="nv">18853</span><span class="o">==</span><span class="w"> </span>Unified<span class="w"> </span>Memory<span class="w"> </span>profiling<span class="w"> </span>result:
+Device<span class="w"> </span><span class="s2">&quot;Tesla T4 (0)&quot;</span>
+<span class="w">   </span>Count<span class="w">  </span>Avg<span class="w"> </span>Size<span class="w">  </span>Min<span class="w"> </span>Size<span class="w">  </span>Max<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Time<span class="w">  </span>Name
+<span class="w">      </span><span class="m">48</span><span class="w">  </span><span class="m">170</span>.67KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">0</span>.9961MB<span class="w">  </span><span class="m">8</span>.000000MB<span class="w">  </span><span class="m">809</span>.9640us<span class="w">  </span>Host<span class="w"> </span>To<span class="w"> </span>Device
+<span class="w">      </span><span class="m">24</span><span class="w">  </span><span class="m">170</span>.67KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">0</span>.9961MB<span class="w">  </span><span class="m">4</span>.000000MB<span class="w">  </span><span class="m">360</span>.6320us<span class="w">  </span>Device<span class="w"> </span>To<span class="w"> </span>Host
+<span class="w">      </span><span class="m">12</span><span class="w">         </span>-<span class="w">         </span>-<span class="w">         </span>-<span class="w">           </span>-<span class="w">  </span><span class="m">2</span>.564287ms<span class="w">  </span>Gpu<span class="w"> </span>page<span class="w"> </span>fault<span class="w"> </span>groups
+Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </span>faults:<span class="w"> </span><span class="m">36</span>
+</pre></div>
+</div>
+<p>If you increase just the number of threads to 256 (check the change
+in <code class="docutils literal notranslate"><span class="pre">&lt;&lt;&lt;...&gt;&gt;&gt;</span></code>), and split correctly the work using the cuda vars
+<code class="docutils literal notranslate"><span class="pre">threadIdx.x</span></code> (thread id in the block) and <code class="docutils literal notranslate"><span class="pre">blockDim.x</span></code> (number of
+threads in the block), as shown,</p>
+<div class="highlight-cuda notranslate"><div class="highlight"><pre><span></span><span class="kr">__global__</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">stride</span><span class="p">)</span>
+<span class="w">      </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-cuda notranslate"><div class="highlight"><pre><span></span><span class="c1">// Run kernel on 1M elements on the GPU</span>
+<span class="w">  </span><span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>then you get the following output</p>
+<ul>
+<li><p>Quadro P1000 : From 2.5 secs to 0.022 secs!</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==</span><span class="nv">21739</span><span class="o">==</span><span class="w"> </span>NVPROF<span class="w"> </span>is<span class="w"> </span>profiling<span class="w"> </span>process<span class="w"> </span><span class="m">21739</span>,<span class="w"> </span>command:<span class="w"> </span>./a.out
+Max<span class="w"> </span>error:<span class="w"> </span><span class="nv">0</span>
+<span class="o">==</span><span class="nv">21739</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>application:<span class="w"> </span>./a.out
+<span class="o">==</span><span class="nv">21739</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>result:
+<span class="w">            </span>Type<span class="w">  </span>Time<span class="o">(</span>%<span class="o">)</span><span class="w">      </span>Time<span class="w">     </span>Calls<span class="w">       </span>Avg<span class="w">       </span>Min<span class="w">       </span>Max<span class="w">  </span>Name
+<span class="w"> </span>GPU<span class="w"> </span>activities:<span class="w">  </span><span class="m">100</span>.00%<span class="w">  </span><span class="m">21</span>.978ms<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">21</span>.978ms<span class="w">  </span><span class="m">21</span>.978ms<span class="w">  </span><span class="m">21</span>.978ms<span class="w">  </span>add<span class="o">(</span>int,<span class="w"> </span>float*,<span class="w"> </span>float*<span class="o">)</span>
+<span class="w">      </span>API<span class="w"> </span>calls:<span class="w">   </span><span class="m">87</span>.86%<span class="w">  </span><span class="m">164</span>.24ms<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">82</span>.118ms<span class="w">  </span><span class="m">12</span>.398us<span class="w">  </span><span class="m">164</span>.22ms<span class="w">  </span>cudaMallocManaged
+<span class="w">                   </span><span class="m">11</span>.76%<span class="w">  </span><span class="m">21</span>.980ms<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">21</span>.980ms<span class="w">  </span><span class="m">21</span>.980ms<span class="w">  </span><span class="m">21</span>.980ms<span class="w">  </span>cudaDeviceSynchronize
+<span class="w">                    </span><span class="m">0</span>.24%<span class="w">  </span><span class="m">457</span>.32us<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">228</span>.66us<span class="w">  </span><span class="m">177</span>.89us<span class="w">  </span><span class="m">279</span>.43us<span class="w">  </span>cudaFree
+<span class="w">                    </span><span class="m">0</span>.11%<span class="w">  </span><span class="m">206</span>.80us<span class="w">       </span><span class="m">101</span><span class="w">  </span><span class="m">2</span>.0470us<span class="w">     </span>128ns<span class="w">  </span><span class="m">144</span>.81us<span class="w">  </span>cuDeviceGetAttribute
+<span class="w">                    </span><span class="m">0</span>.02%<span class="w">  </span><span class="m">29</span>.041us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">29</span>.041us<span class="w">  </span><span class="m">29</span>.041us<span class="w">  </span><span class="m">29</span>.041us<span class="w">  </span>cudaLaunchKernel
+<span class="w">                    </span><span class="m">0</span>.01%<span class="w">  </span><span class="m">20</span>.149us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">20</span>.149us<span class="w">  </span><span class="m">20</span>.149us<span class="w">  </span><span class="m">20</span>.149us<span class="w">  </span>cuDeviceGetName
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">5</span>.5860us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">5</span>.5860us<span class="w">  </span><span class="m">5</span>.5860us<span class="w">  </span><span class="m">5</span>.5860us<span class="w">  </span>cuDeviceGetPCIBusId
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">2</span>.1000us<span class="w">         </span><span class="m">3</span><span class="w">     </span>700ns<span class="w">     </span>277ns<span class="w">     </span>958ns<span class="w">  </span>cuDeviceGetCount
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>952ns<span class="w">         </span><span class="m">2</span><span class="w">     </span>476ns<span class="w">     </span>330ns<span class="w">     </span>622ns<span class="w">  </span>cuDeviceGet
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>391ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>391ns<span class="w">     </span>391ns<span class="w">     </span>391ns<span class="w">  </span>cuDeviceTotalMem
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>259ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>259ns<span class="w">     </span>259ns<span class="w">     </span>259ns<span class="w">  </span><span class="nv">cuDeviceGetUuid</span>
+
+<span class="o">==</span><span class="nv">21739</span><span class="o">==</span><span class="w"> </span>Unified<span class="w"> </span>Memory<span class="w"> </span>profiling<span class="w"> </span>result:
+Device<span class="w"> </span><span class="s2">&quot;Quadro P1000 (0)&quot;</span>
+<span class="w">   </span>Count<span class="w">  </span>Avg<span class="w"> </span>Size<span class="w">  </span>Min<span class="w"> </span>Size<span class="w">  </span>Max<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Time<span class="w">  </span>Name
+<span class="w">      </span><span class="m">48</span><span class="w">  </span><span class="m">170</span>.67KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">0</span>.9961MB<span class="w">  </span><span class="m">8</span>.000000MB<span class="w">  </span><span class="m">734</span>.5940us<span class="w">  </span>Host<span class="w"> </span>To<span class="w"> </span>Device
+<span class="w">      </span><span class="m">24</span><span class="w">  </span><span class="m">170</span>.67KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">0</span>.9961MB<span class="w">  </span><span class="m">4</span>.000000MB<span class="w">  </span><span class="m">338</span>.5950us<span class="w">  </span>Device<span class="w"> </span>To<span class="w"> </span>Host
+<span class="w">      </span><span class="m">24</span><span class="w">         </span>-<span class="w">         </span>-<span class="w">         </span>-<span class="w">           </span>-<span class="w">  </span><span class="m">1</span>.764587ms<span class="w">  </span>Gpu<span class="w"> </span>page<span class="w"> </span>fault<span class="w"> </span>groups
+Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </span>faults:<span class="w"> </span><span class="m">36</span>
+</pre></div>
+</div>
+</li>
+<li><p>Tesla T4: From 0.108 secs to 0.004 secs!</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==</span><span class="nv">21448</span><span class="o">==</span><span class="w"> </span>NVPROF<span class="w"> </span>is<span class="w"> </span>profiling<span class="w"> </span>process<span class="w"> </span><span class="m">21448</span>,<span class="w"> </span>command:<span class="w"> </span>./cuda_03.x
+Max<span class="w"> </span>error:<span class="w"> </span><span class="nv">0</span>
+<span class="o">==</span><span class="nv">21448</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>application:<span class="w"> </span>./cuda_03.x
+<span class="o">==</span><span class="nv">21448</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>result:
+<span class="w">            </span>Type<span class="w">  </span>Time<span class="o">(</span>%<span class="o">)</span><span class="w">      </span>Time<span class="w">     </span>Calls<span class="w">       </span>Avg<span class="w">       </span>Min<span class="w">       </span>Max<span class="w">  </span>Name
+<span class="w"> </span>GPU<span class="w"> </span>activities:<span class="w">  </span><span class="m">100</span>.00%<span class="w">  </span><span class="m">3</span>.7978ms<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">3</span>.7978ms<span class="w">  </span><span class="m">3</span>.7978ms<span class="w">  </span><span class="m">3</span>.7978ms<span class="w">  </span>add<span class="o">(</span>int,<span class="w"> </span>float*,<span class="w"> </span>float*<span class="o">)</span>
+<span class="w">      </span>API<span class="w"> </span>calls:<span class="w">   </span><span class="m">98</span>.24%<span class="w">  </span><span class="m">291</span>.22ms<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">145</span>.61ms<span class="w">  </span><span class="m">73</span>.005us<span class="w">  </span><span class="m">291</span>.15ms<span class="w">  </span>cudaMallocManaged
+<span class="w">                    </span><span class="m">1</span>.28%<span class="w">  </span><span class="m">3</span>.8044ms<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">3</span>.8044ms<span class="w">  </span><span class="m">3</span>.8044ms<span class="w">  </span><span class="m">3</span>.8044ms<span class="w">  </span>cudaDeviceSynchronize
+<span class="w">                    </span><span class="m">0</span>.36%<span class="w">  </span><span class="m">1</span>.0699ms<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">534</span>.95us<span class="w">  </span><span class="m">512</span>.29us<span class="w">  </span><span class="m">557</span>.62us<span class="w">  </span>cudaFree
+<span class="w">                    </span><span class="m">0</span>.08%<span class="w">  </span><span class="m">222</span>.64us<span class="w">       </span><span class="m">101</span><span class="w">  </span><span class="m">2</span>.2040us<span class="w">     </span>174ns<span class="w">  </span><span class="m">102</span>.62us<span class="w">  </span>cuDeviceGetAttribute
+<span class="w">                    </span><span class="m">0</span>.02%<span class="w">  </span><span class="m">62</span>.588us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">62</span>.588us<span class="w">  </span><span class="m">62</span>.588us<span class="w">  </span><span class="m">62</span>.588us<span class="w">  </span>cudaLaunchKernel
+<span class="w">                    </span><span class="m">0</span>.02%<span class="w">  </span><span class="m">44</span>.725us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">44</span>.725us<span class="w">  </span><span class="m">44</span>.725us<span class="w">  </span><span class="m">44</span>.725us<span class="w">  </span>cuDeviceGetName
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">8</span>.1290us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">8</span>.1290us<span class="w">  </span><span class="m">8</span>.1290us<span class="w">  </span><span class="m">8</span>.1290us<span class="w">  </span>cuDeviceGetPCIBusId
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">3</span>.2970us<span class="w">         </span><span class="m">3</span><span class="w">  </span><span class="m">1</span>.0990us<span class="w">     </span>266ns<span class="w">  </span><span class="m">2</span>.6840us<span class="w">  </span>cuDeviceGetCount
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">1</span>.7320us<span class="w">         </span><span class="m">2</span><span class="w">     </span>866ns<span class="w">     </span>352ns<span class="w">  </span><span class="m">1</span>.3800us<span class="w">  </span>cuDeviceGet
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>632ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>632ns<span class="w">     </span>632ns<span class="w">     </span>632ns<span class="w">  </span>cuDeviceTotalMem
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>549ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>549ns<span class="w">     </span>549ns<span class="w">     </span>549ns<span class="w">  </span>cuModuleGetLoadingMode
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>377ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>377ns<span class="w">     </span>377ns<span class="w">     </span>377ns<span class="w">  </span><span class="nv">cuDeviceGetUuid</span>
+
+<span class="o">==</span><span class="nv">21448</span><span class="o">==</span><span class="w"> </span>Unified<span class="w"> </span>Memory<span class="w"> </span>profiling<span class="w"> </span>result:
+Device<span class="w"> </span><span class="s2">&quot;Tesla T4 (0)&quot;</span>
+<span class="w">   </span>Count<span class="w">  </span>Avg<span class="w"> </span>Size<span class="w">  </span>Min<span class="w"> </span>Size<span class="w">  </span>Max<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Time<span class="w">  </span>Name
+<span class="w">      </span><span class="m">48</span><span class="w">  </span><span class="m">170</span>.67KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">0</span>.9961MB<span class="w">  </span><span class="m">8</span>.000000MB<span class="w">  </span><span class="m">825</span>.8720us<span class="w">  </span>Host<span class="w"> </span>To<span class="w"> </span>Device
+<span class="w">      </span><span class="m">24</span><span class="w">  </span><span class="m">170</span>.67KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">0</span>.9961MB<span class="w">  </span><span class="m">4</span>.000000MB<span class="w">  </span><span class="m">360</span>.3130us<span class="w">  </span>Device<span class="w"> </span>To<span class="w"> </span>Host
+<span class="w">      </span><span class="m">13</span><span class="w">         </span>-<span class="w">         </span>-<span class="w">         </span>-<span class="w">           </span>-<span class="w">  </span><span class="m">2</span>.951606ms<span class="w">  </span>Gpu<span class="w"> </span>page<span class="w"> </span>fault<span class="w"> </span>groups
+Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </span>faults:<span class="w"> </span><span class="m">36</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Cuda devices group parallel processors into Streaming
+Multiprocessors (SM), and each of them can run several threads in
+parallel. In our case, by using the command <code class="docutils literal notranslate"><span class="pre">deviceQuery</span></code> (for the
+QuadroP1000 system it is at
+<code class="docutils literal notranslate"><span class="pre">/opt/cuda/extras/demo_suite/deviceQuery</span></code>), we get</p>
+<ul class="simple">
+<li><p>Quadro P1000: 5 SM, 128 threads/SM</p></li>
+<li><p>Tesla T4: 32 SM, 128 threads/SM</p></li>
+</ul>
+<p>So the ideal number of threads changes per card, and we will compute
+as</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">128</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">blockSize</span><span class="p">;</span><span class="w"> </span><span class="c1">// what if N is not divisible by blocksize?</span>
+<span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Notice that you can also compute this constant by using the follow
+code (generated by bard.google.com)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get the number of threads per multiprocessor.</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">threadsPerMultiprocessor</span><span class="p">;</span>
+<span class="n">cudaError_t</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cudaDeviceGetAttribute</span><span class="p">(</span><span class="o">&amp;</span><span class="n">threadsPerMultiprocessor</span><span class="p">,</span><span class="w"> </span><span class="n">cudaDevAttrMaxThreadsPerMultiprocessor</span><span class="p">,</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">cudaSuccess</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Handle error.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The kernel will now become</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">__global__</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gridDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">stride</span><span class="p">)</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>based on the job distribution done by the tutorial
+<a class="reference external" href="https://developer-blogs.nvidia.com/wp-content/uploads/2017/01/cuda_indexing.png">https://developer-blogs.nvidia.com/wp-content/uploads/2017/01/cuda_indexing.png</a></p>
+<p>Now we get</p>
+<ul>
+<li><p>Nvidia Quadro P1000: From 2.500 to 0.022 to 0.006 secs!</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==</span><span class="nv">10662</span><span class="o">==</span><span class="w"> </span>NVPROF<span class="w"> </span>is<span class="w"> </span>profiling<span class="w"> </span>process<span class="w"> </span><span class="m">10662</span>,<span class="w"> </span>command:<span class="w"> </span>./a.out
+Max<span class="w"> </span>error:<span class="w"> </span><span class="nv">0</span>
+<span class="o">==</span><span class="nv">10662</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>application:<span class="w"> </span>./a.out
+<span class="o">==</span><span class="nv">10662</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>result:
+<span class="w">            </span>Type<span class="w">  </span>Time<span class="o">(</span>%<span class="o">)</span><span class="w">      </span>Time<span class="w">     </span>Calls<span class="w">       </span>Avg<span class="w">       </span>Min<span class="w">       </span>Max<span class="w">  </span>Name
+<span class="w"> </span>GPU<span class="w"> </span>activities:<span class="w">  </span><span class="m">100</span>.00%<span class="w">  </span><span class="m">6</span>.0868ms<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">6</span>.0868ms<span class="w">  </span><span class="m">6</span>.0868ms<span class="w">  </span><span class="m">6</span>.0868ms<span class="w">  </span>add<span class="o">(</span>int,<span class="w"> </span>float*,<span class="w"> </span>float*<span class="o">)</span>
+<span class="w">      </span>API<span class="w"> </span>calls:<span class="w">   </span><span class="m">96</span>.03%<span class="w">  </span><span class="m">165</span>.28ms<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">82</span>.641ms<span class="w">  </span><span class="m">13</span>.911us<span class="w">  </span><span class="m">165</span>.27ms<span class="w">  </span>cudaMallocManaged
+<span class="w">                    </span><span class="m">3</span>.54%<span class="w">  </span><span class="m">6</span>.0887ms<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">6</span>.0887ms<span class="w">  </span><span class="m">6</span>.0887ms<span class="w">  </span><span class="m">6</span>.0887ms<span class="w">  </span>cudaDeviceSynchronize
+<span class="w">                    </span><span class="m">0</span>.27%<span class="w">  </span><span class="m">460</span>.56us<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">230</span>.28us<span class="w">  </span><span class="m">184</span>.71us<span class="w">  </span><span class="m">275</span>.85us<span class="w">  </span>cudaFree
+<span class="w">                    </span><span class="m">0</span>.13%<span class="w">  </span><span class="m">215</span>.37us<span class="w">       </span><span class="m">101</span><span class="w">  </span><span class="m">2</span>.1320us<span class="w">     </span>133ns<span class="w">  </span><span class="m">151</span>.55us<span class="w">  </span>cuDeviceGetAttribute
+<span class="w">                    </span><span class="m">0</span>.02%<span class="w">  </span><span class="m">30</span>.822us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">30</span>.822us<span class="w">  </span><span class="m">30</span>.822us<span class="w">  </span><span class="m">30</span>.822us<span class="w">  </span>cudaLaunchKernel
+<span class="w">                    </span><span class="m">0</span>.01%<span class="w">  </span><span class="m">22</span>.122us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">22</span>.122us<span class="w">  </span><span class="m">22</span>.122us<span class="w">  </span><span class="m">22</span>.122us<span class="w">  </span>cuDeviceGetName
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">5</span>.7430us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">5</span>.7430us<span class="w">  </span><span class="m">5</span>.7430us<span class="w">  </span><span class="m">5</span>.7430us<span class="w">  </span>cuDeviceGetPCIBusId
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">1</span>.3810us<span class="w">         </span><span class="m">3</span><span class="w">     </span>460ns<span class="w">     </span>203ns<span class="w">     </span>945ns<span class="w">  </span>cuDeviceGetCount
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>921ns<span class="w">         </span><span class="m">2</span><span class="w">     </span>460ns<span class="w">     </span>163ns<span class="w">     </span>758ns<span class="w">  </span>cuDeviceGet
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>438ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>438ns<span class="w">     </span>438ns<span class="w">     </span>438ns<span class="w">  </span>cuDeviceTotalMem
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>234ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>234ns<span class="w">     </span>234ns<span class="w">     </span>234ns<span class="w">  </span><span class="nv">cuDeviceGetUuid</span>
+
+<span class="o">==</span><span class="nv">10662</span><span class="o">==</span><span class="w"> </span>Unified<span class="w"> </span>Memory<span class="w"> </span>profiling<span class="w"> </span>result:
+Device<span class="w"> </span><span class="s2">&quot;Quadro P1000 (0)&quot;</span>
+<span class="w">   </span>Count<span class="w">  </span>Avg<span class="w"> </span>Size<span class="w">  </span>Min<span class="w"> </span>Size<span class="w">  </span>Max<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Time<span class="w">  </span>Name
+<span class="w">      </span><span class="m">59</span><span class="w">  </span><span class="m">138</span>.85KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">0</span>.9961MB<span class="w">  </span><span class="m">8</span>.000000MB<span class="w">  </span><span class="m">740</span>.3880us<span class="w">  </span>Host<span class="w"> </span>To<span class="w"> </span>Device
+<span class="w">      </span><span class="m">24</span><span class="w">  </span><span class="m">170</span>.67KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">0</span>.9961MB<span class="w">  </span><span class="m">4</span>.000000MB<span class="w">  </span><span class="m">337</span>.8280us<span class="w">  </span>Device<span class="w"> </span>To<span class="w"> </span>Host
+<span class="w">      </span><span class="m">32</span><span class="w">         </span>-<span class="w">         </span>-<span class="w">         </span>-<span class="w">           </span>-<span class="w">  </span><span class="m">2</span>.253582ms<span class="w">  </span>Gpu<span class="w"> </span>page<span class="w"> </span>fault<span class="w"> </span>groups
+Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </span>faults:<span class="w"> </span><span class="m">36</span>
+</pre></div>
+</div>
+</li>
+<li><p>Testla T4: From 0.108 to 0.004 to 0.003 secs</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==</span><span class="nv">8972</span><span class="o">==</span><span class="w"> </span>NVPROF<span class="w"> </span>is<span class="w"> </span>profiling<span class="w"> </span>process<span class="w"> </span><span class="m">8972</span>,<span class="w"> </span>command:<span class="w"> </span>./cuda_04.x
+Max<span class="w"> </span>error:<span class="w"> </span><span class="nv">0</span>
+<span class="o">==</span><span class="nv">8972</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>application:<span class="w"> </span>./cuda_04.x
+<span class="o">==</span><span class="nv">8972</span><span class="o">==</span><span class="w"> </span>Profiling<span class="w"> </span>result:
+<span class="w">            </span>Type<span class="w">  </span>Time<span class="o">(</span>%<span class="o">)</span><span class="w">      </span>Time<span class="w">     </span>Calls<span class="w">       </span>Avg<span class="w">       </span>Min<span class="w">       </span>Max<span class="w">  </span>Name
+<span class="w"> </span>GPU<span class="w"> </span>activities:<span class="w">  </span><span class="m">100</span>.00%<span class="w">  </span><span class="m">2</span>.9741ms<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">2</span>.9741ms<span class="w">  </span><span class="m">2</span>.9741ms<span class="w">  </span><span class="m">2</span>.9741ms<span class="w">  </span>add<span class="o">(</span>int,<span class="w"> </span>float*,<span class="w"> </span>float*<span class="o">)</span>
+<span class="w">      </span>API<span class="w"> </span>calls:<span class="w">   </span><span class="m">98</span>.47%<span class="w">  </span><span class="m">250</span>.63ms<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">125</span>.31ms<span class="w">  </span><span class="m">38</span>.785us<span class="w">  </span><span class="m">250</span>.59ms<span class="w">  </span>cudaMallocManaged
+<span class="w">                    </span><span class="m">1</span>.18%<span class="w">  </span><span class="m">2</span>.9959ms<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">2</span>.9959ms<span class="w">  </span><span class="m">2</span>.9959ms<span class="w">  </span><span class="m">2</span>.9959ms<span class="w">  </span>cudaDeviceSynchronize
+<span class="w">                    </span><span class="m">0</span>.24%<span class="w">  </span><span class="m">613</span>.16us<span class="w">         </span><span class="m">2</span><span class="w">  </span><span class="m">306</span>.58us<span class="w">  </span><span class="m">302</span>.27us<span class="w">  </span><span class="m">310</span>.89us<span class="w">  </span>cudaFree
+<span class="w">                    </span><span class="m">0</span>.07%<span class="w">  </span><span class="m">188</span>.26us<span class="w">       </span><span class="m">101</span><span class="w">  </span><span class="m">1</span>.8630us<span class="w">     </span>169ns<span class="w">  </span><span class="m">86</span>.068us<span class="w">  </span>cuDeviceGetAttribute
+<span class="w">                    </span><span class="m">0</span>.02%<span class="w">  </span><span class="m">38</span>.874us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">38</span>.874us<span class="w">  </span><span class="m">38</span>.874us<span class="w">  </span><span class="m">38</span>.874us<span class="w">  </span>cuDeviceGetName
+<span class="w">                    </span><span class="m">0</span>.01%<span class="w">  </span><span class="m">37</span>.051us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">37</span>.051us<span class="w">  </span><span class="m">37</span>.051us<span class="w">  </span><span class="m">37</span>.051us<span class="w">  </span>cudaLaunchKernel
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">5</span>.7050us<span class="w">         </span><span class="m">1</span><span class="w">  </span><span class="m">5</span>.7050us<span class="w">  </span><span class="m">5</span>.7050us<span class="w">  </span><span class="m">5</span>.7050us<span class="w">  </span>cuDeviceGetPCIBusId
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">  </span><span class="m">2</span>.2980us<span class="w">         </span><span class="m">3</span><span class="w">     </span>766ns<span class="w">     </span>224ns<span class="w">  </span><span class="m">1</span>.8050us<span class="w">  </span>cuDeviceGetCount
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>979ns<span class="w">         </span><span class="m">2</span><span class="w">     </span>489ns<span class="w">     </span>195ns<span class="w">     </span>784ns<span class="w">  </span>cuDeviceGet
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>587ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>587ns<span class="w">     </span>587ns<span class="w">     </span>587ns<span class="w">  </span>cuDeviceTotalMem
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>367ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>367ns<span class="w">     </span>367ns<span class="w">     </span>367ns<span class="w">  </span>cuModuleGetLoadingMode
+<span class="w">                    </span><span class="m">0</span>.00%<span class="w">     </span>324ns<span class="w">         </span><span class="m">1</span><span class="w">     </span>324ns<span class="w">     </span>324ns<span class="w">     </span>324ns<span class="w">  </span><span class="nv">cuDeviceGetUuid</span>
+
+<span class="o">==</span><span class="nv">8972</span><span class="o">==</span><span class="w"> </span>Unified<span class="w"> </span>Memory<span class="w"> </span>profiling<span class="w"> </span>result:
+Device<span class="w"> </span><span class="s2">&quot;Tesla T4 (0)&quot;</span>
+<span class="w">   </span>Count<span class="w">  </span>Avg<span class="w"> </span>Size<span class="w">  </span>Min<span class="w"> </span>Size<span class="w">  </span>Max<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Size<span class="w">  </span>Total<span class="w"> </span>Time<span class="w">  </span>Name
+<span class="w">     </span><span class="m">106</span><span class="w">  </span><span class="m">77</span>.282KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">980</span>.00KB<span class="w">  </span><span class="m">8</span>.000000MB<span class="w">  </span><span class="m">969</span>.6510us<span class="w">  </span>Host<span class="w"> </span>To<span class="w"> </span>Device
+<span class="w">      </span><span class="m">24</span><span class="w">  </span><span class="m">170</span>.67KB<span class="w">  </span><span class="m">4</span>.0000KB<span class="w">  </span><span class="m">0</span>.9961MB<span class="w">  </span><span class="m">4</span>.000000MB<span class="w">  </span><span class="m">363</span>.6760us<span class="w">  </span>Device<span class="w"> </span>To<span class="w"> </span>Host
+<span class="w">      </span><span class="m">11</span><span class="w">         </span>-<span class="w">         </span>-<span class="w">         </span>-<span class="w">           </span>-<span class="w">  </span><span class="m">2</span>.908132ms<span class="w">  </span>Gpu<span class="w"> </span>page<span class="w"> </span>fault<span class="w"> </span>groups
+Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </span>faults:<span class="w"> </span><span class="m">36</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="todo-openmp-offload-to-gpu">
+<h2><span class="section-number">17.3. </span><span class="todo TODO">TODO</span> Openmp offload to gpu<a class="headerlink" href="#todo-openmp-offload-to-gpu" title="Link to this heading">#</a></h2>
+<p>REF:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=uVcvecgdW7g">https://www.youtube.com/watch?v=uVcvecgdW7g</a></p></li>
+</ul>
+<p>Code</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Initialize arrays a and b</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">        </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">num_devices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_devices</span><span class="p">();</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Number of available devices %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">num_devices</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Offload computation to GPU</span>
+<span class="w">    </span><span class="cp">#pragma omp target teams distribute parallel for map(to:a[0:100], b[0:100]) map(from:c[0:100])</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Print results</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Does not work in sala2 due to the error</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>OpenMP<span class="w"> </span>GPU<span class="w"> </span>Offload<span class="w"> </span>is<span class="w"> </span>available<span class="w"> </span>only<span class="w"> </span>on<span class="w"> </span>systems<span class="w"> </span>with<span class="w"> </span>NVIDIA<span class="w"> </span>GPUs<span class="w"> </span>with<span class="w"> </span>compute<span class="w"> </span>capability<span class="w"> </span>&gt;<span class="o">=</span><span class="w"> </span>cc70
+</pre></div>
+</div>
+<p>It seems that sala2 compute capability is 6.1. It can be get with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nvidia-smi<span class="w"> </span>--query-gpu<span class="o">=</span>compute_cap<span class="w"> </span>--format<span class="o">=</span>csv
+</pre></div>
+</div>
+<p>Using google collab I can compile it</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!nvcc<span class="w"> </span>-arch<span class="w"> </span>sm_75<span class="w"> </span>-O3<span class="w"> </span>-o<span class="w"> </span>openmp_offload<span class="w"> </span>openmp_offload.cpp<span class="w"> </span>-lgomp
+</pre></div>
+</div>
+<p>and get</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Number<span class="w"> </span>of<span class="w"> </span>available<span class="w"> </span>devices<span class="w"> </span><span class="m">1</span>
+<span class="m">0</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">21</span><span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">27</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="m">33</span><span class="w"> </span><span class="m">36</span><span class="w"> </span>...
+</pre></div>
+</div>
+<p>Check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://enccs.github.io/openmp-gpu/target/">https://enccs.github.io/openmp-gpu/target/</a></p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Copyright (c) 2019 CSC Training */</span>
+<span class="cm">/* Copyright (c) 2021 ENCCS */</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="cp">#ifdef _OPENMP</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#endif</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_devices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_devices</span><span class="p">();</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Number of available devices %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">num_devices</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cp">#pragma omp target</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">omp_is_initial_device</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Running on host</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">nteams</span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_teams</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">nthreads</span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">();</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Running on device with %d teams in total and %d threads in each team</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">nteams</span><span class="p">,</span><span class="n">nthreads</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</pre></div>
+</div>
+</section>
+<section id="todo-openacc-intro">
+<h2><span class="section-number">17.4. </span><span class="todo TODO">TODO</span> OpenACC intro<a class="headerlink" href="#todo-openacc-intro" title="Link to this heading">#</a></h2>
+<p>REF:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.openacc.org/">https://www.openacc.org/</a></p></li>
+<li><p><a class="reference external" href="https://enccs.github.io/OpenACC-CUDA-beginners/1.02_openacc-introduction/">https://enccs.github.io/OpenACC-CUDA-beginners/1.02_openacc-introduction/</a></p></li>
+<li><p><a class="reference external" href="https://ulhpc-tutorials.readthedocs.io/en/latest/gpu/openacc/basics/">https://ulhpc-tutorials.readthedocs.io/en/latest/gpu/openacc/basics/</a></p></li>
+</ul>
+<p>Check if we are using the gpu or the cpu:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;openacc.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">device_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">acc_get_device_type</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">device_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">acc_device_nvidia</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Running on an NVIDIA GPU</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">device_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">acc_device_radeon</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Running on an AMD GPU</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//} else if (device_type == acc_device_intel_mic) {</span>
+<span class="w">    </span><span class="c1">//printf(&quot;Running on an Intel MIC\n&quot;);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">device_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">acc_device_host</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Running on the host CPU</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Unknown device type</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Compile as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>-fopenacc<span class="w"> </span>mycode.c
+</pre></div>
+</div>
+<p>Simple example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+
+<span class="w">  </span><span class="c1">// Initialize arrays</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Compute element-wise sum</span>
+<span class="w">  </span><span class="cp">#pragma acc parallel loop</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Print result</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -502,7 +1142,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Introduction to MPI (distributed memory)</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Introduction to MPI (distributed memory)</p>
       </div>
     </a>
     <a class="right-next"
@@ -510,7 +1150,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">17. </span>Some extra tools for development</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>Some extra tools for development</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -520,6 +1160,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup-for-cuda">17.1. Environment setup for cuda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-cuda-intro">17.2. <span class="todo TODO">TODO</span> Cuda intro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-openmp-offload-to-gpu">17.3. <span class="todo TODO">TODO</span> Openmp offload to gpu</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-openacc-intro">17.4. <span class="todo TODO">TODO</span> OpenACC intro</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

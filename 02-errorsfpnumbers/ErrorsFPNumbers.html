@@ -193,22 +193,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Making sure your bugs don’t come back</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-RunMultiplePrograms/FarmTask.html">9. Simple parallelization: farm task and gnu parallel or xargs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Computational linear algebra: Performance exploration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">17. Some extra tools for development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">10. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">11. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Computational linear algebra: Performance exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">15. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">16. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">17. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">18. Some extra tools for development</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">18. Git introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">19. Git introduction</a></li>
 </ul>
 
     </div>
@@ -628,8 +629,8 @@ begin<span class="w"> </span><span class="k">do</span><span class="w"> </span>N<
 <section id="practical-example-series-expansion-of-e-x">
 <h2><span class="section-number">3.4. </span>Practical example: Series expansion of <span class="math notranslate nohighlight">\(e^{-x}\)</span><a class="headerlink" href="#practical-example-series-expansion-of-e-x" title="Link to this heading">#</a></h2>
 <p>The function <span class="math notranslate nohighlight">\(e^{-x}\)</span> can be expanded as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-af311284-178d-4e29-beef-2e4fd68649a8">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-af311284-178d-4e29-beef-2e4fd68649a8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d3de14da-7e7f-4c44-99c8-54f2e9d3fa2b">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-d3de14da-7e7f-4c44-99c8-54f2e9d3fa2b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 e^{-x} = \sum_{i=0}^{\infty} (-1)^i \frac{x^i}{i!} = 1 -  x + \frac{x^2}{2} - \frac{x^3}{6} + \ldots \ (|x| &lt; \infty)
 \end{equation}\]</div>
 <p>This is a great expansion, valid for all finite values of <span class="math notranslate nohighlight">\(x\)</span>. But, <strong>what numerical problems do you see?</strong></p>
@@ -683,8 +684,8 @@ e^{-x} = \sum_{i=0}^{\infty} (-1)^i \frac{x^i}{i!} = 1 -  x + \frac{x^2}{2} - \f
 <section id="exercise-sum-ups-and-down">
 <h3><span class="section-number">3.4.2. </span>Exercise: Sum ups and down<a class="headerlink" href="#exercise-sum-ups-and-down" title="Link to this heading">#</a></h3>
 <p>Is there any computation difference between the following sums?</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c14210a2-f6a1-4cde-9a3c-5c911b01910b">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-c14210a2-f6a1-4cde-9a3c-5c911b01910b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1cd0d97b-edc5-4298-b979-698548114a4b">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-1cd0d97b-edc5-4298-b979-698548114a4b" title="Permalink to this equation">#</a></span>\[\begin{align}
 S_{up}(N) &amp;= \sum_{n=1}^{N} \frac{1}{n},\\
 S_{down}(N) &amp;= \sum_{n=N}^{1} \frac{1}{n}.
 \end{align}\]</div>
@@ -736,8 +737,8 @@ S_{down}(N) &amp;= \sum_{n=N}^{1} \frac{1}{n}.
 <section id="roundoff-truncation-example">
 <h3><span class="section-number">3.5.2. </span>Roundoff/truncation example<a class="headerlink" href="#roundoff-truncation-example" title="Link to this heading">#</a></h3>
 <p>Let’s compute the following sum as a function of <span class="math notranslate nohighlight">\(k\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-66feae8d-4afd-412d-90b6-ea0a31c9793b">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-66feae8d-4afd-412d-90b6-ea0a31c9793b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-461ff6d6-c264-4aaa-978a-81496c3a8671">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-461ff6d6-c264-4aaa-978a-81496c3a8671" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(k) = \left|\frac{k}{10} - \sum_{i=1}^k 0.1\right|
 \end{equation}\]</div>
 <p>Mathematically, this function should give 0 always. Is that true?</p>
@@ -745,32 +746,32 @@ f(k) = \left|\frac{k}{10} - \sum_{i=1}^k 0.1\right|
 <section id="substractive-cancellation">
 <h3><span class="section-number">3.5.3. </span>Substractive cancellation<a class="headerlink" href="#substractive-cancellation" title="Link to this heading">#</a></h3>
 <p>Given <span class="math notranslate nohighlight">\(a = b-c\)</span>, then <span class="math notranslate nohighlight">\(a_c = b_c-c_c\)</span>, therefore</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bb4841fb-60a3-49d1-a387-4aabc1e95ebd">
-<span class="eqno">(3.4)<a class="headerlink" href="#equation-bb4841fb-60a3-49d1-a387-4aabc1e95ebd" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ddd39ea5-5bd5-47bf-8677-f4fd9111c1d2">
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-ddd39ea5-5bd5-47bf-8677-f4fd9111c1d2" title="Permalink to this equation">#</a></span>\[\begin{align}
 a_c &amp;= a(1+\epsilon_a ) = b_c - c_c = b(1+\epsilon_b ) - c(1+\epsilon_c )\\
 \frac{a_c}{a} &amp;= 1 + \epsilon_b \frac{b}{a} - \frac{c}{a}\epsilon_c  
 \end{align}\]</div>
 <p>so the error in <span class="math notranslate nohighlight">\(a\)</span> is about</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f6543f28-bc15-4de8-9784-16a2b617b040">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-f6543f28-bc15-4de8-9784-16a2b617b040" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-505736e2-5294-40bd-b63a-fff6c76b97fe">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-505736e2-5294-40bd-b63a-fff6c76b97fe" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \epsilon_a = \frac{b}{a}(\epsilon_b - \epsilon_c), 
 \end{equation}\]</div>
 <p>which is much larger, when <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(c\)</span> are close (so <span class="math notranslate nohighlight">\(a\)</span> is small).</p>
 <section id="example-of-substrative-cancellation">
 <h4><span class="section-number">3.5.3.1. </span>Example of substrative cancellation<a class="headerlink" href="#example-of-substrative-cancellation" title="Link to this heading">#</a></h4>
 <p>The following series,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ca9e9eb7-5214-47a4-8d97-46a417857c3d">
-<span class="eqno">(3.6)<a class="headerlink" href="#equation-ca9e9eb7-5214-47a4-8d97-46a417857c3d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-663e9a9c-86de-4898-a456-9d536b65877e">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-663e9a9c-86de-4898-a456-9d536b65877e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 S_N^{(1)} = \sum_{n=1}^{2N} (-1)^n \frac{n}{n+1},
 \end{equation}\]</div>
 <p>can be written in two mathematically equivalent ways:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d6d20b8b-af1a-4d33-bd99-6c14c1ffc375">
-<span class="eqno">(3.7)<a class="headerlink" href="#equation-d6d20b8b-af1a-4d33-bd99-6c14c1ffc375" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6c807433-fd0b-4e9f-bbce-c85a463b9069">
+<span class="eqno">(3.7)<a class="headerlink" href="#equation-6c807433-fd0b-4e9f-bbce-c85a463b9069" title="Permalink to this equation">#</a></span>\[\begin{equation}
 S_N^{(2)} = -\sum_{n=1}^{N} \frac{2n-1}{2n} + \sum_{n=1}^{N} \frac{2n}{2n+1},
 \end{equation}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-20e356cd-4d1b-454b-895a-15e2245e2270">
-<span class="eqno">(3.8)<a class="headerlink" href="#equation-20e356cd-4d1b-454b-895a-15e2245e2270" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c9cc5d50-ba00-44a9-a61e-4fc493cf9dd5">
+<span class="eqno">(3.8)<a class="headerlink" href="#equation-c9cc5d50-ba00-44a9-a61e-4fc493cf9dd5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 S_N^{(3)} = \sum_{n=1}^{N} \frac{1}{2n(2n+1)}.
 \end{equation}\]</div>
 <p><strong>Could there be any computational difference? why?</strong></p>
@@ -781,8 +782,8 @@ S_N^{(3)} = \sum_{n=1}^{N} \frac{1}{2n(2n+1)}.
 <section id="total-errors-in-algorithms-and-their-computational-implementation">
 <h2><span class="section-number">3.6. </span>Total errors in algorithms and their computational implementation<a class="headerlink" href="#total-errors-in-algorithms-and-their-computational-implementation" title="Link to this heading">#</a></h2>
 <p>As you can see, there are several source for errors in computation. Some come from the mathematical approximation, , called <span class="math notranslate nohighlight">\(\epsilon_a\)</span>, and some others are intrinsic from the numerical representation, and we can call them <span class="math notranslate nohighlight">\(\epsilon_r\)</span>. Sometimes, the rounding/truncation error are modeled as a random walk, <span class="math notranslate nohighlight">\(\epsilon_r \simeq \sqrt{N} \epsilon_m\)</span>, where <span class="math notranslate nohighlight">\(\epsilon_m\)</span> is the machine precision, and <span class="math notranslate nohighlight">\(N\)</span> is the representative number of “steps”.  From here, the total error can be estimated as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-424c7669-9809-453b-b8bf-bc07c1ba5ac5">
-<span class="eqno">(3.9)<a class="headerlink" href="#equation-424c7669-9809-453b-b8bf-bc07c1ba5ac5" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5b7e4769-bd02-4271-a1af-af7b8d275cbd">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-5b7e4769-bd02-4271-a1af-af7b8d275cbd" title="Permalink to this equation">#</a></span>\[\begin{align}
 \epsilon_{\rm tot} &amp;= \epsilon_a + \epsilon_r \\
 &amp;= \frac{\alpha}{N^\beta} + \sqrt{N} \epsilon_m.
 \end{align}\]</div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>13. Introduction to OpenMp (Shared memory) &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>15. Introduction to OpenMp (Shared memory) &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -64,8 +64,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. HPC resource manager: Slurm" href="../15-Intro-Slurm/Slurm.html" />
-    <link rel="prev" title="12. Introduction to High Performance Computing" href="../12-IntroHPC/ParallelProgramming-Intro.html" />
+    <link rel="next" title="16. Introduction to MPI (distributed memory)" href="../14-MPI/MPI-Intro.html" />
+    <link rel="prev" title="14. HPC resource manager: Slurm" href="../12-Slurm/Slurm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -193,22 +193,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Making sure your bugs don’t come back</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-RunMultiplePrograms/FarmTask.html">9. Simple parallelization: farm task and gnu parallel or xargs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Computational linear algebra: Performance exploration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">17. Some extra tools for development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">10. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">11. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Computational linear algebra: Performance exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">16. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">17. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">18. Some extra tools for development</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">18. Git introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">19. Git introduction</a></li>
 </ul>
 
     </div>
@@ -453,16 +454,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-hello-world-and-threadid">13.1. Introduction: Hello world and threadid</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-and-shared-variables">13.2. Private and shared variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelizing-a-for-loop">13.3. Parallelizing a for loop</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manually">13.3.1. Manually</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-omp-parallel-for">13.3.2. Using <code class="docutils literal notranslate"><span class="pre">omp</span> <span class="pre">parallel</span> <span class="pre">for</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-reductions">13.3.3. Using reductions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-hello-world-and-threadid">15.1. Introduction: Hello world and threadid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-and-shared-variables">15.2. Private and shared variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelizing-a-for-loop">15.3. Parallelizing a for loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manually">15.3.1. Manually</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-omp-parallel-for">15.3.2. Using <code class="docutils literal notranslate"><span class="pre">omp</span> <span class="pre">parallel</span> <span class="pre">for</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-reductions">15.3.3. Using reductions</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-and-extra-materials">13.4. Tutorial and extra materials:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.5. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-and-extra-materials">15.4. Tutorial and extra materials:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">15.5. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -475,7 +476,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-openmp-shared-memory">
-<h1><span class="section-number">13. </span>Introduction to OpenMp (Shared memory)<a class="headerlink" href="#introduction-to-openmp-shared-memory" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">15. </span>Introduction to OpenMp (Shared memory)<a class="headerlink" href="#introduction-to-openmp-shared-memory" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>https://news.ycombinator.com/item?id=42139843</p></li>
 </ul>
@@ -486,7 +487,7 @@ and then completely ignored. It is ideal for a machine with several
 cores, and shared memory. For much more info, see
 <a class="reference external" href="http://www.openmp.org/">http://www.openmp.org/</a> and <a class="reference external" href="https://hpc-tutorials.llnl.gov/openmp/">https://hpc-tutorials.llnl.gov/openmp/</a></p>
 <section id="introduction-hello-world-and-threadid">
-<h2><span class="section-number">13.1. </span>Introduction: Hello world and threadid<a class="headerlink" href="#introduction-hello-world-and-threadid" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.1. </span>Introduction: Hello world and threadid<a class="headerlink" href="#introduction-hello-world-and-threadid" title="Link to this heading">#</a></h2>
 <p>Typical Hello world,</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;omp.h&quot;</span>
@@ -576,7 +577,7 @@ conditions, etc.</p>
 </div>
 </section>
 <section id="private-and-shared-variables">
-<h2><span class="section-number">13.2. </span>Private and shared variables<a class="headerlink" href="#private-and-shared-variables" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.2. </span>Private and shared variables<a class="headerlink" href="#private-and-shared-variables" title="Link to this heading">#</a></h2>
 <p>Shared and private</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
@@ -666,7 +667,7 @@ variables to illustrate those concepts:</p>
 </div>
 </section>
 <section id="parallelizing-a-for-loop">
-<h2><span class="section-number">13.3. </span>Parallelizing a for loop<a class="headerlink" href="#parallelizing-a-for-loop" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.3. </span>Parallelizing a for loop<a class="headerlink" href="#parallelizing-a-for-loop" title="Link to this heading">#</a></h2>
 <p>Condiciones del problema:</p>
 <ul class="simple">
 <li><p>Arreglo de tamanho N.</p></li>
@@ -678,7 +679,7 @@ variables to illustrate those concepts:</p>
 </pre></div>
 </div>
 <section id="manually">
-<h3><span class="section-number">13.3.1. </span>Manually<a class="headerlink" href="#manually" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.3.1. </span>Manually<a class="headerlink" href="#manually" title="Link to this heading">#</a></h3>
 <p>The following code assigns the elements of a vector in parallel:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -784,7 +785,7 @@ variables to illustrate those concepts:</p>
 </div>
 </section>
 <section id="using-omp-parallel-for">
-<h3><span class="section-number">13.3.2. </span>Using <code class="docutils literal notranslate"><span class="pre">omp</span> <span class="pre">parallel</span> <span class="pre">for</span></code><a class="headerlink" href="#using-omp-parallel-for" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.3.2. </span>Using <code class="docutils literal notranslate"><span class="pre">omp</span> <span class="pre">parallel</span> <span class="pre">for</span></code><a class="headerlink" href="#using-omp-parallel-for" title="Link to this heading">#</a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
@@ -933,7 +934,7 @@ the number of processors. Can you compute any parallel metric?</p>
 </div>
 </section>
 <section id="using-reductions">
-<h3><span class="section-number">13.3.3. </span>Using reductions<a class="headerlink" href="#using-reductions" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.3.3. </span>Using reductions<a class="headerlink" href="#using-reductions" title="Link to this heading">#</a></h3>
 <p>This example shows how to reduce a variable using the <code class="docutils literal notranslate"><span class="pre">reduction</span></code>
 keyword:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -992,7 +993,7 @@ and test your prediction (from
 </section>
 </section>
 <section id="tutorial-and-extra-materials">
-<h2><span class="section-number">13.4. </span>Tutorial and extra materials:<a class="headerlink" href="#tutorial-and-extra-materials" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.4. </span>Tutorial and extra materials:<a class="headerlink" href="#tutorial-and-extra-materials" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://researchcomputing.princeton.edu/education/external-online-resources/openmp">https://researchcomputing.princeton.edu/education/external-online-resources/openmp</a></p></li>
 <li><p><a class="reference external" href="https://cvw.cac.cornell.edu/openmp/default">https://cvw.cac.cornell.edu/openmp/default</a></p></li>
@@ -1009,7 +1010,7 @@ and test your prediction (from
 <a class="reference external" href="https://www.modernescpp.com/index.php?option=com_content&amp;amp;view=article&amp;amp;id=573&amp;amp;catid=49">https://www.modernescpp.com/index.php?option=com_content&amp;view=article&amp;id=573&amp;catid=49</a></p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">13.5. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.5. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>Refs: CT-LAB openmp exercises;
 <a class="reference external" href="https://computing.llnl.gov/tutorials/openMP/exercise.html">https://computing.llnl.gov/tutorials/openMP/exercise.html</a></p>
 <ol class="arabic">
@@ -1202,20 +1203,20 @@ what should be private?</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../12-IntroHPC/ParallelProgramming-Intro.html"
+       href="../12-Slurm/Slurm.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>Introduction to High Performance Computing</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>HPC resource manager: Slurm</p>
       </div>
     </a>
     <a class="right-next"
-       href="../15-Intro-Slurm/Slurm.html"
+       href="../14-MPI/MPI-Intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>HPC resource manager: Slurm</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Introduction to MPI (distributed memory)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1235,16 +1236,16 @@ what should be private?</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-hello-world-and-threadid">13.1. Introduction: Hello world and threadid</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-and-shared-variables">13.2. Private and shared variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelizing-a-for-loop">13.3. Parallelizing a for loop</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manually">13.3.1. Manually</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-omp-parallel-for">13.3.2. Using <code class="docutils literal notranslate"><span class="pre">omp</span> <span class="pre">parallel</span> <span class="pre">for</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-reductions">13.3.3. Using reductions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-hello-world-and-threadid">15.1. Introduction: Hello world and threadid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-and-shared-variables">15.2. Private and shared variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelizing-a-for-loop">15.3. Parallelizing a for loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manually">15.3.1. Manually</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-omp-parallel-for">15.3.2. Using <code class="docutils literal notranslate"><span class="pre">omp</span> <span class="pre">parallel</span> <span class="pre">for</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-reductions">15.3.3. Using reductions</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-and-extra-materials">13.4. Tutorial and extra materials:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.5. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial-and-extra-materials">15.4. Tutorial and extra materials:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">15.5. Exercises</a></li>
 </ul>
   </nav></div>
 

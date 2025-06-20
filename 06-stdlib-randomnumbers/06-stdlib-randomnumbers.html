@@ -193,22 +193,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Making sure your bugs don’t come back</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-RunMultiplePrograms/FarmTask.html">9. Simple parallelization: farm task and gnu parallel or xargs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Computational linear algebra: Performance exploration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">17. Some extra tools for development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">10. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">11. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Computational linear algebra: Performance exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">15. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">16. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">17. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">18. Some extra tools for development</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">18. Git introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">19. Git introduction</a></li>
 </ul>
 
     </div>
@@ -583,13 +584,13 @@ We need:</p>
 <section id="challenge">
 <h3><span class="section-number">5.1.4. </span>Challenge<a class="headerlink" href="#challenge" title="Link to this heading">#</a></h3>
 <p>Compute <span class="math notranslate nohighlight">\(\pi\)</span>. How? Throw random numbers uniformly distributed in the unit square (randomly generate both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates). Count how many fall inside the unit circle (<span class="math notranslate nohighlight">\(N_c\)</span>). The ratio of the later to the total random numbers <span class="math notranslate nohighlight">\(N\)</span> is a good approximation for the ratio of the circle area  <span class="math notranslate nohighlight">\(A_c = \pi/4\)</span> over the total square area <span class="math notranslate nohighlight">\(1\)</span>. In other words:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-71516b32-20d4-4cee-aae7-e2b5d9399371">
-<span class="eqno">(5.1)<a class="headerlink" href="#equation-71516b32-20d4-4cee-aae7-e2b5d9399371" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5f4978d6-0a15-4378-8172-9cf07490db0d">
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-5f4978d6-0a15-4378-8172-9cf07490db0d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \dfrac{N_c}{N} \simeq \dfrac{A_c}{A_s} = \frac{\pi}{4},
 \end{equation}\]</div>
 <p>therefore</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5deb8fe5-7a60-425c-9556-e716d0c95713">
-<span class="eqno">(5.2)<a class="headerlink" href="#equation-5deb8fe5-7a60-425c-9556-e716d0c95713" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1fdfabbd-408a-4509-a7e9-ce85866ae155">
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-1fdfabbd-408a-4509-a7e9-ce85866ae155" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \pi \simeq 4\dfrac{N_c}{N}.
 \end{equation}\]</div>
 <p>how much number do you need to get 2 decimals correctly? and for 6 decimals? compare with your peers to check who gets the most decimals correctly. How to make this faster?</p>

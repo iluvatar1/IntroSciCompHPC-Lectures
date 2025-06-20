@@ -58,12 +58,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '15-Intro-Slurm/Slurm';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '12-Slurm/Slurm';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Introduction to MPI (distributed memory)" href="../14-MPI/MPI-Intro.html" />
-    <link rel="prev" title="13. Introduction to OpenMp (Shared memory)" href="../13-OpenMP/OpenMP-Intro.html" />
+    <link rel="next" title="15. Introduction to OpenMp (Shared memory)" href="../13-OpenMP/OpenMP-Intro.html" />
+    <link rel="prev" title="13. Introduction to High Performance Computing" href="../12-IntroHPC/ParallelProgramming-Intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -191,22 +191,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Making sure your bugs don’t come back</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-RunMultiplePrograms/FarmTask.html">9. Simple parallelization: farm task and gnu parallel or xargs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Computational linear algebra: Performance exploration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">10. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">11. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Computational linear algebra: Performance exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">14. HPC resource manager: Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">17. Some extra tools for development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">15. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">16. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">17. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">18. Some extra tools for development</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">18. Git introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">19. Git introduction</a></li>
 </ul>
 
     </div>
@@ -261,7 +262,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-Lectures/master?urlpath=lab/tree/15-Intro-Slurm/Slurm.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-Lectures/master?urlpath=lab/tree/12-Slurm/Slurm.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -279,7 +280,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/iluvatar1/IntroSciCompHPC-Lectures/blob/master/github/iluvatar1/IntroSciCompHPC-Lectures/blob/master/15-Intro-Slurm/Slurm.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/iluvatar1/IntroSciCompHPC-Lectures/blob/master/github/iluvatar1/IntroSciCompHPC-Lectures/blob/master/12-Slurm/Slurm.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -327,7 +328,7 @@
       
       
       
-      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-Lectures/issues/new?title=Issue%20on%20page%20%2F15-Intro-Slurm/Slurm.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-Lectures/issues/new?title=Issue%20on%20page%20%2F12-Slurm/Slurm.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -357,7 +358,7 @@
       
       
       
-      <li><a href="../_sources/15-Intro-Slurm/Slurm.ipynb" target="_blank"
+      <li><a href="../_sources/12-Slurm/Slurm.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -472,6 +473,7 @@ a HPC environment to get an optimal usage. It allows to specify usage
 policies, limits in terms of memory or cpu etc, to get metrics regarding
 the cluster usage, and so on. You can watch a good intro at
 <a class="reference external" href="https://www.youtube.com/watch?v=NH_Fb7X6Db0">https://www.youtube.com/watch?v=NH_Fb7X6Db0</a> and related videos.</p>
+<a class="reference internal image-reference" href="https://hpc.llnl.gov/sites/default/files/styles/with_sidebar_1_up/public/workloadMgrWorkflow.png?itok=Hrhz5ZVZ"><img alt="https://hpc.llnl.gov/sites/default/files/styles/with_sidebar_1_up/public/workloadMgrWorkflow.png?itok=Hrhz5ZVZ" class="align-center" src="https://hpc.llnl.gov/sites/default/files/styles/with_sidebar_1_up/public/workloadMgrWorkflow.png?itok=Hrhz5ZVZ" style="width: 60%;" /></a>
 <p>Here we will use a very simple installation in the computer room. Our
 goal will be to learn some of the basic commands to get the possible
 resources, how to specify a partition, limits, resources and so on.</p>
@@ -701,7 +703,7 @@ and specifiy , for instance, what modules to load, like using
         },
         kernelOptions: {
             name: "python3",
-            path: "./15-Intro-Slurm"
+            path: "./12-Slurm"
         },
         predefinedOutput: true
     }
@@ -719,20 +721,20 @@ and specifiy , for instance, what modules to load, like using
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../13-OpenMP/OpenMP-Intro.html"
+       href="../12-IntroHPC/ParallelProgramming-Intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Introduction to OpenMp (Shared memory)</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Introduction to High Performance Computing</p>
       </div>
     </a>
     <a class="right-next"
-       href="../14-MPI/MPI-Intro.html"
+       href="../13-OpenMP/OpenMP-Intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Introduction to MPI (distributed memory)</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Introduction to OpenMp (Shared memory)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

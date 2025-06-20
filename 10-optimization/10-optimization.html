@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>9. Optimization &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>10. Optimization &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -62,8 +62,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="10. Profiling" href="../10-profiling/10-profiling.html" />
-    <link rel="prev" title="8. Unit Testing : Making sure your bugs don’t come back" href="../09-UnitTest/09-UnitTesting.html" />
+    <link rel="next" title="11. Profiling" href="../10-profiling/10-profiling.html" />
+    <link rel="prev" title="9. Simple parallelization: farm task and gnu parallel or xargs" href="../10-RunMultiplePrograms/FarmTask.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -191,22 +191,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Making sure your bugs don’t come back</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-RunMultiplePrograms/FarmTask.html">9. Simple parallelization: farm task and gnu parallel or xargs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Computational linear algebra: Performance exploration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">17. Some extra tools for development</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">11. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Computational linear algebra: Performance exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">15. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">16. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">17. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">18. Some extra tools for development</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">18. Git introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">19. Git introduction</a></li>
 </ul>
 
     </div>
@@ -451,50 +452,50 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">9.1. Compiler flags</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">9.1.1. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">10.1. Compiler flags</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">10.1.1. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">9.2. Memory layout</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.2.1. Blocking multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">10.2. Memory layout</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">10.2.1. Blocking multiplication</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-gnu-parallel">9.3. Introduction to gnu parallel</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-syntax">9.3.1. Basic Syntax</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-examples">9.3.2. Basic Examples</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-multiple-commands-in-parallel">9.3.2.1. Running Multiple Commands in Parallel</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-files-in-parallel">9.3.2.2. Processing Files in Parallel</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-combinations">9.3.2.3. Parameter Combinations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-gnu-parallel">10.3. Introduction to gnu parallel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-syntax">10.3.1. Basic Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-examples">10.3.2. Basic Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-multiple-commands-in-parallel">10.3.2.1. Running Multiple Commands in Parallel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-files-in-parallel">10.3.2.2. Processing Files in Parallel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-combinations">10.3.2.3. Parameter Combinations</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-examples">9.3.3. Advanced Examples</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#system-administration">9.3.3.1. System Administration</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing">9.3.3.2. Data Processing</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-image-video-processing">9.3.3.3. Batch Image/Video Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-examples">10.3.3. Advanced Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#system-administration">10.3.3.1. System Administration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing">10.3.3.2. Data Processing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-image-video-processing">10.3.3.3. Batch Image/Video Processing</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-options-and-features">9.3.4. Key Options and Features</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-parallelism">9.3.4.1. Controlling Parallelism</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-and-monitoring">9.3.4.2. Progress and Monitoring</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">9.3.4.3. Error Handling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-options-and-features">10.3.4. Key Options and Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-parallelism">10.3.4.1. Controlling Parallelism</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-and-monitoring">10.3.4.2. Progress and Monitoring</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">10.3.4.3. Error Handling</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-other-tools">9.3.5. Comparison with Other Tools</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-xargs-p">9.3.5.1. vs. xargs -P</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-bash-background-jobs">9.3.5.2. vs. Bash Background Jobs (&amp;)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-make-j">9.3.5.3. vs. Make -j</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-custom-shell-scripts">9.3.5.4. vs. Custom Shell Scripts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-other-tools">10.3.5. Comparison with Other Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-xargs-p">10.3.5.1. vs. xargs -P</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-bash-background-jobs">10.3.5.2. vs. Bash Background Jobs (&amp;)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-make-j">10.3.5.3. vs. Make -j</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-custom-shell-scripts">10.3.5.4. vs. Custom Shell Scripts</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-advantages-of-gnu-parallel">9.3.6. Key Advantages of GNU Parallel</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">9.3.7. Best Practices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-example">9.3.8. Performance Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-advantages-of-gnu-parallel">10.3.6. Key Advantages of GNU Parallel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">10.3.7. Best Practices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-example">10.3.8. Performance Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-model-simple-matrices">9.4. How to model simple matrices?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">9.5. Using scientific libraries</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">9.6. Other optimization techniques</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">9.7. Other resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-model-simple-matrices">10.4. How to model simple matrices?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">10.5. Using scientific libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">10.6. Other optimization techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">10.7. Other resources</a></li>
 </ul>
             </nav>
         </div>
@@ -508,7 +509,7 @@ document.write(`
                   
   <p>https://quick-bench.com/</p>
 <section class="tex2jax_ignore mathjax_ignore" id="optimization">
-<h1><span class="section-number">9. </span>Optimization<a class="headerlink" href="#optimization" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">10. </span>Optimization<a class="headerlink" href="#optimization" title="Link to this heading">#</a></h1>
 <p>First of all :</p>
 <blockquote>
 <div><p>“Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.” - Donald Knuth</p>
@@ -525,7 +526,7 @@ memory usage. Some low level techniques are better left to the compiler.</p>
 <li><p>Scenario 3 (Big Data): “Processing massive datasets is a common task. A simple operation on a small dataset might be instant, but scale it up to terabytes, and suddenly ‘simple’ becomes ‘hours’ or ‘days’. Optimization is the key to making these tasks feasible.”</p></li>
 </ul>
 <section id="compiler-flags">
-<h2><span class="section-number">9.1. </span>Compiler flags<a class="headerlink" href="#compiler-flags" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.1. </span>Compiler flags<a class="headerlink" href="#compiler-flags" title="Link to this heading">#</a></h2>
 <p>See : <a class="reference external" href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html</a></p>
 <p>Some warnings:</p>
 <ul class="simple">
@@ -624,12 +625,12 @@ something like</p>
 <p>Be careful when using <code class="docutils literal notranslate"><span class="pre">-O3</span></code>: it activates some unsafe math optimizations
 that will not respect IEEE754.</p>
 <section id="exercise">
-<h3><span class="section-number">9.1.1. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.1.1. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
 <p>Vary both the matrix size and the cache size to compute both times. Plot the results on two different 3d plots (in gnuplot use <code class="docutils literal notranslate"><span class="pre">splot</span></code>). Repeat for <code class="docutils literal notranslate"><span class="pre">-O0</span></code> and <code class="docutils literal notranslate"><span class="pre">-O2</span></code></p>
 </section>
 </section>
 <section id="memory-layout">
-<h2><span class="section-number">9.2. </span>Memory layout<a class="headerlink" href="#memory-layout" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.2. </span>Memory layout<a class="headerlink" href="#memory-layout" title="Link to this heading">#</a></h2>
 <p>The memory layout should always be taken into account since cache misses
 will greatly affect a program performance. Always measure with a
 profiler and if possible with cachegrind in order to detect possible
@@ -711,7 +712,7 @@ could have a huge impact on the app performance:</p>
 </ul>
 </div></blockquote>
 <section id="blocking-multiplication">
-<h3><span class="section-number">9.2.1. </span>Blocking multiplication<a class="headerlink" href="#blocking-multiplication" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.2.1. </span>Blocking multiplication<a class="headerlink" href="#blocking-multiplication" title="Link to this heading">#</a></h3>
 <p>See <a class="reference external" href="https://malithjayaweera.com/2020/07/blocked-matrix-multiplication/">https://malithjayaweera.com/2020/07/blocked-matrix-multiplication/</a></p>
 <p>Blocking techniques are neat examples that show how being aware of the
 cache allows you to increase the performance dramatically. For instance,
@@ -801,22 +802,22 @@ performance.</p>
 </section>
 </section>
 <section id="introduction-to-gnu-parallel">
-<h2><span class="section-number">9.3. </span>Introduction to gnu parallel<a class="headerlink" href="#introduction-to-gnu-parallel" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.3. </span>Introduction to gnu parallel<a class="headerlink" href="#introduction-to-gnu-parallel" title="Link to this heading">#</a></h2>
 <p>Up to now we have been running each program serially. We needed to run several parameters combinations, but we were always running them one after the other even though our computer is multicore. Here we will  learn a tool, called <code class="docutils literal notranslate"><span class="pre">gnu</span> <span class="pre">parallel</span></code>, which allows you to run several tasks in parallel. Imagine that you have 10,000 data files to process. Each takes 30
 seconds. That’s 83 hours of sequential processing - over 3 days! With GNU Parallel
 on your 8-core laptop, you can finish in 10 hours. Let’s see how.</p>
 <p>GNU Parallel is a powerful command-line tool that allows you to execute multiple jobs in parallel, making efficient use of multiple CPU cores and dramatically reducing execution time for batch operations.</p>
 <section id="basic-syntax">
-<h3><span class="section-number">9.3.1. </span>Basic Syntax<a class="headerlink" href="#basic-syntax" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.3.1. </span>Basic Syntax<a class="headerlink" href="#basic-syntax" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>parallel<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>arguments
 parallel<span class="w"> </span><span class="o">[</span>options<span class="o">]</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span>::::<span class="w"> </span>input-file
 </pre></div>
 </div>
 </section>
 <section id="basic-examples">
-<h3><span class="section-number">9.3.2. </span>Basic Examples<a class="headerlink" href="#basic-examples" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.3.2. </span>Basic Examples<a class="headerlink" href="#basic-examples" title="Link to this heading">#</a></h3>
 <section id="running-multiple-commands-in-parallel">
-<h4><span class="section-number">9.3.2.1. </span>Running Multiple Commands in Parallel<a class="headerlink" href="#running-multiple-commands-in-parallel" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.2.1. </span>Running Multiple Commands in Parallel<a class="headerlink" href="#running-multiple-commands-in-parallel" title="Link to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Execute multiple independent commands</span>
 parallel<span class="w"> </span>:::<span class="w"> </span><span class="s2">&quot;echo &#39;Task 1&#39;&quot;</span><span class="w"> </span><span class="s2">&quot;sleep 2; echo &#39;Task 2&#39;&quot;</span><span class="w"> </span><span class="s2">&quot;echo &#39;Task 3&#39;&quot;</span>
 
@@ -829,7 +830,7 @@ parallel<span class="w"> </span>wget<span class="w"> </span>:::<span class="w"> 
 </div>
 </section>
 <section id="processing-files-in-parallel">
-<h4><span class="section-number">9.3.2.2. </span>Processing Files in Parallel<a class="headerlink" href="#processing-files-in-parallel" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.2.2. </span>Processing Files in Parallel<a class="headerlink" href="#processing-files-in-parallel" title="Link to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compress multiple files</span>
 parallel<span class="w"> </span>gzip<span class="w"> </span>:::<span class="w"> </span>*.txt
 
@@ -842,7 +843,7 @@ parallel<span class="w"> </span><span class="s2">&quot;grep &#39;ERROR&#39; {} &
 </div>
 </section>
 <section id="parameter-combinations">
-<h4><span class="section-number">9.3.2.3. </span>Parameter Combinations<a class="headerlink" href="#parameter-combinations" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.2.3. </span>Parameter Combinations<a class="headerlink" href="#parameter-combinations" title="Link to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiple parameter sets</span>
 parallel<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing {1} with {2}&quot;</span><span class="w"> </span>:::<span class="w"> </span>file1<span class="w"> </span>file2<span class="w"> </span>file3<span class="w"> </span>:::<span class="w"> </span>option-a<span class="w"> </span>option-b
 
@@ -856,9 +857,9 @@ parallel<span class="w"> </span><span class="s2">&quot;convert {1} -resize {2} r
 </section>
 </section>
 <section id="advanced-examples">
-<h3><span class="section-number">9.3.3. </span>Advanced Examples<a class="headerlink" href="#advanced-examples" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.3.3. </span>Advanced Examples<a class="headerlink" href="#advanced-examples" title="Link to this heading">#</a></h3>
 <section id="system-administration">
-<h4><span class="section-number">9.3.3.1. </span>System Administration<a class="headerlink" href="#system-administration" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.3.1. </span>System Administration<a class="headerlink" href="#system-administration" title="Link to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check disk usage on multiple servers</span>
 parallel<span class="w"> </span>-j10<span class="w"> </span><span class="s2">&quot;ssh {} &#39;df -h&#39;&quot;</span><span class="w"> </span>:::<span class="w"> </span>server1<span class="w"> </span>server2<span class="w"> </span>server3
 
@@ -869,7 +870,7 @@ parallel<span class="w"> </span><span class="s2">&quot;ssh {} &#39;sudo apt upda
 </div>
 </section>
 <section id="data-processing">
-<h4><span class="section-number">9.3.3.2. </span>Data Processing<a class="headerlink" href="#data-processing" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.3.2. </span>Data Processing<a class="headerlink" href="#data-processing" title="Link to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process CSV files with different tools</span>
 parallel<span class="w"> </span><span class="s2">&quot;cut -d&#39;,&#39; -f{2} {1} &gt; {1.}_{2}.csv&quot;</span><span class="w"> </span>:::<span class="w"> </span>data*.csv<span class="w"> </span>:::<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span>
 
@@ -879,7 +880,7 @@ parallel<span class="w"> </span><span class="s2">&quot;./analyze.py --input {} -
 </div>
 </section>
 <section id="batch-image-video-processing">
-<h4><span class="section-number">9.3.3.3. </span>Batch Image/Video Processing<a class="headerlink" href="#batch-image-video-processing" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.3.3. </span>Batch Image/Video Processing<a class="headerlink" href="#batch-image-video-processing" title="Link to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resize images to multiple sizes</span>
 parallel<span class="w"> </span><span class="s2">&quot;convert {} -resize {2}x{2} {1/.}_{2}.{1/}&quot;</span><span class="w"> </span>:::<span class="w"> </span>*.jpg<span class="w"> </span>:::<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="m">300</span>
 
@@ -890,9 +891,9 @@ parallel<span class="w"> </span><span class="s2">&quot;ffmpeg -i video.mp4 -ss {
 </section>
 </section>
 <section id="key-options-and-features">
-<h3><span class="section-number">9.3.4. </span>Key Options and Features<a class="headerlink" href="#key-options-and-features" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.3.4. </span>Key Options and Features<a class="headerlink" href="#key-options-and-features" title="Link to this heading">#</a></h3>
 <section id="controlling-parallelism">
-<h4><span class="section-number">9.3.4.1. </span>Controlling Parallelism<a class="headerlink" href="#controlling-parallelism" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.4.1. </span>Controlling Parallelism<a class="headerlink" href="#controlling-parallelism" title="Link to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Limit number of parallel jobs</span>
 parallel<span class="w"> </span>-j4<span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>args
 
@@ -905,7 +906,7 @@ parallel<span class="w"> </span>-j1<span class="w"> </span><span class="nb">comm
 </div>
 </section>
 <section id="progress-and-monitoring">
-<h4><span class="section-number">9.3.4.2. </span>Progress and Monitoring<a class="headerlink" href="#progress-and-monitoring" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.4.2. </span>Progress and Monitoring<a class="headerlink" href="#progress-and-monitoring" title="Link to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show progress bar</span>
 parallel<span class="w"> </span>--progress<span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>args
 
@@ -918,7 +919,7 @@ parallel<span class="w"> </span>--progress<span class="w"> </span>--verbose<span
 </div>
 </section>
 <section id="error-handling">
-<h4><span class="section-number">9.3.4.3. </span>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.4.3. </span>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Continue on errors, collect failed jobs</span>
 parallel<span class="w"> </span>--keep-order<span class="w"> </span>--joblog<span class="w"> </span>logfile<span class="w"> </span><span class="nb">command</span><span class="w"> </span>:::<span class="w"> </span>args
 
@@ -932,9 +933,9 @@ parallel<span class="w"> </span>--resume<span class="w"> </span>--joblog<span cl
 </section>
 </section>
 <section id="comparison-with-other-tools">
-<h3><span class="section-number">9.3.5. </span>Comparison with Other Tools<a class="headerlink" href="#comparison-with-other-tools" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.3.5. </span>Comparison with Other Tools<a class="headerlink" href="#comparison-with-other-tools" title="Link to this heading">#</a></h3>
 <section id="vs-xargs-p">
-<h4><span class="section-number">9.3.5.1. </span>vs. xargs -P<a class="headerlink" href="#vs-xargs-p" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.5.1. </span>vs. xargs -P<a class="headerlink" href="#vs-xargs-p" title="Link to this heading">#</a></h4>
 <p><strong>GNU Parallel Advantages:</strong></p>
 <ul class="simple">
 <li><p>More intuitive syntax for complex parameter combinations</p></li>
@@ -952,7 +953,7 @@ parallel<span class="w"> </span>gzip<span class="w"> </span>:::<span class="w"> 
 </div>
 </section>
 <section id="vs-bash-background-jobs">
-<h4><span class="section-number">9.3.5.2. </span>vs. Bash Background Jobs (&amp;)<a class="headerlink" href="#vs-bash-background-jobs" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.5.2. </span>vs. Bash Background Jobs (&amp;)<a class="headerlink" href="#vs-bash-background-jobs" title="Link to this heading">#</a></h4>
 <p><strong>GNU Parallel Advantages:</strong></p>
 <ul class="simple">
 <li><p>Automatic job limiting (prevents system overload)</p></li>
@@ -972,7 +973,7 @@ parallel<span class="w"> </span>gzip<span class="w"> </span>:::<span class="w"> 
 </div>
 </section>
 <section id="vs-make-j">
-<h4><span class="section-number">9.3.5.3. </span>vs. Make -j<a class="headerlink" href="#vs-make-j" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.5.3. </span>vs. Make -j<a class="headerlink" href="#vs-make-j" title="Link to this heading">#</a></h4>
 <p><strong>GNU Parallel Advantages:</strong></p>
 <ul class="simple">
 <li><p>No need to write Makefiles for simple parallel tasks</p></li>
@@ -982,7 +983,7 @@ parallel<span class="w"> </span>gzip<span class="w"> </span>:::<span class="w"> 
 </ul>
 </section>
 <section id="vs-custom-shell-scripts">
-<h4><span class="section-number">9.3.5.4. </span>vs. Custom Shell Scripts<a class="headerlink" href="#vs-custom-shell-scripts" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">10.3.5.4. </span>vs. Custom Shell Scripts<a class="headerlink" href="#vs-custom-shell-scripts" title="Link to this heading">#</a></h4>
 <p><strong>GNU Parallel Advantages:</strong></p>
 <ul class="simple">
 <li><p>No need to write custom parallel execution logic</p></li>
@@ -993,7 +994,7 @@ parallel<span class="w"> </span>gzip<span class="w"> </span>:::<span class="w"> 
 </section>
 </section>
 <section id="key-advantages-of-gnu-parallel">
-<h3><span class="section-number">9.3.6. </span>Key Advantages of GNU Parallel<a class="headerlink" href="#key-advantages-of-gnu-parallel" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.3.6. </span>Key Advantages of GNU Parallel<a class="headerlink" href="#key-advantages-of-gnu-parallel" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Simplicity</strong>: Easy to parallelize existing sequential commands</p></li>
 <li><p><strong>Flexibility</strong>: Handles complex parameter combinations effortlessly</p></li>
@@ -1006,7 +1007,7 @@ parallel<span class="w"> </span>gzip<span class="w"> </span>:::<span class="w"> 
 </ol>
 </section>
 <section id="best-practices">
-<h3><span class="section-number">9.3.7. </span>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.3.7. </span>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Start with low parallelism</strong> (<code class="docutils literal notranslate"><span class="pre">-j2</span></code> or <code class="docutils literal notranslate"><span class="pre">-j4</span></code>) and increase gradually</p></li>
 <li><p><strong>Use <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code></strong> to test commands before execution</p></li>
@@ -1017,7 +1018,7 @@ parallel<span class="w"> </span>gzip<span class="w"> </span>:::<span class="w"> 
 </ol>
 </section>
 <section id="performance-example">
-<h3><span class="section-number">9.3.8. </span>Performance Example<a class="headerlink" href="#performance-example" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.3.8. </span>Performance Example<a class="headerlink" href="#performance-example" title="Link to this heading">#</a></h3>
 <p>Sequential processing of 100 files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">time</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>file*.txt<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>gzip<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
 <span class="c1"># Real: 2m30s</span>
@@ -1036,7 +1037,7 @@ Plot the Run the cache lines examples for several optimization levels and matrix
 </section>
 </section>
 <section id="how-to-model-simple-matrices">
-<h2><span class="section-number">9.4. </span>How to model simple matrices?<a class="headerlink" href="#how-to-model-simple-matrices" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.4. </span>How to model simple matrices?<a class="headerlink" href="#how-to-model-simple-matrices" title="Link to this heading">#</a></h2>
 <p>It depends greatly from the problem. But for the typical applications of
 vector and matrix computations, we can expect that homogeneous and
 contiguous arrays are the data structures to go. In that case, it is
@@ -1145,7 +1146,7 @@ one-dimensional array and just model the 2D shape with smart indexes</p>
 </div></blockquote>
 </section>
 <section id="using-scientific-libraries">
-<h2><span class="section-number">9.5. </span>Using scientific libraries<a class="headerlink" href="#using-scientific-libraries" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.5. </span>Using scientific libraries<a class="headerlink" href="#using-scientific-libraries" title="Link to this heading">#</a></h2>
 <p>Scientific libraries are written by people with deep knowledge of the
 computer and algorithms internals , therefore saving developer time and
 resources. One should always try to use a established scientific library
@@ -1302,7 +1303,7 @@ creating a copy.</p>
 </div>
 </section>
 <section id="other-optimization-techniques">
-<h2><span class="section-number">9.6. </span>Other optimization techniques<a class="headerlink" href="#other-optimization-techniques" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.6. </span>Other optimization techniques<a class="headerlink" href="#other-optimization-techniques" title="Link to this heading">#</a></h2>
 <p>There are other techniques sometimes applied in very speficic
 situations, like</p>
 <ul class="simple">
@@ -1334,7 +1335,7 @@ them at some optimization levels. Therefore it is advisable to focus on
 the clarity of the program first and let the compiler do its job.</p>
 </section>
 <section id="other-resources">
-<h2><span class="section-number">9.7. </span>Other resources<a class="headerlink" href="#other-resources" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.7. </span>Other resources<a class="headerlink" href="#other-resources" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.agner.org/optimize/">https://www.agner.org/optimize/</a></p></li>
 </ul>
@@ -1372,12 +1373,12 @@ the clarity of the program first and let the compiler do its job.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../09-UnitTest/09-UnitTesting.html"
+       href="../10-RunMultiplePrograms/FarmTask.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Unit Testing : Making sure your bugs don’t come back</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Simple parallelization: farm task and gnu parallel or xargs</p>
       </div>
     </a>
     <a class="right-next"
@@ -1385,7 +1386,7 @@ the clarity of the program first and let the compiler do its job.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Profiling</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Profiling</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1405,50 +1406,50 @@ the clarity of the program first and let the compiler do its job.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">9.1. Compiler flags</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">9.1.1. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">10.1. Compiler flags</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">10.1.1. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">9.2. Memory layout</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.2.1. Blocking multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">10.2. Memory layout</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">10.2.1. Blocking multiplication</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-gnu-parallel">9.3. Introduction to gnu parallel</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-syntax">9.3.1. Basic Syntax</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-examples">9.3.2. Basic Examples</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-multiple-commands-in-parallel">9.3.2.1. Running Multiple Commands in Parallel</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-files-in-parallel">9.3.2.2. Processing Files in Parallel</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-combinations">9.3.2.3. Parameter Combinations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-gnu-parallel">10.3. Introduction to gnu parallel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-syntax">10.3.1. Basic Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-examples">10.3.2. Basic Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-multiple-commands-in-parallel">10.3.2.1. Running Multiple Commands in Parallel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-files-in-parallel">10.3.2.2. Processing Files in Parallel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-combinations">10.3.2.3. Parameter Combinations</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-examples">9.3.3. Advanced Examples</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#system-administration">9.3.3.1. System Administration</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing">9.3.3.2. Data Processing</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-image-video-processing">9.3.3.3. Batch Image/Video Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-examples">10.3.3. Advanced Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#system-administration">10.3.3.1. System Administration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing">10.3.3.2. Data Processing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-image-video-processing">10.3.3.3. Batch Image/Video Processing</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-options-and-features">9.3.4. Key Options and Features</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-parallelism">9.3.4.1. Controlling Parallelism</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-and-monitoring">9.3.4.2. Progress and Monitoring</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">9.3.4.3. Error Handling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-options-and-features">10.3.4. Key Options and Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-parallelism">10.3.4.1. Controlling Parallelism</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#progress-and-monitoring">10.3.4.2. Progress and Monitoring</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">10.3.4.3. Error Handling</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-other-tools">9.3.5. Comparison with Other Tools</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-xargs-p">9.3.5.1. vs. xargs -P</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-bash-background-jobs">9.3.5.2. vs. Bash Background Jobs (&amp;)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-make-j">9.3.5.3. vs. Make -j</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-custom-shell-scripts">9.3.5.4. vs. Custom Shell Scripts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-other-tools">10.3.5. Comparison with Other Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-xargs-p">10.3.5.1. vs. xargs -P</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-bash-background-jobs">10.3.5.2. vs. Bash Background Jobs (&amp;)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-make-j">10.3.5.3. vs. Make -j</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-custom-shell-scripts">10.3.5.4. vs. Custom Shell Scripts</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-advantages-of-gnu-parallel">9.3.6. Key Advantages of GNU Parallel</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">9.3.7. Best Practices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-example">9.3.8. Performance Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-advantages-of-gnu-parallel">10.3.6. Key Advantages of GNU Parallel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">10.3.7. Best Practices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-example">10.3.8. Performance Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-model-simple-matrices">9.4. How to model simple matrices?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">9.5. Using scientific libraries</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">9.6. Other optimization techniques</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">9.7. Other resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-model-simple-matrices">10.4. How to model simple matrices?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">10.5. Using scientific libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">10.6. Other optimization techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">10.7. Other resources</a></li>
 </ul>
   </nav></div>
 

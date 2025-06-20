@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>11. Computational linear algebra: Performance exploration &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>12. Computational linear algebra: Performance exploration &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -64,8 +64,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="12. Introduction to High Performance Computing" href="../12-IntroHPC/ParallelProgramming-Intro.html" />
-    <link rel="prev" title="10. Profiling" href="../10-profiling/10-profiling.html" />
+    <link rel="next" title="13. Introduction to High Performance Computing" href="../12-IntroHPC/ParallelProgramming-Intro.html" />
+    <link rel="prev" title="11. Profiling" href="../10-profiling/10-profiling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -193,22 +193,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Making sure your bugs don’t come back</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-RunMultiplePrograms/FarmTask.html">9. Simple parallelization: farm task and gnu parallel or xargs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Computational linear algebra: Performance exploration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">17. Some extra tools for development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">10. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">11. Profiling</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Computational linear algebra: Performance exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-Slurm/Slurm.html">14. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">15. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">16. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">17. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16-Extra/ExtraToolsForDevelopment.html">18. Some extra tools for development</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">18. Git introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../A-01-Git/VersionControlGit.html">19. Git introduction</a></li>
 </ul>
 
     </div>
@@ -453,17 +454,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c-library">11.1. <code class="docutils literal notranslate"><span class="pre">Eigen</span> <span class="pre">c++</span></code> library</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-basic-matrices">11.1.1. Creating basic matrices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra-with-eigen-c">11.1.2. Linear Algebra with eigen c++</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c-library">12.1. <code class="docutils literal notranslate"><span class="pre">Eigen</span> <span class="pre">c++</span></code> library</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-basic-matrices">12.1.1. Creating basic matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra-with-eigen-c">12.1.2. Linear Algebra with eigen c++</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-operations-performance-lu-operations-to-solve-ax-b">11.2. Matrix operations performance: LU operations to solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">11.2.1. Threads</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-time-as-a-function-of-size">11.2.2. Measuring time as a function of size</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-operations-performance-lu-operations-to-solve-ax-b">12.2. Matrix operations performance: LU operations to solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">12.2.1. Threads</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-time-as-a-function-of-size">12.2.2. Measuring time as a function of size</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">11.3. Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">12.3. Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-gnu-parallel-to-run-several-matmul-and-compute-first-parallel-metrics">12.4. Using gnu parallel to run several matmul and compute first parallel metrics</a></li>
 </ul>
             </nav>
         </div>
@@ -476,7 +478,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="computational-linear-algebra-performance-exploration">
-<h1><span class="section-number">11. </span>Computational linear algebra: Performance exploration<a class="headerlink" href="#computational-linear-algebra-performance-exploration" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">12. </span>Computational linear algebra: Performance exploration<a class="headerlink" href="#computational-linear-algebra-performance-exploration" title="Link to this heading">#</a></h1>
 <p>In this section we will learn how to perform some benchmarks on some
 matrix operations to get an idea of the operations performance. This
 will be done manually, but in the future you can use specialized tools
@@ -491,11 +493,11 @@ nanobench, <a class="reference external" href="https://nanobench.ankerl.com/">ht
 </ul>
 <p>In our example, we will use the <code class="docutils literal notranslate"><span class="pre">eigen</span> <span class="pre">c++</span></code> library. Therefore, we will start with some <code class="docutils literal notranslate"><span class="pre">eigen</span> <span class="pre">c++</span></code> examples.</p>
 <section id="eigen-c-library">
-<h2><span class="section-number">11.1. </span><code class="docutils literal notranslate"><span class="pre">Eigen</span> <span class="pre">c++</span></code> library<a class="headerlink" href="#eigen-c-library" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.1. </span><code class="docutils literal notranslate"><span class="pre">Eigen</span> <span class="pre">c++</span></code> library<a class="headerlink" href="#eigen-c-library" title="Link to this heading">#</a></h2>
 <p>“Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.”  Taken from <a class="reference external" href="http://eigen.tuxfamily.org/index.php?title=Main_Page">http://eigen.tuxfamily.org/index.php?title=Main_Page</a></p>
 <p>For a quick start go to: <a class="reference external" href="http://eigen.tuxfamily.org/dox/GettingStarted.html">http://eigen.tuxfamily.org/dox/GettingStarted.html</a></p>
 <section id="creating-basic-matrices">
-<h3><span class="section-number">11.1.1. </span>Creating basic matrices<a class="headerlink" href="#creating-basic-matrices" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.1.1. </span>Creating basic matrices<a class="headerlink" href="#creating-basic-matrices" title="Link to this heading">#</a></h3>
 <p>The following shows how to create a dynamic 2x2 matrix of doubles (<code class="docutils literal notranslate"><span class="pre">X</span></code> means dynamic, <code class="docutils literal notranslate"><span class="pre">d</span></code> means double), and also show how to access a given element.</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
@@ -606,7 +608,7 @@ Control the seed, print it twice to check that the elements are the same.</p>
 </div>
 </section>
 <section id="linear-algebra-with-eigen-c">
-<h3><span class="section-number">11.1.2. </span>Linear Algebra with eigen c++<a class="headerlink" href="#linear-algebra-with-eigen-c" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.1.2. </span>Linear Algebra with eigen c++<a class="headerlink" href="#linear-algebra-with-eigen-c" title="Link to this heading">#</a></h3>
 <p>In this example we are going to use eigen to solve the system
 <span class="math notranslate nohighlight">\(\boldsymbol{A}\vec x = \vec{x}\)</span> using HouseHolder QR decomposition as
 done in
@@ -754,7 +756,7 @@ done in
 </section>
 </section>
 <section id="matrix-operations-performance-lu-operations-to-solve-ax-b">
-<h2><span class="section-number">11.2. </span>Matrix operations performance: LU operations to solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code><a class="headerlink" href="#matrix-operations-performance-lu-operations-to-solve-ax-b" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.2. </span>Matrix operations performance: LU operations to solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code><a class="headerlink" href="#matrix-operations-performance-lu-operations-to-solve-ax-b" title="Link to this heading">#</a></h2>
 <p>In the following we want to explore the performance of the following
 program as a function of the system size. We will explore the role of the compiler optimization flags, and possibly parallelization using threads. By reading <a class="reference external" href="https://eigen.tuxfamily.org/dox/TopicMultiThreading.html">https://eigen.tuxfamily.org/dox/TopicMultiThreading.html</a>, we see that eigen supports parallelization for some operations, and we will take solving with partial pivote LU as example.</p>
 <p>This is a very simple example on how to use it</p>
@@ -945,13 +947,13 @@ how to measure it? Check:</p>
 <hr class="docutils" />
 <p><strong>Statistics</strong></p>
 <p>We will need a function to repeat the measured function several times, and then compute both the mean,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-179c42a4-6760-4ad1-940f-d81fedf5a468">
-<span class="eqno">(11.1)<a class="headerlink" href="#equation-179c42a4-6760-4ad1-940f-d81fedf5a468" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-06dab79d-6ccd-4e55-a73d-4ed01185a8b1">
+<span class="eqno">(12.1)<a class="headerlink" href="#equation-06dab79d-6ccd-4e55-a73d-4ed01185a8b1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar x = \dfrac{1}{N} \sum x_i,
 \end{equation}\]</div>
 <p>and the standard deviation,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c8ce27af-6f11-4304-9be7-cfe609f6ae51">
-<span class="eqno">(11.2)<a class="headerlink" href="#equation-c8ce27af-6f11-4304-9be7-cfe609f6ae51" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0b95e7af-fe05-4ebc-9525-bb7327763cbb">
+<span class="eqno">(12.2)<a class="headerlink" href="#equation-0b95e7af-fe05-4ebc-9525-bb7327763cbb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma = \sqrt{\dfrac{1}{N-1}\sum (x_i - \bar x)^2}.
 \end{equation}\]</div>
 <p>Your main function must be something  like</p>
@@ -1001,7 +1003,7 @@ how to measure it? Check:</p>
 </div>
 <hr class="docutils" />
 <section id="threads">
-<h3><span class="section-number">11.2.1. </span>Threads<a class="headerlink" href="#threads" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.2.1. </span>Threads<a class="headerlink" href="#threads" title="Link to this heading">#</a></h3>
 <p>Eigen c++ includes parallelization with openmp threads. To do so, you
 need to compile with the <code class="docutils literal notranslate"><span class="pre">-fopenmp</span></code> flag and then execute as</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span>n<span class="w"> </span>./a.out<span class="w"> </span>...
@@ -1013,12 +1015,12 @@ of ops that can be parallelized:
 <p>Run the code for a large enough size and check if the flag has any effect.</p>
 </section>
 <section id="measuring-time-as-a-function-of-size">
-<h3><span class="section-number">11.2.2. </span>Measuring time as a function of size<a class="headerlink" href="#measuring-time-as-a-function-of-size" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.2.2. </span>Measuring time as a function of size<a class="headerlink" href="#measuring-time-as-a-function-of-size" title="Link to this heading">#</a></h3>
 <p>Now you are ready to measure both the wall and cpu time as a function of size, for at least 5 samples per size, and also for several number of threads. Start using <code class="docutils literal notranslate"><span class="pre">-O3</span> <span class="pre">-fopenmp</span></code> and plot the curves for 1, 2, 4, 8 and the max threads in your pc. Then try the same with <code class="docutils literal notranslate"><span class="pre">-O0</span> <span class="pre">-fopenmp</span></code>, but maybe you will not be able to use large sizes. How will you run this in parallel? take into account the memory consumption and also that <code class="docutils literal notranslate"><span class="pre">parallel</span> <span class="pre">-j</span> <span class="pre">jobs</span></code> is the number of processes which is different to the number of threads (a process can sapwn a lot of threads, and you should not launch more threads than available in your machine)</p>
 </section>
 </section>
 <section id="exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">
-<h2><span class="section-number">11.3. </span>Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization<a class="headerlink" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.3. </span>Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization<a class="headerlink" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization" title="Link to this heading">#</a></h2>
 <p>Now do the same study but with matrix multiplication. Implement the
 matrix matmul with eigen (see the code snippet at the end). Also implement the typical three-loop matrix multiplication (but does not use for large matrix sizes).
 Always
@@ -1052,6 +1054,195 @@ graph, each one for each VAR value.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
+</section>
+<section id="using-gnu-parallel-to-run-several-matmul-and-compute-first-parallel-metrics">
+<h2><span class="section-number">12.4. </span>Using gnu parallel to run several matmul and compute first parallel metrics<a class="headerlink" href="#using-gnu-parallel-to-run-several-matmul-and-compute-first-parallel-metrics" title="Link to this heading">#</a></h2>
+<p>Now let’s use the previous matmul with eigen and blas exercise to show
+how to use parallel to run several matrix sizes at the same time and
+also to compute some parallel metrics. The code is</p>
+<p>We have two goals:</p>
+<ol class="arabic simple">
+<li><p>To compute the wall time as a function of the matrix size (strong
+scaling, changing problem size), using blas.</p></li>
+<li><p>To compute the speedup and parallel efficiency for a fixed matrix
+size.</p></li>
+</ol>
+<p>In the first case we will just use parallel to run as many simulations
+as possible. In the second case we will compute some metrics to check
+when is our code the most efficient.</p>
+<p>It is assumed that you have blas with spack, so you can load it as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>load<span class="w"> </span>openblas
+</pre></div>
+</div>
+<p>or might have to install it using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>install<span class="w"> </span>openblas<span class="w"> </span><span class="nv">threads</span><span class="o">=</span>openmp<span class="w"> </span><span class="nv">cxxflags</span><span class="o">=</span><span class="s2">&quot;-O3&quot;</span><span class="w"> </span><span class="nv">cflags</span><span class="o">=</span><span class="s2">&quot;-O3&quot;</span><span class="w"> </span><span class="nv">target</span><span class="o">=</span>x86_64
+</pre></div>
+</div>
+<p>(the last flag is just to have the same target independent of the actual
+machine, like the conditions we have in the computer room)</p>
+<ol class="arabic">
+<li><p>Strong scaling: Time as a function of matriz size, one thread,
+eigen + blas</p>
+<p>Naively, we could just run the program serially for each matriz
+size, but if we are in computer with multiple cores/threads it would
+be better if we ran as many parameters as possible (adapt the
+following instructions to your case):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#source $HOME/repos/spack/share/spack/setup-env.sh</span>
+spack<span class="w"> </span>load<span class="w"> </span>openblas
+<span class="c1">#g++ -fopenmp -O3 -I $CMAKE_PREFIX_PATH/include -L $CMAKE_PREFIX_PATH/lib eigen-matmul.cpp -DEIGEN_USE_BLAS -lopenblas -o eigen_blas.x</span>
+g++<span class="w"> </span>-fopenmp<span class="w"> </span>-O3<span class="w">  </span>eigen-matmul.cpp<span class="w"> </span>-DEIGEN_USE_BLAS<span class="w"> </span>-lopenblas<span class="w"> </span>-o<span class="w"> </span>eigen_blas.x
+parallel<span class="w"> </span><span class="s1">&#39;OMP_NUM_THREADS=1 ./eigen_blas.x {} 10 2&gt;/dev//null&#39;</span><span class="w"> </span>:::<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="m">500</span><span class="w"> </span><span class="m">700</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">2000</span><span class="w"> </span>5000w
+</pre></div>
+</div>
+<p>Check that your programs are running in parallel, as expected.</p>
+<ol class="arabic">
+<li><p>Exercise: Strong scaling for eigen eigenvectors</p>
+<p>With the following code, compute the strong scaling of eigen
+when computing eigenvectors with the more general method:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">solve_eigensystem</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="n">time</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">arg</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"> </span><span class="c1">// Matrix size</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="w"> </span><span class="c1">// Repetitions</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span><span class="w"> </span><span class="c1">// seed</span>
+<span class="w">  </span><span class="n">srand</span><span class="p">(</span><span class="n">S</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">totaltime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">auxtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">irep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">irep</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">R</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">irep</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">solve_eigensystem</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">auxtime</span><span class="p">);</span>
+<span class="w">    </span><span class="n">totaltime</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">auxtime</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">totaltime</span><span class="o">/</span><span class="n">R</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w"> </span><span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">solve_eigensystem</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="n">time</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">aux</span><span class="p">;</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">SelfAdjointEigenSolver</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">&gt;</span><span class="w"> </span><span class="n">eigensolver</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="w">  </span><span class="n">aux</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eigensolver</span><span class="p">.</span><span class="n">eigenvalues</span><span class="p">()(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">clog</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The first eigenvalue of A is:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">aux</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">;</span>
+<span class="w">  </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diff</span><span class="p">.</span><span class="n">count</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Compile como</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-O3<span class="w"> </span>eigen-eigenvectors.cpp<span class="w">  </span>-o<span class="w"> </span>eigen.x
+</pre></div>
+</div>
+<p>Ejecute como</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./eigen.x<span class="w"> </span>M<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</pre></div>
+</div>
+<p>debe cambiar M, matriz size.</p>
+<p>Datos de ejemplo (dependen de la maquina, pero las relaciones
+entre ellos deben ser similares):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">10</span><span class="w">      </span><span class="m">9</span>.7568e-06
+<span class="m">20</span><span class="w">      </span><span class="m">3</span>.55734e-05
+<span class="m">50</span><span class="w">      </span><span class="m">0</span>.000312481
+<span class="m">80</span><span class="w">      </span><span class="m">0</span>.000890043
+...
+<span class="m">2700</span><span class="w">    </span><span class="m">72</span>.8078
+<span class="m">3000</span><span class="w">    </span><span class="m">81</span>.0619
+</pre></div>
+</div>
+<p>Plot the data ad analyze.</p>
+</li>
+</ol>
+</li>
+<li><p>Weak scaling: number of threads and parallel metrics</p>
+<p>Here we will compute some key parallel metrics that inform about the
+efficiency of our code when running in parallel. Now you do not want
+to use gnu parallel since you have a variable number of thredas per
+process</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span><span class="nv">$HOME</span>/repos/spack/share/spack/setup-env.sh
+spack<span class="w"> </span>load<span class="w"> </span>openblas
+<span class="c1">#g++ -fopenmp -O3 -I $CMAKE_PREFIX_PATH/include -L $CMAKE_PREFIX_PATH/lib eigen-matmul.cpp -DEIGEN_USE_BLAS -lopenblas -o eigen_blas.x</span>
+g++<span class="w"> </span>-fopenmp<span class="w"> </span>-O3<span class="w"> </span>eigen-matmul.cpp<span class="w"> </span>-DEIGEN_USE_BLAS<span class="w"> </span>-lopenblas<span class="w"> </span>-o<span class="w"> </span>eigen_blas.x
+parallel<span class="w"> </span>-j<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s1">&#39;echo -n &quot;{}  &quot;; OMP_NUM_THREADS={} ./eigen_blas.x 4000 10 2&gt;/dev//null&#39;</span><span class="w"> </span>:::<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">13</span><span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">16</span>
+</pre></div>
+</div>
+<p>The following is data obtained from a run in a 8core/16threads
+computer, running only with eigen</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">1</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">6</span>.75223<span class="w"> </span><span class="m">0</span>.00290168<span class="w">      </span><span class="m">6</span>.75225<span class="w"> </span><span class="m">0</span>.0029001
+<span class="m">2</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">3</span>.52052<span class="w"> </span><span class="m">0</span>.00405504<span class="w">      </span><span class="m">7</span>.01616<span class="w"> </span><span class="m">0</span>.00819132
+<span class="m">3</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">2</span>.40281<span class="w"> </span><span class="m">0</span>.0117795<span class="w">       </span><span class="m">7</span>.15847<span class="w"> </span><span class="m">0</span>.0355119
+<span class="m">4</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">1</span>.85186<span class="w"> </span><span class="m">0</span>.0049013<span class="w">       </span><span class="m">7</span>.33257<span class="w"> </span><span class="m">0</span>.0187681
+<span class="m">5</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">1</span>.72682<span class="w"> </span><span class="m">0</span>.176218<span class="w">        </span><span class="m">8</span>.53451<span class="w"> </span><span class="m">0</span>.880953
+<span class="m">6</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">1</span>.65921<span class="w"> </span><span class="m">0</span>.00946933<span class="w">      </span><span class="m">9</span>.83127<span class="w"> </span><span class="m">0</span>.0574367
+<span class="m">7</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">1</span>.52068<span class="w"> </span><span class="m">0</span>.00538196<span class="w">      </span><span class="m">10</span>.4943<span class="w"> </span><span class="m">0</span>.0370317
+<span class="m">8</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">1</span>.39755<span class="w"> </span><span class="m">0</span>.0326183<span class="w">       </span><span class="m">11</span>.006<span class="w">  </span><span class="m">0</span>.260568
+<span class="m">9</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">2</span>.26355<span class="w"> </span><span class="m">0</span>.00254841<span class="w">      </span><span class="m">19</span>.9546<span class="w"> </span><span class="m">0</span>.0452903
+<span class="m">10</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">2</span>.04808<span class="w"> </span><span class="m">0</span>.00732663<span class="w">      </span><span class="m">20</span>.0991<span class="w"> </span><span class="m">0</span>.0807175
+<span class="m">11</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">2</span>.00821<span class="w"> </span><span class="m">0</span>.00876695<span class="w">      </span><span class="m">21</span>.7043<span class="w"> </span><span class="m">0</span>.104527
+<span class="m">12</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">1</span>.76768<span class="w"> </span><span class="m">0</span>.0276189<span class="w">       </span><span class="m">20</span>.834<span class="w">  </span><span class="m">0</span>.324801
+<span class="m">13</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">1</span>.77771<span class="w"> </span><span class="m">0</span>.00686642<span class="w">      </span><span class="m">22</span>.7412<span class="w"> </span><span class="m">0</span>.0887671
+<span class="m">14</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">1</span>.59293<span class="w"> </span><span class="m">0</span>.0116353<span class="w">       </span><span class="m">21</span>.9208<span class="w"> </span><span class="m">0</span>.213236
+<span class="m">15</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">1</span>.56692<span class="w"> </span><span class="m">0</span>.00829185<span class="w">      </span><span class="m">23</span>.1334<span class="w"> </span><span class="m">0</span>.121202
+<span class="m">16</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">1</span>.49262<span class="w"> </span><span class="m">0</span>.0321579<span class="w">       </span><span class="m">23</span>.3921<span class="w"> </span><span class="m">0</span>.417985
+</pre></div>
+</div>
+<p>And these are with running with eigen+blas</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">1</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">1</span>.76345<span class="w"> </span><span class="m">0</span>.00750705<span class="w">      </span><span class="m">1</span>.76345<span class="w"> </span><span class="m">0</span>.0075023
+<span class="m">2</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">0</span>.930922<span class="w">        </span><span class="m">0</span>.00450842<span class="w">      </span><span class="m">1</span>.83688<span class="w"> </span><span class="m">0</span>.00900039
+<span class="m">3</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">0</span>.666528<span class="w">        </span><span class="m">0</span>.0122499<span class="w">       </span><span class="m">1</span>.94996<span class="w"> </span><span class="m">0</span>.0365303
+<span class="m">4</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">0</span>.523076<span class="w">        </span><span class="m">0</span>.00175201<span class="w">      </span><span class="m">2</span>.01795<span class="w"> </span><span class="m">0</span>.00654245
+<span class="m">5</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">0</span>.442096<span class="w">        </span><span class="m">0</span>.00226719<span class="w">      </span><span class="m">2</span>.1107<span class="w">  </span><span class="m">0</span>.0108692
+<span class="m">6</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">0</span>.394103<span class="w">        </span><span class="m">0</span>.00867531<span class="w">      </span><span class="m">2</span>.23982<span class="w"> </span><span class="m">0</span>.0513271
+<span class="m">7</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">0</span>.371224<span class="w">        </span><span class="m">0</span>.000725666<span class="w">     </span><span class="m">2</span>.44876<span class="w"> </span><span class="m">0</span>.00691333
+<span class="m">8</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">0</span>.35202<span class="w"> </span><span class="m">0</span>.00564542<span class="w">      </span><span class="m">2</span>.64095<span class="w"> </span><span class="m">0</span>.0441576
+<span class="m">9</span><span class="w">  </span><span class="m">4000</span><span class="w"> </span><span class="m">0</span>.53266<span class="w"> </span><span class="m">0</span>.00218486<span class="w">      </span><span class="m">4</span>.59061<span class="w"> </span><span class="m">0</span>.02803
+<span class="m">10</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">0</span>.496156<span class="w">        </span><span class="m">0</span>.00207424<span class="w">      </span><span class="m">4</span>.73416<span class="w"> </span><span class="m">0</span>.0281744
+<span class="m">11</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">0</span>.461317<span class="w">        </span><span class="m">0</span>.00102704<span class="w">      </span><span class="m">4</span>.82462<span class="w"> </span><span class="m">0</span>.0111843
+<span class="m">12</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">0</span>.550406<span class="w">        </span><span class="m">0</span>.0431109<span class="w">       </span><span class="m">6</span>.32975<span class="w"> </span><span class="m">0</span>.518631
+<span class="m">13</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">0</span>.514583<span class="w">        </span><span class="m">0</span>.0119228<span class="w">       </span><span class="m">6</span>.38601<span class="w"> </span><span class="m">0</span>.144949
+<span class="m">14</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">0</span>.494073<span class="w">        </span><span class="m">0</span>.0166192<span class="w">       </span><span class="m">6</span>.58912<span class="w"> </span><span class="m">0</span>.231588
+<span class="m">15</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">0</span>.484151<span class="w">        </span><span class="m">0</span>.0121776<span class="w">       </span><span class="m">6</span>.90909<span class="w"> </span><span class="m">0</span>.179303
+<span class="m">16</span><span class="w">  </span><span class="m">4000</span><span class="w">        </span><span class="m">0</span>.493364<span class="w">        </span><span class="m">0</span>.0316198<span class="w">       </span><span class="m">7</span>.45327<span class="w"> </span><span class="m">0</span>.429279
+</pre></div>
+</div>
+<p>The two more important parallel metric efficiency.</p>
+<p>The speed up is defined as</p>
+<p>where <span class="math notranslate nohighlight">\(T_1\)</span> is the reference time with one thread, and <span class="math notranslate nohighlight">\(T_n\)</span> with n
+threads. For a perfect scaling, <span class="math notranslate nohighlight">\(T_n = T_1/n\)</span>, so
+<span class="math notranslate nohighlight">\(S_{\rm theo}(n) = n\)</span>. This does not occur always and depend on the
+actual machine, the communication patterns and so on. In the
+following we will use <span class="math notranslate nohighlight">\(T_1 = 6.75223\)</span> for eigen and <span class="math notranslate nohighlight">\(T_1 = 1.76345\)</span>
+for eigen+blas.</p>
+<p>The parallel efficiency measures roughly how efficiently we are
+using all the threads. It is defined as</p>
+<p>and, therefore, theoretically it is equal to 1.</p>
+<p>To easily create the data we need, we could use a spreadsheet or
+better, the command line</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>awk<span class="w"> </span><span class="s1">&#39;{print $1, 6.75223/$3, 6.75223/$3/$1 }&#39;</span><span class="w"> </span>codes/eigen.txt<span class="w"> </span>&gt;<span class="w"> </span>codes/eigen_metrics.txt
+awk<span class="w"> </span><span class="s1">&#39;{print $1, 1.76345/$3, 1.76345/$3/$1 }&#39;</span><span class="w"> </span>codes/eigen_blas.txt<span class="w"> </span>&gt;<span class="w"> </span>codes/eigen_blas_metrics.txt
+</pre></div>
+</div>
+<p>Then we can plot and analyze</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="w"> </span>term<span class="w"> </span>png<span class="w"> </span>enhaced<span class="w"> </span>giant#<span class="p">;</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>out<span class="w"> </span><span class="s1">&#39;tmpspeedup.png&#39;</span>
+<span class="nb">set</span><span class="w"> </span>key<span class="w"> </span>l<span class="w"> </span>t<span class="p">;</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>xlabel<span class="w"> </span><span class="s1">&#39;nthreads&#39;</span><span class="p">;</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>ylabel<span class="w"> </span><span class="s1">&#39;Parallel speedup&#39;</span><span class="p">;</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>title<span class="w"> </span><span class="s1">&#39;Computer with 8cores/16threads&#39;</span>
+plot<span class="w"> </span><span class="o">[</span>:17<span class="o">][</span>:<span class="o">]</span><span class="w"> </span>x<span class="w"> </span>lt<span class="w"> </span>-1<span class="w"> </span>t<span class="w"> </span><span class="s1">&#39;theo&#39;</span>,<span class="w"> </span><span class="s1">&#39;codes/eigen_metrics.txt&#39;</span><span class="w"> </span>u<span class="w"> </span><span class="m">1</span>:2<span class="w"> </span>w<span class="w"> </span>lp<span class="w"> </span>t<span class="w"> </span><span class="s1">&#39;eigen&#39;</span>,<span class="w"> </span><span class="s1">&#39;codes/eigen_blas_metrics.txt&#39;</span><span class="w">  </span>u<span class="w"> </span><span class="m">1</span>:2<span class="w"> </span>w<span class="w"> </span>lp<span class="w"> </span>t<span class="w"> </span><span class="s1">&#39;eigen+blas&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#set term png; set out &#39;efficiency.png&#39;</span>
+<span class="nb">set</span><span class="w"> </span>key<span class="w"> </span>l<span class="w"> </span>b<span class="p">;</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>xlabel<span class="w"> </span><span class="s1">&#39;nthreads&#39;</span><span class="p">;</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>ylabel<span class="w"> </span><span class="s1">&#39;Parallel efficiency&#39;</span><span class="p">;</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>title<span class="w"> </span><span class="s1">&#39;Computer with 8cores/16threads&#39;</span>
+plot<span class="w"> </span><span class="o">[</span>:17<span class="o">][</span>-0.1:1.1<span class="o">]</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>lt<span class="w"> </span>-1,<span class="w"> </span><span class="s1">&#39;codes/eigen_metrics.txt&#39;</span><span class="w"> </span>u<span class="w"> </span><span class="m">1</span>:3<span class="w"> </span>w<span class="w"> </span>lp<span class="w"> </span>t<span class="w"> </span><span class="s1">&#39;eigen&#39;</span>,<span class="w"> </span><span class="s1">&#39;codes/eigen_blas_metrics.txt&#39;</span><span class="w">  </span>u<span class="w"> </span><span class="m">1</span>:3<span class="w"> </span>w<span class="w"> </span>lp<span class="w"> </span>t<span class="w"> </span><span class="s1">&#39;eigen+blas&#39;</span>,<span class="w"> </span><span class="m">0</span>.6<span class="w"> </span>lt<span class="w"> </span><span class="m">4</span>
+</pre></div>
+</div>
+<p>Normally, if you want to buy some cloud services to run your code,
+you should use threads that give equal or above 60-70% efficiency.</p>
+</li>
+</ol>
 </section>
 </section>
 
@@ -1091,7 +1282,7 @@ graph, each one for each VAR value.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Profiling</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Profiling</p>
       </div>
     </a>
     <a class="right-next"
@@ -1099,7 +1290,7 @@ graph, each one for each VAR value.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>Introduction to High Performance Computing</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Introduction to High Performance Computing</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1119,17 +1310,18 @@ graph, each one for each VAR value.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c-library">11.1. <code class="docutils literal notranslate"><span class="pre">Eigen</span> <span class="pre">c++</span></code> library</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-basic-matrices">11.1.1. Creating basic matrices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra-with-eigen-c">11.1.2. Linear Algebra with eigen c++</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c-library">12.1. <code class="docutils literal notranslate"><span class="pre">Eigen</span> <span class="pre">c++</span></code> library</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-basic-matrices">12.1.1. Creating basic matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra-with-eigen-c">12.1.2. Linear Algebra with eigen c++</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-operations-performance-lu-operations-to-solve-ax-b">11.2. Matrix operations performance: LU operations to solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">11.2.1. Threads</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-time-as-a-function-of-size">11.2.2. Measuring time as a function of size</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-operations-performance-lu-operations-to-solve-ax-b">12.2. Matrix operations performance: LU operations to solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">12.2.1. Threads</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-time-as-a-function-of-size">12.2.2. Measuring time as a function of size</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">11.3. Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">12.3. Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-gnu-parallel-to-run-several-matmul-and-compute-first-parallel-metrics">12.4. Using gnu parallel to run several matmul and compute first parallel metrics</a></li>
 </ul>
   </nav></div>
 
