@@ -40,3 +40,5 @@ parts:
     numbered: true
     chapters:
     - file: A-01-Git/VersionControlGit.ipynb
+    - file: A-02-Containers/Docker.ipynb
+    - file: A-02-Containers/apptainer.ipynb
